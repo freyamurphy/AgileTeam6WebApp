@@ -8,11 +8,11 @@ package staff;
  *
  * @author freyamurphy
  */
-import Java.util.HashMap;
+//import Java.util.HashMap;
 
 public class StaffHandler {
     private boolean empty;
-    private staffList
+    //private staffList;
     
     public StaffHandler() {
         empty = true;
