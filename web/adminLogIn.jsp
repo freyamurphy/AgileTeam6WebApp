@@ -1,3 +1,5 @@
+
+<%@page import="staff.StaffHandler"%>
 <%-- 
     Document   : adminLogIn
     Created on : 22 Jan 2019, 10:39:36
@@ -5,10 +7,22 @@
 --%>
 
 <% 
+    
     String username = request.getParameter("username");
     String password = request.getParameter("password");
     
-    // Search through a list of all users to find the username
+    staff.StaffHandler sf = new staff.StaffHandler();
+    String correctPassword = new String();
+    correctPassword  = sf.getPassword(username);
+    
+    if (password == correctPassword) {
+        %>
+        <h1>CORRECT PASSWORD!!!!</h1>
+    <%
+    }
+    else {
+        %> <h1>INCORRECT LOGIN</h1> <%
+    }
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

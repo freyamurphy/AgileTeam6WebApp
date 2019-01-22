@@ -45,4 +45,25 @@ public class StaffHandlerTest {
         
     }
     
+    @Test
+    public void testaddStaff() {
+        Staff newMember = new Staff("username", "password");
+        StaffHandler staffHandler = new StaffHandler();
+        staffHandler.addStaff(newMember);
+        
+        Staff foundMember = staffHandler.getStaffMember("username");
+        String password = foundMember.getPassword();
+        assertEquals("Added and stored password do not match", password, "password");
+    }
+    
+    @Test
+    public void testgetPassword() {
+        Staff newMember = new Staff("username", "password");
+        StaffHandler staffHandler = new StaffHandler();
+        staffHandler.addStaff(newMember);
+        
+        String password = staffHandler.getPassword("username");
+        assertEquals("Added and stored password do not match", password, "password");
+    }
+    
 }
