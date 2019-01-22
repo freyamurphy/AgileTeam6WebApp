@@ -15,10 +15,10 @@
     <body>
         <h1>You can get access all exams here</h1>
         <%
-            String path = "D:/CD";
-            JspWriter mout = pageContext.getOut();;
+            String path = "D:/CD";//This is the path of the folder you want to get access
+            JspWriter mout = pageContext.getOut();//get the print from java
             ListAllFiles laf = new ListAllFiles();
-            laf.listFilesAndFolders(path,mout);
+            laf.listFilesAndFolders(path,mout);//put the path in the java to find folders and files
         %>
 
     </body>
