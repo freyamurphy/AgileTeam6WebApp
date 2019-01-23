@@ -5,16 +5,22 @@
  */
 package staff;
 
+import classes.Comment;
+
 /**
  *
  * @author freyamurphy
  */
-public class InternalModerator extends Staff {
+public class InternalModerator extends Staff implements Commenting{
     
     public InternalModerator(String username, String password) 
     { 
-        //Currently creates default staff member with these login details
         super(username, password); 
+    }
+    
+    public Comment addComment(String content) {
+        Comment comment = new Comment(content, this.username, "InternalModerator");
+        return comment;
     }
     
 }
