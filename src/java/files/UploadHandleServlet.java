@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package files;
 
 import java.io.File;
@@ -118,8 +113,7 @@ import java.io.File;
         //关闭输入流
         in.close();
         //关闭输出流
-        out.close();        //删除处理文件上传时生成的临时文件        //item.delete();        
-        message = "文件上传成功！";
+        out.close();        //删除处理文件上传时生成的临时文件        //item.delete();        message = "文件上传成功！";
        }
       }
      }catch (FileUploadBase.FileSizeLimitExceededException e) {
@@ -136,7 +130,6 @@ import java.io.File;
       message= "文件上传失败！";
       e.printStackTrace();
      }
-     
      request.setAttribute("message",message);
      request.getRequestDispatcher("/message.jsp").forward(request, response);
   }
