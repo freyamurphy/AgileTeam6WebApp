@@ -8,7 +8,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        title>消息提示</title>
+        <title>information notification</title>
     </head>
     <body>
         ${message}
