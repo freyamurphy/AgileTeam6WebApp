@@ -1,8 +1,7 @@
-
 <%@page import="staff.StaffHandler"%>
 <%-- 
-    Document   : adminLogIn
-    Created on : 22 Jan 2019, 10:39:36
+    Document   : internalModeratorLogin
+    Created on : 23 Jan 2019, 11:28:06
     Author     : freyamurphy
 --%>
 
@@ -12,16 +11,16 @@
     String password = request.getParameter("password");
     
     staff.StaffHandler staffHandler = new staff.StaffHandler();
-    String correctPassword = staffHandler.getAdminPassword(username);
+    String correctPassword = staffHandler.getIMPassword(username);
     
     if (password.equals(correctPassword)) {
         
         out.print("<h1>CORRECT PASSWORD!!!!</h1>");
-        // Redirect to admin dashboard
+        // Redirect to IM dashboard
     
     }
     else {
         out.print("<h1>INCORRECT LOGIN</h1>");
-        // redirect to admin login?
+        // redirect to IM login?
     }
 %>
