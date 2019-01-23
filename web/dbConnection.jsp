@@ -8,6 +8,6 @@
 <!DOCTYPE html>
 <html>
     <script language="javascript">
-    window.location.href = "http://silva.computing.dundee.ac.uk/2018-agileteam6/dbConnection.jsp"
+    window.location.href = "http://silva.computing.dundee.ac.uk/2018-agileteam6/dbConnection.jsp";
     </script>
 </html>
