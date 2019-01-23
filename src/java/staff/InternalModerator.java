@@ -11,10 +11,10 @@ package staff;
  */
 public class InternalModerator extends Staff {
     
-    public InternalModerator() 
+    public InternalModerator(String username, String password) 
     { 
         //Currently creates default staff member with these login details
-        super("username", "password"); 
+        super(username, password); 
     }
     
 }

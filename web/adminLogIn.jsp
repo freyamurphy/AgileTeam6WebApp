@@ -11,28 +11,15 @@
     String username = request.getParameter("username");
     String password = request.getParameter("password");
     
-    staff.StaffHandler sf = new staff.StaffHandler();
-    String correctPassword = new String();
-    correctPassword  = sf.getPassword(username);
+    staff.StaffHandler staffHandler = new staff.StaffHandler();
+    String correctPassword = staffHandler.getAdminPassword(username);
     
-    if (password == correctPassword) {
-        %>
-        <h1>CORRECT PASSWORD!!!!</h1>
-    <%
+    if (password.equals(correctPassword)) {
+        
+        out.print("<h1>CORRECT PASSWORD!!!!</h1>");
+    
     }
     else {
-        %> <h1>INCORRECT LOGIN</h1> <%
+        out.print("<h1>INCORRECT LOGIN</h1>");
     }
 %>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>

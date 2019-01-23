@@ -16,10 +16,10 @@ import java.util.*;
  */
 public class Admin extends Staff {
  
-    public Admin() 
+    public Admin(String username, String password) 
     { 
         //Currently creates default staff member with these login details
-        super("username", "password"); 
+        super(username, password); 
     }
     
     //method to create an exam
