@@ -1,30 +1,13 @@
 <%-- 
-    Document   : dbConnection
-    Created on : 23 Jan 2019, 12:26:25
-    Author     : Lucy Taylor
+    Document   : dbConnectionRD
+    Created on : 23 Jan 2019, 13:51:21
+    Author     : Lucy
 --%>
 
-<%@ page import="java.sql.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
-
-<head>
-<title>Database Connection</title>
-</head>
-
-<body>
-<h1>Connection Status</h1>
-
-<%
-  try {
-    java.sql.Connection connection;
-    Class.forName("com.mysql.jdbc.Driver");
-    connection = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam6db", "18agileteam6", "1243.at6.3421");
-    out.println ("Successfully Connected To Silva.");
-  }
-  catch(SQLException e) {
-    out.println("Exception: " +e.getMessage());
-  }
-%>
-
-</body>
+    <script language="javascript">
+    window.location.href = "http://silva.computing.dundee.ac.uk/2018-agileteam6/dbConnection.jsp"
+    </script>
 </html>
