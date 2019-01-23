@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Assign Exam Setter</title>
+    </head>
+    <body>
+        <div style="margin: auto; width: 50%;">
+            <h1> Assign an Exam to an Exam Setter</h1>
+            <p> Select an exam from the options available then select a member of Teaching Staff to assign 
+            an exam to them.</p>
+               <form action= "AssignExamSetter.jsp" method="post">
+        
+               <h3>Exams available</h3>
+               <select name="Exams">
+            <option value="maths">Maths</option>
+            <option value="french">French</option>
+               </select>
+       
+        <h3>Teaching Staff</h3>
+        <select name="Teaching Staff">
+            <option
+                value="craig">Craig</option>
+        </select>
+        
+        <h3></h3>
+                    
+        <input type="submit" value="Assign"/>
+        
+        </form>
+        </div>      
+    </body>
+</html>
