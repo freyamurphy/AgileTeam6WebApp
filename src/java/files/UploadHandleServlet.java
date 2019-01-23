@@ -18,8 +18,8 @@ import java.io.File;
  /**
  * @ClassName: UploadHandleServlet
  * @Description: TODO(这里用一句话描述这个类的作用)
- * @author: 孤傲苍狼
- * @date: 2015-1-3 下午11:35:50
+ * @author: ASUS
+ * @date: 2019-1-23 下午11:00:50
  *
  */
  public class UploadHandleServlet extends HttpServlet {
@@ -113,7 +113,8 @@ import java.io.File;
         //关闭输入流
         in.close();
         //关闭输出流
-        out.close();        //删除处理文件上传时生成的临时文件        //item.delete();        message = "文件上传成功！";
+        out.close();        //删除处理文件上传时生成的临时文件        //item.delete();       
+        message = "文件上传成功！";
        }
       }
      }catch (FileUploadBase.FileSizeLimitExceededException e) {
@@ -136,7 +137,7 @@ import java.io.File;
   /**
   * @Method: makeFileName
   * @Description: 生成上传文件的文件名，文件名以：uuid+"_"+文件的原始名称
-  * @Anthor:孤傲苍狼
+  * @Anthor:ASUS
   * @param filename 文件的原始名称
   * @return uuid+"_"+文件的原始名称
   */
@@ -148,7 +149,7 @@ import java.io.File;
   * 为防止一个目录下面出现太多文件，要使用hash算法打散存储
   * @Method: makePath
   * @Description: 
-  * @Anthor:孤傲苍狼
+  * @Anthor:ASUS
   *
   * @param filename 文件名，要根据文件名生成存储目录
   * @param savePath 文件存储路径
