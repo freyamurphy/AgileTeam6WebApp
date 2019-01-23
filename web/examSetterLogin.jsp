@@ -1,8 +1,7 @@
-
 <%@page import="staff.StaffHandler"%>
 <%-- 
-    Document   : adminLogIn
-    Created on : 22 Jan 2019, 10:39:36
+    Document   : examSetterLogin
+    Created on : 23 Jan 2019, 11:30:51
     Author     : freyamurphy
 --%>
 
@@ -12,16 +11,16 @@
     String password = request.getParameter("password");
     
     staff.StaffHandler staffHandler = new staff.StaffHandler();
-    String correctPassword = staffHandler.getAdminPassword(username);
+    String correctPassword = staffHandler.getESPassword(username);
     
     if (password.equals(correctPassword)) {
         
         out.print("<h1>CORRECT PASSWORD!!!!</h1>");
-        // Redirect to admin dashboard
+        // Redirect to ES dashboard
     
     }
     else {
         out.print("<h1>INCORRECT LOGIN</h1>");
-        // redirect to admin login?
+        // redirect to ES login?
     }
 %>

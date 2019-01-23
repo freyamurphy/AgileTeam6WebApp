@@ -48,7 +48,7 @@ public class AdminTest {
         String modCode = "AC31007";
         String type = "M";
         String degree = "UG";
-        Admin testAdmin = new Admin();
+        Admin testAdmin = new Admin("foo", "foo");
         testAdmin.createExam(year, modName, modCode, type, degree);
         
         //Still missing testing attributes

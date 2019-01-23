@@ -39,16 +39,30 @@ public class StaffTest {
 
     @Test
     public void testgetUsername() {
-        Staff staff = new Staff("username", "password");
+        String testUsername = "username";
+        Staff staff = new Staff(testUsername, "foo");
         String username = staff.getUsername();
-        assertEquals("Username passed in constructor does not match output from getUsername()", username, "username");
+        assertEquals("Username passed in constructor does not match output from getUsername()", username, testUsername);
+        
+        // Another test to ensure getUsername() does not just return "username" every time
+        testUsername = "myUsername";
+        Staff anotherStaff = new Staff(testUsername, "foo");
+        username = anotherStaff.getUsername();
+        assertEquals("Username passed in constructor does not match output from getUsername()", username, testUsername);
     }
     
     @Test
     public void testgetPassword() {
-        Staff staff = new Staff("username", "password");
+        String testPassword = "password";
+        Staff staff = new Staff("foo", testPassword);
         String password = staff.getPassword();
-        assertEquals("Password passed in constructor does not match output from getPassword()", password, "password");
+        assertEquals("Password passed in constructor does not match output from getPassword()", password, testPassword);
+        
+        // Another test to ensure getPassword() does not just return "password" every time
+        testPassword = "myPassword";
+        Staff anotherStaff = new Staff("foo", testPassword);
+        password = anotherStaff.getPassword();
+        assertEquals("Password passed in constructor does not match output from getPassword()", password, testPassword);
     }
     
 }

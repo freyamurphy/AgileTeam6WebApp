@@ -10,10 +10,10 @@ package staff;
  * @author freyamurphy
  */
 public class ExamSetter extends Staff {
-    public ExamSetter() 
+    public ExamSetter(String username, String password) 
     { 
         //Currently creates default staff member with these login details
-        super("username", "password"); 
+        super(username, password); 
     }
     
 }
