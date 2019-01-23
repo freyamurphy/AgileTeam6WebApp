@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="staff.*"%>
-
+<%@include file="dbConnection.jsp"%>
 
 <%
     
@@ -28,5 +28,38 @@
     
     admin.createExam(academicYear, moduleCode, moduleName, examType, moduleDegree);
     
-    //add functionality
+    pageContext.setAttribute("academicYear",academicYear);
+    pageContext.setAttribute("moduleCode",moduleCode);
+    pageContext.setAttribute("moduleName",moduleName);
+    pageContext.setAttribute("examType",examType);
+    pageContext.setAttribute("moduleDegree",moduleDegree);
+    /*
+    <sql:query dataSource = "${connection}" var = "result">
+            SELECT * from Exams;
+        </sql:query>
+        
+    */
 %>
+
+<!--
+    Connecting to SQL database to store info on new exam
+-->
+<html>
+    <head>
+        <title>Create Exam</title>
+    </head>
+    <body>
+        
+        <sql:update sql="INSERT INTO Exams VALUES (23,?,?,?,?,?)"
+                    dataSource = "${connection}" var = "result">
+            <sql:param value="${academicYear}"/>
+            <sql:param value="${moduleCode}"/>        
+            <sql:param value="${moduleName}"/>
+            <sql:param value="${examType}"/>
+            <sql:param value="${moduleDegree}"/>
+        </sql:update>
+        
+        
+    </body>
+</html>
+    
