@@ -348,6 +348,12 @@
                 <th>AcademicYear:<c:out value="${row.AcademicYear}"/></th></br>
                 <th>ExamType:<c:out value="${row.ExamType}"/></th></br>
                 <th>ModuleDegree:<c:out value="${row.ModuleDegree}"/></th></br>
+                <th>
+                    <form action="ViewComments.jsp">
+                        <input type="hidden" value="${row.ExamNo}" name="examNo" />
+                        <input type="submit" value="View comments" />
+                    </form>
+                </th></br>
                  <h3>Process:</h3>
                  <div class="progress progress-striped active">
                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%">

@@ -4,13 +4,15 @@
     Author     : freyamurphy
 --%>
 
-<%@ include file="dbConnection.jsp"%>
+<%@include file="../dbConnection.jsp"%>
 <%@page import="classes.Comment"%>
 <% 
     String examNo = request.getParameter("examNo");
+    // Make variable accessible to JSTL
+    pageContext.setAttribute("examNo", examNo);
 %>
 
-<sql:query sql="SELECT Content, Author, TimeOfComment, AuthorRole FROM Comments WHERE ExamNo = ${examNo};}" 
+<sql:query sql="SELECT Content, Author, TimeOfComment, AuthorRole FROM Comments WHERE ExamNo = ${examNo}" 
            var="result" dataSource="${connection}">
 </sql:query>
 
