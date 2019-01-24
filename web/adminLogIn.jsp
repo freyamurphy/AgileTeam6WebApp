@@ -29,7 +29,7 @@
         // redirect to admin login?
       %>
       <!--the code below is an auto-refresh code that will change back to the adminLogIn.html automatically-->
-      <meta http-equiv="refresh" content="3;url=adminLogIn.html">
+      <meta http-equiv="refresh" content="3;url=pages/login.html">
       <%
     }
 %>
