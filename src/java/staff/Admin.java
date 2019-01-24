@@ -22,14 +22,16 @@ public class Admin extends Staff {
         super(username, password); 
     }
     
-    //method to create an exam
+    //method to create an exam 
+    //currently not in use, since switch to external SQL database instead of Java data structure
     public void createExam(String year, String modName, String modCode, String type, String degree)
     {
-        //will need to add other attributes later, like exam types, staff names, etc etc
+        //create exam object with given parameters
         Exam exam = new Exam(year, modName, modCode, type, degree);
         System.out.print("Created Exam");
         
         //functionality to store newly created exams
+        //currently not in use, since switch to external SQL database instead of Java data structure
         ExamStorage examStore = new ExamStorage();
         examStore.addExamToList(exam);
     }

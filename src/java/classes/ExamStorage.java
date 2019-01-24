@@ -12,17 +12,21 @@ import java.util.*;
  * @author Momoko Werner
  */
 public class ExamStorage {
-    //
+    
+    //currently not in use, since switch to external SQL database instead of Java data structure
+    
     //HashMap<String, Exam> examList;
+    
     //constructor 
     public ExamStorage()
     {
-        //examList = new HashMap<>();
-        //add functionality to read in list of stored exams
         
+        //examList = new HashMap<>();
+                
     }
     
     //method to add an exam to the exam storage
+    //currently not in use, since switch to external SQL database instead of Java data structure
     public void addExamToList(Exam newExam)
     {
         //

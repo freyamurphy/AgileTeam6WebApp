@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>View All Exams</title>
+    <title>Create Exam</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -338,7 +338,7 @@
             <!-- /.row -->
 <%
     
-    //input that needs to be fetched from HTML form (createExam.html)
+    //input gets fetched from HTML form (createExam.html)
     
     String moduleCode = request.getParameter("moduleCode");
     String moduleName = request.getParameter("moduleName");
@@ -348,29 +348,34 @@
     
     //need to know who is logged in
     //cookies? who is logged in, use cookie to get right admin
+    //implement in sprint 2
     
     staff.StaffHandler staffhandler = new StaffHandler();
     
     //this won't work until we have the cookie working 
-    //for time being use "Craig", replace later with String username
+    //for time being using "Craig", replace later with String username
     staff.Admin admin = staffhandler.getAdmin("Craig");    
     
+    //calling create method in Exsm Java class
     admin.createExam(academicYear, moduleCode, moduleName, examType, moduleDegree);
     
+    //taking the JSP variables and converting them into JSTL attributes (essentially also variables...)
+    //This allows usage of variables outside of JSP brackets
     pageContext.setAttribute("academicYear",academicYear);
     pageContext.setAttribute("moduleCode",moduleCode);
     pageContext.setAttribute("moduleName",moduleName);
     pageContext.setAttribute("examType",examType);
     pageContext.setAttribute("moduleDegree",moduleDegree);
-    /*
-    <sql:query dataSource = "${connection}" var = "result">
-            SELECT * from Exams;
-        </sql:query>
-        
-    */
+    
 %>
+
+        <!--
+            SQL Insert statement to insert exam into database   
+        -->
         <sql:update sql="INSERT INTO Exams (AcademicYear, ModuleCode, ModuleName, ExamType, ModuleDegree) VALUES (?,?,?,?,?)"
                     dataSource = "${connection}" var = "result">
+            
+            <!-- Parameters ('?') in SQL statement replaced with the JSTL attributes -->
             <sql:param value="${academicYear}"/>
             <sql:param value="${moduleCode}"/>        
             <sql:param value="${moduleName}"/>
@@ -379,7 +384,7 @@
         </sql:update>
         Create Successfully! You can check in view all exams:<a href="viewAllExams.jsp">CHECK</a></br>
         </br>Or <a href="createExam.html">CREATE AGAIN</a>
-
+        
         <!-- /#page-wrapper -->
 
     </div>
