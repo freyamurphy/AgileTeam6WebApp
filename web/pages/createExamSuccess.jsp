@@ -1,6 +1,13 @@
+<%-- 
+    Document   : viewAllExams
+    Created on : 2019年1月24日, 下午3:03:31
+    Author     : YHSSSS
+--%>
+<%@page import="staff.*"%>
+<%@include file="../dbConnection.jsp"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>View All Exams</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -324,84 +331,55 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">View All Exams</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Comments to Review!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>Exams to Write!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
-                                    <div>New Orders!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-           
-            <!-- /.row -->
-            <div class="row">
-            </div>
-            <!-- /.row -->
-        </div>
+<%
+    
+    //input that needs to be fetched from HTML form (createExam.html)
+    
+    String moduleCode = request.getParameter("moduleCode");
+    String moduleName = request.getParameter("moduleName");
+    String academicYear = request.getParameter("academicYear");
+    String examType = request.getParameter("examType");
+    String moduleDegree = request.getParameter("moduleDegree");
+    
+    //need to know who is logged in
+    //cookies? who is logged in, use cookie to get right admin
+    
+    staff.StaffHandler staffhandler = new StaffHandler();
+    
+    //this won't work until we have the cookie working 
+    //for time being use "Craig", replace later with String username
+    staff.Admin admin = staffhandler.getAdmin("Craig");    
+    
+    admin.createExam(academicYear, moduleCode, moduleName, examType, moduleDegree);
+    
+    pageContext.setAttribute("academicYear",academicYear);
+    pageContext.setAttribute("moduleCode",moduleCode);
+    pageContext.setAttribute("moduleName",moduleName);
+    pageContext.setAttribute("examType",examType);
+    pageContext.setAttribute("moduleDegree",moduleDegree);
+    /*
+    <sql:query dataSource = "${connection}" var = "result">
+            SELECT * from Exams;
+        </sql:query>
+        
+    */
+%>
+        <sql:update sql="INSERT INTO Exams (AcademicYear, ModuleCode, ModuleName, ExamType, ModuleDegree) VALUES (?,?,?,?,?)"
+                    dataSource = "${connection}" var = "result">
+            <sql:param value="${academicYear}"/>
+            <sql:param value="${moduleCode}"/>        
+            <sql:param value="${moduleName}"/>
+            <sql:param value="${examType}"/>
+            <sql:param value="${moduleDegree}"/>
+        </sql:update>
+        Create Successfully! You can check in view all exams:<a href="viewAllExams.jsp">CHECK</a></br>
+        </br>Or <a href="createExam.html">CREATE AGAIN</a>
+
         <!-- /#page-wrapper -->
 
     </div>

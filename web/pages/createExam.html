@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html lang="en">
 
 <head>
@@ -236,7 +241,7 @@
                                 <li>
                                     <a href="viewAllExams.jsp">View All Exams</a>
                                 </li>
-                                <li>
+                                 <li>
                                     <a href="createExam.html">Create Exam</a>
                                 </li>
                             </ul>
@@ -324,83 +329,36 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">Create Exam</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Comments to Review!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>Exams to Write!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
-                                    <div>New Orders!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-           
-            <!-- /.row -->
-            <div class="row">
-            </div>
-            <!-- /.row -->
+            <div style="margin: auto; width: 100%;">
+            <h1>Exam Form</h1><br>
+            <h4>Please fill in the information on the exam: </h4><br>
+            
+            <form action="createExamSuccess.jsp" method="post">
+                
+                Module Code <br>
+                <input type="text" name="moduleCode"/><br><br>
+                
+                Module Name <br>
+                <input type="text" name="moduleName"/><br><br>
+                
+                Academic Year [Format: yyyy]<br>
+                <input type="text" name="academicYear"/><br><br>
+                
+                Exam Type<br>
+                <input type="radio" name="examType" value="M" checked/> Main Exam<br>
+                <input type="radio" name="examType" value="R"/> Resit Exam<br><br>
+                
+                Module Degree<br>
+                <input type="radio" name="moduleDegree" value="UG" checked/> Undergraduate Exam<br>
+                <input type="radio" name="moduleDegree" value="PG"/> Postgraduate Exam<br><br>
+                <input type="submit" value="Create"/>
+                </br></br></br></br>
+            </form>
         </div>
         <!-- /#page-wrapper -->
 
@@ -427,3 +385,4 @@
 </body>
 
 </html>
+
