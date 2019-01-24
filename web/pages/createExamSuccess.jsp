@@ -1,6 +1,13 @@
+<%-- 
+    Document   : viewAllExams
+    Created on : 2019年1月24日, 下午3:03:31
+    Author     : YHSSSS
+--%>
+<%@page import="staff.*"%>
+<%@include file="../dbConnection.jsp"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Create Exam</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -228,7 +235,7 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="uploadExam.html">Upload Exam</a>
+                                    <a href="flot.html">Upload Exam</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">View Feedback</a>
@@ -324,21 +331,60 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Upload an Exam</h1>
-                </div>
-                 <div style="margin: auto; width: 95%;">
-                    <h3>Upload Files</h3>
-                    </br>
-                    Please select the file you want to upload: 
-                    </br>
-                    <form action="../uploadhandle.jsp" method="post" enctype="multipart/form-data"></br>
-                    <input type="file" name="file" size="50" /></br>
-                    <input type="submit" value="submit" /></br>
-                    </form>
+                    <h1 class="page-header">View All Exams</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-        </div>
+            <!-- /.row -->
+<%
+    
+    //input gets fetched from HTML form (createExam.html)
+    
+    String moduleCode = request.getParameter("moduleCode");
+    String moduleName = request.getParameter("moduleName");
+    String academicYear = request.getParameter("academicYear");
+    String examType = request.getParameter("examType");
+    String moduleDegree = request.getParameter("moduleDegree");
+    
+    //need to know who is logged in
+    //cookies? who is logged in, use cookie to get right admin
+    //implement in sprint 2
+    
+    staff.StaffHandler staffhandler = new StaffHandler();
+    
+    //this won't work until we have the cookie working 
+    //for time being using "Craig", replace later with String username
+    staff.Admin admin = staffhandler.getAdmin("Craig");    
+    
+    //calling create method in Exsm Java class
+    admin.createExam(academicYear, moduleCode, moduleName, examType, moduleDegree);
+    
+    //taking the JSP variables and converting them into JSTL attributes (essentially also variables...)
+    //This allows usage of variables outside of JSP brackets
+    pageContext.setAttribute("academicYear",academicYear);
+    pageContext.setAttribute("moduleCode",moduleCode);
+    pageContext.setAttribute("moduleName",moduleName);
+    pageContext.setAttribute("examType",examType);
+    pageContext.setAttribute("moduleDegree",moduleDegree);
+    
+%>
+
+        <!--
+            SQL Insert statement to insert exam into database   
+        -->
+        <sql:update sql="INSERT INTO Exams (AcademicYear, ModuleCode, ModuleName, ExamType, ModuleDegree) VALUES (?,?,?,?,?)"
+                    dataSource = "${connection}" var = "result">
+            
+            <!-- Parameters ('?') in SQL statement replaced with the JSTL attributes -->
+            <sql:param value="${academicYear}"/>
+            <sql:param value="${moduleCode}"/>        
+            <sql:param value="${moduleName}"/>
+            <sql:param value="${examType}"/>
+            <sql:param value="${moduleDegree}"/>
+        </sql:update>
+        Create Successfully! You can check in view all exams:<a href="viewAllExams.jsp">CHECK</a></br>
+        </br>Or <a href="createExam.html">CREATE AGAIN</a>
+        
         <!-- /#page-wrapper -->
 
     </div>

@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html lang="en">
 
 <head>
@@ -58,79 +63,6 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-tasks">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 1</strong>
-                                        <span class="pull-right text-muted">40% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 2</strong>
-                                        <span class="pull-right text-muted">20% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 3</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 4</strong>
-                                        <span class="pull-right text-muted">80% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            <span class="sr-only">80% Complete (danger)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Tasks</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-tasks -->
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -228,15 +160,9 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="uploadExam.html">Upload Exam</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">View Feedback</a>
-                                </li>
-                                <li>
                                     <a href="viewAllExams.jsp">View All Exams</a>
                                 </li>
-                                <li>
+                                 <li>
                                     <a href="createExam.html">Create Exam</a>
                                 </li>
                             </ul>
@@ -324,20 +250,36 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Upload an Exam</h1>
-                </div>
-                 <div style="margin: auto; width: 95%;">
-                    <h3>Upload Files</h3>
-                    </br>
-                    Please select the file you want to upload: 
-                    </br>
-                    <form action="../uploadhandle.jsp" method="post" enctype="multipart/form-data"></br>
-                    <input type="file" name="file" size="50" /></br>
-                    <input type="submit" value="submit" /></br>
-                    </form>
+                    <h1 class="page-header">Create Exam</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            <!-- /.row -->
+            <div style="margin: auto; width: 100%;">
+            <h1>Exam Form</h1><br>
+            <h4>Please fill in the information on the exam: </h4><br>
+            
+            <form action="createExamSuccess.jsp" method="post">
+                
+                Module Code <br>
+                <input type="text" name="moduleCode"/><br><br>
+                
+                Module Name <br>
+                <input type="text" name="moduleName"/><br><br>
+                
+                Academic Year [Format: yyyy]<br>
+                <input type="text" name="academicYear"/><br><br>
+                
+                Exam Type<br>
+                <input type="radio" name="examType" value="M" checked/> Main Exam<br>
+                <input type="radio" name="examType" value="R"/> Resit Exam<br><br>
+                
+                Module Degree<br>
+                <input type="radio" name="moduleDegree" value="UG" checked/> Undergraduate Exam<br>
+                <input type="radio" name="moduleDegree" value="PG"/> Postgraduate Exam<br><br>
+                <input type="submit" value="Create"/>
+                </br></br></br></br>
+            </form>
         </div>
         <!-- /#page-wrapper -->
 
@@ -364,3 +306,4 @@
 </body>
 
 </html>
+
