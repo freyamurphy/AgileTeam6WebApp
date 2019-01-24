@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author freyamurphy
+ * @author Momoko Werner
  */
 public class ExamTest {
     
@@ -36,6 +36,15 @@ public class ExamTest {
     @After
     public void tearDown() {
     }
+    
+    /*
+     * Tests for all get methods
+     * 
+     * Testing by setting variable value in constructor call and then 
+     * checking whether get method fetches correct value
+     */
+    
+
     /**
      * Test of getModuleName method, of class Exam.
      */
@@ -92,6 +101,14 @@ public class ExamTest {
         assertEquals("Method getModuleDegree failed.",expResult, result);      
     }
     
+    
+    
+    /**
+     * Tests for set methods
+     * 
+     * Testing by setting variable to a certain value, 
+     * then using get method to fetch value and see if it's the same
+     */
     
     
     /**
