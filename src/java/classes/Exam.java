@@ -70,10 +70,10 @@ public class Exam
     }
     public void setExamType(String type)
     {
-        this.moduleName = type;
+        this.examType = type;
     }
     public void setModuleDegree(String degree)
     {
-        this.moduleName = degree;
+        this.moduleDegree = degree;
     }
 }
