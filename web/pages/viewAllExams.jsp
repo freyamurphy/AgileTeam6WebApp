@@ -231,10 +231,10 @@
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Exams<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Upload Exam</a>
+                                    <a href="uploadExam.html">Upload Exam</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">View Feedback</a>
@@ -340,14 +340,28 @@
         SELECT * FROM Exams;     
         </sql:query>
         <c:forEach var="row" items="${result.rows}">
+            </br>
             <tr>
+                <h2><c:out value="${row.ModuleCode}"/> Details:</h2>
                 <th>ModuleName:<c:out value="${row.ModuleName}"/></th></br>
-                <th>ModuleCode:<c:out value="${row.ModuleCode}"/></th></br>
                 <th>ExamNo:<c:out value="${row.ExamNo}"/></th></br>
                 <th>AcademicYear:<c:out value="${row.AcademicYear}"/></th></br>
                 <th>ExamType:<c:out value="${row.ExamType}"/></th></br>
-                <th>ModuleDegree:<c:out value="${row.ModuleDegree}"/></th></br></br>
+                <th>ModuleDegree:<c:out value="${row.ModuleDegree}"/></th></br>
+                 <h3>Process:</h3>
+                 <div class="progress progress-striped active">
+                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+                 30% Complete
+                 </div>
+                <%--
+                .progress-bar-success(green)
+                .progress-bar-info(blue)
+                .progress-bar-warning(yellow)
+                .progress-bar-danger(red)
+                --%>
+            </div>
             </tr>
+            <HR style="FILTER: alpha(opacity=0,finishopacity=100,style=1)" width="80%" color=#987cb9 SIZE=3></br>
           </c:forEach>
 -           
         <!-- /#page-wrapper -->
