@@ -47,7 +47,7 @@
         <title>Insert comment</title>
     </head>
     <body>
-        <sql:update sql="INSERT INTO Comments (Content, Author, TimeOfComment, AuthorRole, ExamID) VALUES (?,?,?,?)"
+        <sql:update sql="INSERT INTO Comments (Content, Author, TimeOfComment, AuthorRole, ExamID) VALUES (?,?,?,?, ?)"
                     dataSource = "${connection}" var = "result">
             <sql:param value="${content}"/>
             <sql:param value="${author}"/>        
