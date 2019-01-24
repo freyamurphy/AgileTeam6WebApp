@@ -24,5 +24,22 @@ public class Comment {
         this.timePosted = new Timestamp(System.currentTimeMillis());
     }
     
+    public String getContent() {
+        return content;
+    }
+    
+    public String getAuthorUsername() {
+        return authorUsername;
+    }
+    
+    public String getAuthorRole() {
+        return authorRole;
+    }
+    
+    public String getTimePosted() {
+        return timePosted.toString();
+    }
+    
+    
     
 }
