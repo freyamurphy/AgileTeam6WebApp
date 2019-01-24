@@ -13,6 +13,7 @@
     String content = request.getParameter("commentBox");
     String user = request.getParameter("userRole");
     String examNo = request.getParameter("examNo");
+
     
     // need some cookies
     String username = "Bob";
@@ -39,6 +40,7 @@
     pageContext.setAttribute("time", time);
     pageContext.setAttribute("role", role);
     pageContext.setAttribute("examNo", examNo);
+
             
 %>
     
