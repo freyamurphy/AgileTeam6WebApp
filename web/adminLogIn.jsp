@@ -17,6 +17,10 @@
     if (password.equals(correctPassword)) {
         
         out.print("<h1>CORRECT PASSWORD!!!!</h1>");
+        %>
+        <!--the code below is an auto-refresh code that will change into the createExam.html automatically-->
+        <meta http-equiv="refresh" content="5;url=http://localhost:8081/AgileTeam6WebApp/createExam.html">
+        <%
         // Redirect to admin dashboard
     
     }

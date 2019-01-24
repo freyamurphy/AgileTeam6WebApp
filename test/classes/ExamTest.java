@@ -64,13 +64,13 @@ public class ExamTest {
     @Test
     public void testGetAcademicYear() {
         System.out.println("Testing getAcademicYear");
-        Exam testExam = new Exam("","","1819","","");
+        Exam testExam = new Exam("1819","","","","");
         String expResult = "1819";
         String result = testExam.getAcademicYear();
         assertEquals("Method getAcademicYear failed.",expResult, result);      
     }
     /**
-     * Test of getAcademicYear method, of class Exam.
+     * Test of getExamType method, of class Exam.
      */
     @Test
     public void testGetExamType() {
@@ -81,7 +81,7 @@ public class ExamTest {
         assertEquals("Method getExamType failed.",expResult, result);      
     }
     /**
-     * Test of getAcademicYear method, of class Exam.
+     * Test of getModuleDegree method, of class Exam.
      */
     @Test
     public void testGetModuleDegree() {
@@ -124,7 +124,7 @@ public class ExamTest {
     }
     
     /**
-     * Test of setModuleCode method of class Exam
+     * Test of setModuleName method of class Exam
      */
     @Test
     public void testSetModuleName() 
@@ -140,7 +140,7 @@ public class ExamTest {
     }
     
     /**
-     * Test of setModuleCode method of class Exam
+     * Test of setExamType method of class Exam
      */
     @Test
     public void testSetExamType() 
@@ -149,14 +149,14 @@ public class ExamTest {
         //create empty exam object, then call set method to set to expected value
         String expResult = "M";
         Exam testExam = new Exam("","","","","");
-        testExam.setModuleName("M");
+        testExam.setExamType("M");
         //fetch set value and compare to expected value
         String result = testExam.getExamType();
         assertTrue("Method setExamType failed", result.equals(expResult));
     }
     
     /**
-     * Test of setModuleCode method of class Exam
+     * Test of setModuleDegree method of class Exam
      */
     @Test
     public void testSetModuleDegree() 
@@ -168,6 +168,6 @@ public class ExamTest {
         testExam.setModuleDegree("UG");
         //fetch set value and compare to expected value
         String result = testExam.getModuleDegree();
-        assertTrue("Method setModuleName failed", result.equals(expResult));
+        assertTrue("Method setModuleDegree failed", result.equals(expResult));
     }
 }
