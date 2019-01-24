@@ -7,7 +7,7 @@ package classes;
 
 /**
  *
- * @author freyamurphy
+ * @author Momoko Werner
  */
 
 //Exam class declaration
@@ -19,11 +19,11 @@ public class Exam
     String moduleName;
     String examType;  //main (M) or resit (R)
     String moduleDegree; //undergraduate (UG) or postgraduate (PG) exam
-    //online vs paper
+    //online vs paper variable needed? 
 
-    //later should add exam setter object or smth
+    //might want to add more attributes later
     
-    // Constructor Declaration of Class 
+    // Constructor
     public Exam(String academicYear, String moduleName, String moduleCode, String examType, String moduleDegree) 
     { 
         this.moduleName = moduleName; 
