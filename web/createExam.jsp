@@ -50,7 +50,7 @@
     </head>
     <body>
         
-        <sql:update sql="INSERT INTO Exams VALUES (23,?,?,?,?,?)"
+        <sql:update sql="INSERT INTO Exams (AcademicYear, ModuleCode, ModuleName, ExamType, ModuleDegree) VALUES (?,?,?,?,?)"
                     dataSource = "${connection}" var = "result">
             <sql:param value="${academicYear}"/>
             <sql:param value="${moduleCode}"/>        
