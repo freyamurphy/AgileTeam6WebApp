@@ -225,7 +225,7 @@
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Exams<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="uploadExam.html">Upload Exam</a>
@@ -234,7 +234,10 @@
                                     <a href="morris.html">View Feedback</a>
                                 </li>
                                 <li>
-                                    <a href="flot.html">View All Exams</a>
+                                    <a href="viewAllExams.jsp">View All Exams</a>
+                                </li>
+                                <li>
+                                    <a href="createExam.html">Create Exam</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -323,12 +326,14 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">Upload an Exam</h1>
                 </div>
-                 <div style="margin: auto; width: 80%;">
+                 <div style="margin: auto; width: 95%;">
                     <h3>Upload Files</h3>
+                    </br>
                     Please select the file you want to upload: 
-                    <form action="uploadhandle.jsp" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file" size="50" /><input
-                            type="submit" value="submit" />
+                    </br>
+                    <form action="../uploadhandle.jsp" method="post" enctype="multipart/form-data"></br>
+                    <input type="file" name="file" size="50" /></br>
+                    <input type="submit" value="submit" /></br>
                     </form>
                 </div>
                 <!-- /.col-lg-12 -->

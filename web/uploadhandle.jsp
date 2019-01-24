@@ -86,4 +86,7 @@
         out.println("</html>");
     }
 %>
+        Jumping back into upload page...       
+        <!--the code below is an auto-refresh code that will change into the createExam.html automatically-->
+        <meta http-equiv="refresh" content="3;url=pages/uploadExam.html">
 
