@@ -22,29 +22,32 @@
             <h1> Assign an Exam to an Exam Setter</h1>
             <p> Select an exam from the options available then select a member of Teaching Staff to assign 
             an exam to them.</p>
-               <form action= "AssignExamSetter.jsp" method="post">
-        
-               <h3>Exams available</h3>
-               <select name = "Exams">
-                <c:forEach var="Exams" items="${result.rows}">
+            <h3>Exams available</h3>
+               <form action= "AssignExamSetter.jsp" method="post" id="AssignExam">
+         <select name = "Exams">
+                <c:forEach var="row" items="${result.rows}">
                     <option value="${row.ExamNo}">
                         <c:out value="${row.ModuleCode} ${row.ModuleName} ${row.AcademicYear}"/>
                     </option>
                 </c:forEach>
-            </select>
+         </select>
+    
+    
          <%
    //get setter from hashmap
-   request.setAttribute("availableSetters", eSList);
+   //request.setAttribute("availableSetters", eSList);
     %>
    <h3>Teaching Staff</h3>
         <select name="Teaching Staff">
-            <c:forEach items="${availableSetters}" var="setter" >
-                <option value="${availableSetters.key}" </option>
-            </c:forEach>
+            <option
+                value="craig">Craig</option> 
+            <option
+                value="Iain">Iain</option>
+            <option
+                value="Rachel">Rachel</option>
+            
         </select>
   <% //get input from select and send selected exam to selected setter
-   String Exam = request.getParameter("Exams");
-   String Setter = request.getParameter("Setter");
    //make sure the exam has sent (use counter?)
 %>
 
