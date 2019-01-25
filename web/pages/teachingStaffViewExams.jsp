@@ -54,7 +54,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Team 6 -- the best team :)</a>
+                <a class="navbar-brand" href="teachingStaffDashboard.html">Team 6 -- the best team :)</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -149,22 +149,16 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="teachingStaffDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="uploadExam.html">Upload Exam</a>
+                                    <a href="teachingStaffUploadExam.html">Upload Exam</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">View Feedback</a>
-                                </li>
-                                <li>
-                                    <a href="viewAllExams.jsp">View All Exams</a>
-                                </li>
-                                <li>
-                                    <a href="createExam.html">Create Exam</a>
+                                    <a href="teachingStaffViewExams.jsp">View Exams</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -249,44 +243,40 @@
         </nav>
 
         <div id="page-wrapper">
+            <!-- /.row -->   
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">View All Exams</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <!-- /.row -->
-          
+
         <sql:query dataSource="${connection}" var="result">
         SELECT * FROM Exams;     
-        </sql:query>
-        <c:forEach var="row" items="${result.rows}">
-            </br>
-                <h2><c:out value="${row.ModuleCode}"/> Details:</h2>
-                <th>ModuleName:<c:out value="${row.ModuleName}"/></th></br>
-                <th>ExamNo:<c:out value="${row.ExamNo}"/></th></br>
-                <th>AcademicYear:<c:out value="${row.AcademicYear}"/></th></br>
-                <th>ExamType:<c:out value="${row.ExamType}"/></th></br>
-                <th>ModuleDegree:<c:out value="${row.ModuleDegree}"/></th></br></br>
+        </sql:query>      
+        <c:forEach var="row" items="${result.rows}">                      
+            <h3><c:out value="${row.ModuleCode}"/> Details:</h3>
+                ModuleName:<c:out value="${row.ModuleName}"/></br>
+                ExamNo:<c:out value="${row.ExamNo}"/></br>
+                AcademicYear:<c:out value="${row.AcademicYear}"/></br>
+                ExamType:<c:out value="${row.ExamType}"/></br>
+                ModuleDegree:<c:out value="${row.ModuleDegree}"/></br></br>
                     <form action="ViewComments.jsp">
                         <input type="hidden" value="${row.ExamNo}" name="examNo" />
                         <input type="submit" value="View comments" />
-                    </form>     
+                    </form></br>
                  <h3>Process:</h3>
                  <div class="progress progress-striped active">
                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
                  30% Complete
                  </div>
-                <%--
-                .progress-bar-success(green)
-                .progress-bar-info(blue)
-                .progress-bar-warning(yellow)
-                .progress-bar-danger(red)
-                --%>
-            </div>
-            <HR style="FILTER: alpha(opacity=0,finishopacity=100,style=1)" width="80%" color=#987cb9 SIZE=3></br>
+                 </div>
+                
           </c:forEach>
 -           
+          
+           
+        </div>
         <!-- /#page-wrapper -->
 
     </div>

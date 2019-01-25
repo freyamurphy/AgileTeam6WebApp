@@ -13,13 +13,13 @@
     
     String redirectURL = baseURL;
     if (role.equals("admin")) {
-        redirectURL += "/pages/login.html";
+        redirectURL += "/pages/adminLogin.html";
     }
     else if (role.equals("internalModerator")) {
-        redirectURL += "/pages/login.html";
+        redirectURL += "/pages/internalMouderatorLogin.html";
     }
     else if (role.equals("examSetter")) {
-        redirectURL += "/pages/login.html";
+        redirectURL += "/pages/examSetterLogin.html";
     }
     else {
         redirectURL += "/index.html";
