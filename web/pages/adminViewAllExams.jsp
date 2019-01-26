@@ -54,7 +54,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Team 6 -- the best team :)</a>
+                <a class="navbar-brand" href="adminDashboard.html">Team 6 -- the best team :)</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -149,19 +149,13 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="adminDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="uploadExam.html">Upload Exam</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">View Feedback</a>
-                                </li>
-                                <li>
-                                    <a href="viewAllExams.jsp">View All Exams</a>
+                                    <a href="adminViewAllExams.jsp">View All Exams</a>
                                 </li>
                                 <li>
                                     <a href="createExam.html">Create Exam</a>

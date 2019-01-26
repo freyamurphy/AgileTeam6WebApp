@@ -20,7 +20,7 @@
         out.println("Jumping into home page...");
         %>
         <!--the code below is an auto-refresh code that will change into the createExam.html automatically-->
-        <meta http-equiv="refresh" content="3;url=pages/index.html">
+        <meta http-equiv="refresh" content="3;url=pages/adminDashboard.html">
         <% 
     }
     else {
@@ -29,7 +29,7 @@
         // redirect to admin login?
       %>
       <!--the code below is an auto-refresh code that will change back to the adminLogIn.html automatically-->
-      <meta http-equiv="refresh" content="3;url=pages/login.html">
+      <meta http-equiv="refresh" content="3;url=pages/adminLogin.html">
       <%
     }
 %>
