@@ -11,6 +11,18 @@
     String password = request.getParameter("password");
     String role = request.getParameter("role");
     
+    //Create cookies for username and user's role
+    Cookie usernameCookie = new Cookie("username",username);
+    Cookie roleCookie = new Cookie("role",role);
+    
+    //Set expiry time for cookies as 24h from creation
+    usernameCookie.setMaxAge(60*60*24);
+    roleCookie.setMaxAge(60*60*24);
+    
+    //add cookies into the HTTP response header
+    response.addCookie(usernameCookie);
+    response.addCookie(roleCookie);
+    
     // Make variables visible to JSTL (for SQL stuff)
     pageContext.setAttribute("username", username);
     pageContext.setAttribute("password", password);
