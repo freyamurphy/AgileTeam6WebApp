@@ -5,43 +5,25 @@
 --%>
 
 <%@ include file="dbConnection.jsp"%>
+<%@page import="java.sql.Timestamp"%>
 <%@page import="staff.*"%>
 <%@page import="classes.Comment"%>
 
 <%
     
     String content = request.getParameter("commentBox");
-    String user = request.getParameter("userRole");
     String examNo = request.getParameter("examNo");
-
+    
+    pageContext.setAttribute("content", content);
+    pageContext.setAttribute("examNo", examNo);
     
     // need some cookies
-    String username = "Bob";
+    String staffID = "5";
     
-    StaffHandler sh = new StaffHandler();
-    Commenting commenter = new InternalModerator("", "");
-    
-    if(user.equals("IM"))
-    {
-        commenter = sh.getIM(username);
-        
-    }
-    
-    Comment userComment = commenter.addComment(content);
-    String commentContent = userComment.getContent();
-    String author = userComment.getAuthorUsername();
-    String role = userComment.getAuthorRole();
-    
-    String time = userComment.getTimePosted();
-    time = time.substring(0, 19);
-    
-    pageContext.setAttribute("content", commentContent);
-    pageContext.setAttribute("author", author);
-    pageContext.setAttribute("time", time);
-    pageContext.setAttribute("role", role);
-    pageContext.setAttribute("examNo", examNo);
+    pageContext.setAttribute("staffID", staffID);  
 
-            
+    Timestamp timePosted = new Timestamp(System.currentTimeMillis());
+    pageContext.setAttribute("timePosted", timePosted);
 %>
     
 <html>
@@ -49,12 +31,11 @@
         <title>Insert comment</title>
     </head>
     <body>
-        <sql:update sql="INSERT INTO Comments (Content, Author, TimeOfComment, AuthorRole, ExamNo) VALUES (?,?,?,?,?)"
+        <sql:update sql="INSERT INTO Comments (Content, Author, TimeOfComment, ExamNo) VALUES (?,?,?,?)"
                     dataSource = "${connection}" var = "result">
             <sql:param value="${content}"/>
-            <sql:param value="${author}"/>        
-            <sql:param value="${time}"/>
-            <sql:param value="${role}"/>
+            <sql:param value="${staffID}"/>        
+            <sql:param value="${timePosted}"/>
             <sql:param value="${examNo}" />
      </sql:update>
      <c:if test="${result == 1}" >
