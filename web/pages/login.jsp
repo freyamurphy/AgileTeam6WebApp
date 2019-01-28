@@ -15,9 +15,12 @@
     Cookie usernameCookie = new Cookie("username",username);
     Cookie roleCookie = new Cookie("role",role);
     
-    //Set expiry time for cookies as 24h from creation
-    usernameCookie.setMaxAge(60*60*24);
-    roleCookie.setMaxAge(60*60*24);
+    //Set expiry time for end of session
+    usernameCookie.setMaxAge(-1);
+    roleCookie.setMaxAge(-1);
+    
+    usernameCookie.setPath("/AgileTeam6WebApp");
+    roleCookie.setPath("/AgileTeam6WebApp");
     
     //add cookies into the HTTP response header
     response.addCookie(usernameCookie);
