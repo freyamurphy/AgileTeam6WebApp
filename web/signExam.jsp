@@ -8,12 +8,7 @@
 <%@include file="dbConnection.jsp"%>
 
 <%
-    /*
-    String esSig = "e";
-    String imSig = "e";
-    String evSig = "e";
-    String emSig = "e";
-    */
+    
     String username = "";
     String role = "";
     int examID;
@@ -44,7 +39,8 @@
     else {
         //browser didn't store cookies
         out.println("<h2>No cookies found</h2>");
-        }    
+    }    
+    
     
     //Fetch Input From HTML Form (currently no exist) 
     //int examID = Integer.parseInt(request.getParameter("examID"));
@@ -58,7 +54,7 @@
     
     
     //This is hardcoded in atm, needs to be changed later
-    pageContext.setAttribute("examID", 1);
+    pageContext.setAttribute("examID", 2);
     
     
     

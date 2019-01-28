@@ -252,6 +252,8 @@
             </div>
             <!-- /.row -->
 <%
+    //for getting username from cookie later
+    String username = "";
     
     //input gets fetched from HTML form (createExam.html)
     
@@ -261,18 +263,45 @@
     String examType = request.getParameter("examType");
     String moduleDegree = request.getParameter("moduleDegree");
     
-    //need to know who is logged in
-    //cookies? who is logged in, use cookie to get right admin
-    //implement in sprint 2
     
+    //Get username value from cookie to know who is trying to create
+    
+    //Fetch username value from cookies
+    Cookie cookie = null;
+    Cookie[] cookies = null;
+    //Get cookies array
+    cookies = request.getCookies();
+    //check if cookies exist
+    if( cookies != null ) {
+        //go through cookie array, find username cookie and store value
+        for (int i = 0; i < cookies.length; i++) {
+            cookie = cookies[i];
+            //check if cookie is the username cookie
+            if (cookie.getName().equals("username")) {
+                //Store username cookie's value as JSP variable
+                username = cookie.getValue();
+            }                 
+        }
+    }
+    else {
+        //browser didn't store cookies
+        out.println("<h2>No cookies found</h2>");
+    }    
+    out.print("Name: "+username+"<br/>");
+    
+    //legacy code does not work atm, since users in Hashtable are different to users in SQL DB
+    //Cookies are getting DB users and trying to feed into Hashtable so clearly won't work
+    
+    /*
     staff.StaffHandler staffhandler = new StaffHandler();
-    
-    //this won't work until we have the cookie working 
-    //for time being using "Craig", replace later with String username
-    staff.Admin admin = staffhandler.getAdmin("Craig");    
+    //creating admin project with username fetched from cookie
+    staff.Admin admin = staffhandler.getAdmin(username);    
     
     //calling create method in Exsm Java class
     admin.createExam(academicYear, moduleCode, moduleName, examType, moduleDegree);
+    */
+    
+    
     
     //taking the JSP variables and converting them into JSTL attributes (essentially also variables...)
     //This allows usage of variables outside of JSP brackets
