@@ -8,10 +8,12 @@
 <%@include file="dbConnection.jsp"%>
 
 <%
-    String esSig;
-    String imSig;
-    String evSig;
-    String emSig;
+    /*
+    String esSig = "e";
+    String imSig = "e";
+    String evSig = "e";
+    String emSig = "e";
+    */
     String username = "";
     String role = "";
     int examID;
@@ -61,21 +63,21 @@
     
     
     //Fill Columns Based On Role
-    if (role.equals("internalMod"))
+    if (role.equals("internalModerator"))
     {
         pageContext.setAttribute("esSig", null);
         pageContext.setAttribute("imSig", username);
         pageContext.setAttribute("evSig", null);
         pageContext.setAttribute("emSig", null);
     }
-    else if (role.equals("examVettingCom"))
+    else if (role.equals("examVettingCommittee"))
     {
         pageContext.setAttribute("esSig", null);
         pageContext.setAttribute("imSig", null);
         pageContext.setAttribute("evSig", username);
         pageContext.setAttribute("emSig", null);
     }
-    else if (role.equals("externalMod"))
+    else if (role.equals("externalExaminer"))
     {
         pageContext.setAttribute("esSig", null);
         pageContext.setAttribute("imSig", null);
@@ -89,8 +91,7 @@
         pageContext.setAttribute("evSig", null);
         pageContext.setAttribute("emSig", null);
     }
-    
-    
+        
 %>
 
 <!--
@@ -101,7 +102,7 @@
         <title>Sign Exam</title>
     </head>
     <body>
-        
+                
         <c:if test="${imSig != null}">
             <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE InternalModeratorSignatures=values(InternalModeratorSignatures)" dataSource = "${connection}" var = "result">
                 <sql:param value="${esSig}"/>
