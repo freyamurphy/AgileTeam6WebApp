@@ -13,13 +13,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Internal Moderator Comment</title>
+        <title>Add comment</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <h1>Please enter a comment</h1>
-        <form action="addComment.jsp" method="POST" id="IMComment"> 
+        <form action="addComment.jsp" method="POST" id="comment"> 
             <input type="submit" value="Submit"/>
             <select name = "examNo">
                 <c:forEach var="row" items="${result.rows}">
@@ -28,8 +28,7 @@
                     </option>
                 </c:forEach>
             </select>
-            <input type = "hidden" value="IM" name="userRole"/>
         </form>
-        <textarea name="commentBox" form="IMComment"></textarea>
+        <textarea name="commentBox" form="comment"></textarea>
     </body>
 </html>
