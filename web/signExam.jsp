@@ -9,8 +9,9 @@
 
 <%
     
-    String role = "internalMod";
-    String username = "Bobby";
+    String role = "examSetter";
+    String username = "Cerys The ADULT";
+    String esSig;
     String imSig;
     String evSig;
     String emSig;
@@ -21,27 +22,37 @@
     
     //Use StaffCookie To Detect Logged In User And Role
     //As Cookie Isn't Implemented, Temporarily Just Use Hard Coded Internal Moderator    
-    pageContext.setAttribute("username","Bobb");
-    pageContext.setAttribute("role", "externalMod");
+    pageContext.setAttribute(username,"Cerys The ADULT");
+    pageContext.setAttribute(role, "examSetter");
     
     //Fill Columns Based On Role
     if (role.equals("internalMod"))
     {
+        pageContext.setAttribute("esSig", null);
         pageContext.setAttribute("imSig", username);
         pageContext.setAttribute("evSig", null);
         pageContext.setAttribute("emSig", null);
     }
     else if (role.equals("examVettingCom"))
     {
+        pageContext.setAttribute("esSig", null);
         pageContext.setAttribute("evSig", null);
         pageContext.setAttribute("evSig", username);
         pageContext.setAttribute("emSig", null);
     }
     else if (role.equals("externalMod"))
     {
+        pageContext.setAttribute("esSig", null);
         pageContext.setAttribute("evSig", null);
         pageContext.setAttribute("evSig", null);
         pageContext.setAttribute("emSig", username);
+    }
+    else if (role.equals("examSetter"))
+    {
+        pageContext.setAttribute("esSig", username);
+        pageContext.setAttribute("evSig", null);
+        pageContext.setAttribute("evSig", null);
+        pageContext.setAttribute("emSig", null);
     }
     
     pageContext.setAttribute("examID", 1);
@@ -58,7 +69,8 @@
     <body>
         
         <c:if test="${imSig != null}">
-            <sql:update sql="INSERT INTO Signatures (InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE InternalModeratorSignatures=values(InternalModeratorSignatures)" dataSource = "${connection}" var = "result">
+            <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE InternalModeratorSignatures=values(InternalModeratorSignatures)" dataSource = "${connection}" var = "result">
+                <sql:param value="${esSig}"/>
                 <sql:param value="${imSig}"/>
                 <sql:param value="${evSig}"/>
                 <sql:param value="${emSig}"/>
@@ -66,7 +78,8 @@
             </sql:update>
         </c:if>
         <c:if test="${evSig != null}">
-            <sql:update sql="INSERT INTO Signatures (InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE ExamVettingCommitteeSignatures=values(ExamVettingCommitteeSignatures)" dataSource = "${connection}" var = "result">
+            <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE ExamVettingCommitteeSignatures=values(ExamVettingCommitteeSignatures)" dataSource = "${connection}" var = "result">
+                <sql:param value="${esSig}"/>
                 <sql:param value="${imSig}"/>
                 <sql:param value="${evSig}"/>
                 <sql:param value="${emSig}"/>
@@ -74,7 +87,17 @@
             </sql:update>
         </c:if>
         <c:if test="${emSig != null}">
-            <sql:update sql="INSERT INTO Signatures (InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE ExternalModeratorSignatures=values(ExternalModeratorSignatures)" dataSource = "${connection}" var = "result">
+            <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE ExternalModeratorSignatures=values(ExternalModeratorSignatures)" dataSource = "${connection}" var = "result">
+                <sql:param value="${esSig}"/>
+                <sql:param value="${imSig}"/>
+                <sql:param value="${evSig}"/>
+                <sql:param value="${emSig}"/>
+                <sql:param value="${examID}"/>
+            </sql:update>
+        </c:if>
+        <c:if test="${esSig != null}">
+            <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExamSetterSignatures=values(ExamSetterSignatures)" dataSource = "${connection}" var = "result">
+                <sql:param value="${esSig}"/>
                 <sql:param value="${imSig}"/>
                 <sql:param value="${evSig}"/>
                 <sql:param value="${emSig}"/>
