@@ -262,7 +262,7 @@
     String academicYear = request.getParameter("academicYear");
     String examType = request.getParameter("examType");
     String moduleDegree = request.getParameter("moduleDegree");
-    
+    String examFormat = request.getParameter("examFormat");
     
     //Get username value from cookie to know who is trying to create
     
@@ -310,13 +310,14 @@
     pageContext.setAttribute("moduleName",moduleName);
     pageContext.setAttribute("examType",examType);
     pageContext.setAttribute("moduleDegree",moduleDegree);
+    pageContext.setAttribute("examFormat", examFormat);
     
 %>
 
         <!--
             SQL Insert statement to insert exam into database   
         -->
-        <sql:update sql="INSERT INTO Exams (AcademicYear, ModuleCode, ModuleName, ExamType, ModuleDegree) VALUES (?,?,?,?,?)"
+        <sql:update sql="INSERT INTO Exams (AcademicYear, ModuleCode, ModuleName, ExamType, ModuleDegree, ExamFormat) VALUES (?,?,?,?,?,?)"
                     dataSource = "${connection}" var = "result">
             
             <!-- Parameters ('?') in SQL statement replaced with the JSTL attributes -->
@@ -325,6 +326,7 @@
             <sql:param value="${moduleName}"/>
             <sql:param value="${examType}"/>
             <sql:param value="${moduleDegree}"/>
+            <sql:param value="${examFormat}"/>
         </sql:update>
         <p>
             Created Successfully!
