@@ -10,10 +10,6 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 
 <html>
-<head>
-<title>Database Connection</title>
-</head>
-
 <body>
 
 <sql:setDataSource 
