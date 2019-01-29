@@ -6,8 +6,6 @@
 
 <%@ include file="dbConnection.jsp"%>
 <%@page import="java.sql.Timestamp"%>
-<%@page import="staff.*"%>
-<%@page import="classes.Comment"%>
 
 <%
     
