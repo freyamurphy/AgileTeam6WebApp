@@ -14,10 +14,13 @@
     //String filePath = context.getInitParameter("file-upload");
     String filePath = request.getSession().getServletContext().getRealPath("");
     //String filePath = request.getContextPath(); 
+    String addfold = request.getParameter("folder");
+    String fold = "WEB-INF/upload/";
+    filePath = filePath + fold + addfold + "/";
     System.out.println("filePath => " + filePath);
     // Verify the content type
     String contentType = request.getContentType();
-
+  
     if (contentType == null) {
         System.out.println("contentType => " + contentType);
         contentType = "";
@@ -66,7 +69,7 @@
                     }
                     fi.write(file);
                     out.println("Uploaded successfully!");
-                    %><br/><%
+                   %><br/><%
                     out.println("Uploaded Filename: " + filePath + fileName + "<br>");
                 }
             }
@@ -86,7 +89,7 @@
         out.println("</html>");
     }
 %>
-        Jumping back into upload page...       
+      <%--  Jumping back into upload page...       
         <!--the code below is an auto-refresh code that will change into the createExam.html automatically-->
-        <meta http-equiv="refresh" content="3;url=pages/uploadExam.html">
+        <meta http-equiv="refresh" content="3;url=pages/uploadExam.html">--%>
 

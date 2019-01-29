@@ -149,7 +149,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="teachingStaffDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="internalMouderatorDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
@@ -251,31 +251,47 @@
                 <!-- /.col-lg-12 -->
             </div>
 
-        <sql:query dataSource="${connection}" var="result">
-        SELECT * FROM Exams;     
-        </sql:query>      
-        <c:forEach var="row" items="${result.rows}">                      
-            <h3><c:out value="${row.ModuleCode}"/> Details:</h3>
-                ModuleName:<c:out value="${row.ModuleName}"/></br>
-                ExamNo:<c:out value="${row.ExamNo}"/></br>
-                AcademicYear:<c:out value="${row.AcademicYear}"/></br>
-                ExamType:<c:out value="${row.ExamType}"/></br>
-                ModuleDegree:<c:out value="${row.ModuleDegree}"/></br></br>
-                    <form action="ViewComments.jsp">
+            <div class="tabbable" style="margin-bottom: 18px;">
+             <ul class="nav nav-tabs">   
+             <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+            <sql:query dataSource="${connection}" var="result">
+            SELECT * FROM Exams;     
+            </sql:query>   
+                <c:forEach var="row" items="${result.rows}"> 
+                <li><a href="#${row.ModuleCode}" data-toggle="tab"><c:out value="${row.ModuleCode}"/></a></li>
+                </c:forEach>
+             </ul>
+                <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+                    <div class="tab-pane  active" id="home">
+                    <h3>Home</h3>
+                     <p>You can get the information of the module and view comments here</p>
+                    </div>
+                <sql:query dataSource="${connection}" var="result">
+                    SELECT * FROM Exams;     
+                </sql:query>
+                <c:forEach var="row" items="${result.rows}">     
+                <div class="tab-pane" id="${row.ModuleCode}">
+                      <h3>Module Details:</h3>
+                       ModuleName:<c:out value="${row.ModuleName}"/></br>
+                       ExamNo:<c:out value="${row.ExamNo}"/></br>
+                       AcademicYear:<c:out value="${row.AcademicYear}"/></br>
+                       ExamType(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
+                       ModuleDegree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br></br>
+                       <form action="ViewComments.jsp">
                         <input type="hidden" value="${row.ExamNo}" name="examNo" />
                         <input type="submit" value="View comments" />
-                    </form></br>
+                       </form></br>
                  <h3>Process:</h3>
                  <div class="progress progress-striped active">
                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
                  30% Complete
                  </div>
                  </div>
-                
-          </c:forEach>
--           
-          
-           
+                </div>
+                 </c:forEach>
+              </div>
+            </div>
+    
         </div>
         <!-- /#page-wrapper -->
 

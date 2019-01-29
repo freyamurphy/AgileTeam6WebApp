@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ListFileServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //获取上传文件的目录
-        String uploadFilePath = this.getServletContext().getRealPath("/WEB-INF/upload");
+        String uploadFilePath = this.getServletContext().getRealPath("/WEB-INF/upload/AC31012/");
         //存储要下载的文件名
         Map<String,String> fileNameMap = new HashMap<String,String>();
         //递归遍历filepath目录下的所有文件和目录，将文件的文件名存储到map集合中

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Team 6</title>
+    <title>Upload files</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="examSetterDashboard.html">Team 6 -- the best team :)</a>
+                <a class="navbar-brand" href="index.html">Team 6 -- the best team :)</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -239,56 +239,24 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">Upload an Exam</h1>
+                </div>
+                 <div style="margin: auto; width: 95%;">
+                    <h3>Upload Files</h3>
+                    </br>
+                    Please select the file you want to upload: 
+                    </br>
+                    *The file name should be like: YEAR_MODULECODE_TYPEOFEXAM.pdf
+                    </br>
+                    *Example: 2018-2019_AC31012_mainExam.pdf
+                    </br>
+                    <form action="../uploadhandle.jsp" method="post" enctype="multipart/form-data"></br>
+                    <input type="file" name="file" size="50" /></br>
+                    <input type="submit" value="submit" /></br>
+                    </form>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Comments to Review!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>Exams to Write!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
         </div>
         <!-- /#page-wrapper -->
 

@@ -1,6 +1,12 @@
+<%-- 
+    Document   : viewAllExams
+    Created on : 2019年1月24日, 下午3:03:31
+    Author     : YHSSSS
+--%>
+<%@include file="../dbConnection.jsp"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Team 6</title>
+    <title>View All Exams</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +54,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="examSetterDashboard.html">Team 6 -- the best team :)</a>
+                <a class="navbar-brand" href="teachingStaffDashboard.html">Team 6 -- the best team :)</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -152,7 +158,7 @@
                                     <a href="examSetterUploadExam.html">Upload Exam</a>
                                 </li>
                                 <li>
-                                    <a href="examSetterViewExams.jsp">View All Exams</a>
+                                    <a href="examSetterViewExams.jsp">View Exams</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -237,58 +243,53 @@
         </nav>
 
         <div id="page-wrapper">
+            <!-- /.row -->   
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">View All Exams</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Comments to Review!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
+            <div class="tabbable" style="margin-bottom: 18px;">
+             <ul class="nav nav-tabs">   
+             <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+            <sql:query dataSource="${connection}" var="result">
+            SELECT * FROM Exams;     
+            </sql:query>   
+                <c:forEach var="row" items="${result.rows}"> 
+                <li><a href="#${row.ModuleCode}" data-toggle="tab"><c:out value="${row.ModuleCode}"/></a></li>
+                </c:forEach>
+             </ul>
+                <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+                    <div class="tab-pane  active" id="home">
+                    <h3>Home</h3>
+                     <p>You can get the information of the module and view comments here</p>
                     </div>
+                <sql:query dataSource="${connection}" var="result">
+                    SELECT * FROM Exams;     
+                </sql:query>
+                <c:forEach var="row" items="${result.rows}">     
+                <div class="tab-pane" id="${row.ModuleCode}">
+                      <h3>Module Details:</h3>
+                       ModuleName:<c:out value="${row.ModuleName}"/></br>
+                       ExamNo:<c:out value="${row.ExamNo}"/></br>
+                       AcademicYear:<c:out value="${row.AcademicYear}"/></br>
+                       ExamType(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
+                       ModuleDegree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br></br>
+                       <form action="ViewComments.jsp">
+                        <input type="hidden" value="${row.ExamNo}" name="examNo" />
+                        <input type="submit" value="View comments" />
+                       </form></br>
+                 <h3>Process:</h3>
+                 <div class="progress progress-striped active">
+                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+                 30% Complete
+                 </div>
+                 </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>Exams to Write!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                 </c:forEach>
+              </div>
+            </div>      
         </div>
         <!-- /#page-wrapper -->
 
