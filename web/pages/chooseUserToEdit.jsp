@@ -10,6 +10,7 @@
     Each username is unique, but may appear in different
     rows for different roles (my dodgy database design)
     Hence only select distinct usernames.
+    Distinct so that bob only drops down once
 --%>
 <sql:query sql="SELECT DISTINCT Username FROM Staff" 
            var="result" dataSource="${connection}">
