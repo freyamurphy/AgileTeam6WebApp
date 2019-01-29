@@ -94,7 +94,7 @@
                                     <a href="createExam.html">Create Exam</a>
                                 </li>
                                 <li>
-                                    <a href="viewAllExams.jsp">View All Exams</a>
+                                    <a href="adminViewAllExams.jsp">View All Exams</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

@@ -1,9 +1,12 @@
-<%@ include file="dbConnection.jsp"%>
+<%-- 
+    Document   : viewAllExams
+    Created on : 2019年1月24日, 下午3:03:31
+    Author     : YHSSSS
+--%>
+<%@include file="../dbConnection.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -12,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Team 6</title>
+    <title>View All Exams</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -59,6 +62,66 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
@@ -86,7 +149,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="teachingStaffDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="examSetterDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
@@ -95,7 +158,7 @@
                                     <a href="examSetterUploadExam.html">Upload Exam</a>
                                 </li>
                                 <li>
-                                    <a href="examSetterViewExams.jsp">View All Exams</a>
+                                    <a href="examSetterViewExams.jsp">View Exams</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -167,7 +230,7 @@
                                     <a href="blank.html">Blank Page</a>
                                 </li>
                                 <li>
-                                    <a href="teachingStaffViewExams.jsp">View All Exams</a>
+                                    <a href="login.html">Login Page</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -179,129 +242,54 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-         <c:set var = "newExam" value = "${0}" />
-            <c:set var = "inProgressExam" value = "${0}" />
-            <c:set var = "completedExam" value = "${0}" />
-            <sql:query dataSource ="${connection}" var = "examCount">
-                SELECT COUNT(*) FROM Exams
-            </sql:query>
-            <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
-            <c:forEach var = "i" begin="1" end="${examCountInt}">
-                 <sql:query dataSource = "${connection}" var = "result">
-                    SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
-                    <sql:param value = "${i}" />
-                </sql:query>
-                <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
-                <c:choose>
-                    <c:when test="${resultInt == '0'}">
-                        <c:set var = "newExam" value = "${newExam+1}" />
-                    </c:when>
-                    <c:when test="${resultInt == '4'}">
-                        <c:set var = "completedExam" value = "${completedExam+1}" />
-                    </c:when>
-                    <c:otherwise>
-                        <c:set var = "inProgressExam" value = "${inProgressExam+1}" />
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-
         <div id="page-wrapper">
+            <!-- /.row -->   
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">View All Exams</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><c:out value = "${newExam}" /> </div>
-                                    <div>Exams Not Started</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
+            <div class="tabbable" style="margin-bottom: 18px;">
+             <ul class="nav nav-tabs">   
+             <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+            <sql:query dataSource="${connection}" var="result">
+            SELECT * FROM Exams;     
+            </sql:query>   
+                <c:forEach var="row" items="${result.rows}"> 
+                <li><a href="#${row.ModuleCode}" data-toggle="tab"><c:out value="${row.ModuleCode}"/></a></li>
+                </c:forEach>
+             </ul>
+                <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+                    <div class="tab-pane  active" id="home">
+                    <h3>Home</h3>
+                     <p>You can get the information of the module and view comments here</p>
                     </div>
+                <sql:query dataSource="${connection}" var="result">
+                    SELECT * FROM Exams;     
+                </sql:query>
+                <c:forEach var="row" items="${result.rows}">     
+                <div class="tab-pane" id="${row.ModuleCode}">
+                      <h3>Module Details:</h3>
+                       ModuleName:<c:out value="${row.ModuleName}"/></br>
+                       ExamNo:<c:out value="${row.ExamNo}"/></br>
+                       AcademicYear:<c:out value="${row.AcademicYear}"/></br>
+                       ExamType(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
+                       ModuleDegree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br></br>
+                       <form action="ViewComments.jsp">
+                        <input type="hidden" value="${row.ExamNo}" name="examNo" />
+                        <input type="submit" value="View comments" />
+                       </form></br>
+                 <h3>Process:</h3>
+                 <div class="progress progress-striped active">
+                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+                 30% Complete
+                 </div>
+                 </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><c:out value = "${inProgressExam}" /></div>
-                                    <div>Exams In Progress</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><c:out value = "${completedExam}" /></div>
-                                    <div>Exams Finished</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Comments to Review!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                 </c:forEach>
+              </div>
+            </div>      
         </div>
         <!-- /#page-wrapper -->
 
