@@ -152,85 +152,13 @@
                             <a href="adminDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="adminViewAllExams.jsp">View All Exams</a>
                                 </li>
                                 <li>
                                     <a href="createExam.html">Create Exam</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
-                                </li>
-                                <li>
-                                    <a href="buttons.html">Buttons</a>
-                                </li>
-                                <li>
-                                    <a href="notifications.html">Notifications</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                                <li>
-                                    <a href="icons.html"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grid</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="blank.html">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="login.html">Login Page</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -245,7 +173,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">View All Exams</h1>
+                    <h1 class="page-header">View All New Exams</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -253,11 +181,25 @@
             <div class="tabbable" style="margin-bottom: 18px;">
              <ul class="nav nav-tabs">   
              <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-             <sql:query dataSource="${connection}" var="result">
-                SELECT * FROM Exams;     
-             </sql:query>   
-                <c:forEach var="row" items="${result.rows}"> 
-                <li><a href="#${row.ModuleCode}" data-toggle="tab"><c:out value="${row.ModuleCode}"/></a></li>
+             <sql:query dataSource ="${connection}" var = "examCount">
+                    SELECT COUNT(*) FROM Exams
+             </sql:query>
+                <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
+                <c:forEach var = "i" begin="1" end="${examCountInt}">
+                    <sql:query dataSource = "${connection}" var = "result">
+                        SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
+                        <sql:param value = "${i}" />
+                    </sql:query>
+                    <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
+                    <c:if test="${resultInt == '4'}">
+                        <sql:query dataSource="${connection}" var="examResult">
+                            SELECT * FROM Exams WHERE ExamNo = ? 
+                            <sql:param value = "${i}" />
+                        </sql:query>   
+                        <c:forEach var="row" items="${examResult.rows}"> 
+                            <li><a href="#${row.ModuleCode}" data-toggle="tab"><c:out value="${row.ModuleCode}"/></a></li>
+                        </c:forEach>
+                    </c:if>
                 </c:forEach>
              </ul>
                 <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
@@ -265,34 +207,40 @@
                     <h3>Home</h3>
                      <p>You can get the information of the module and view comments here</p>
                     </div>
-                <sql:query dataSource="${connection}" var="result">
-                    SELECT * FROM Exams;     
+                <sql:query dataSource ="${connection}" var = "examCount">
+                    SELECT COUNT(*) FROM Exams
                 </sql:query>
-                <c:forEach var="row" items="${result.rows}">     
-                <div class="tab-pane" id="${row.ModuleCode}">
-                      <h3>Module Details:</h3>
-                       ModuleName: <c:out value="${row.ModuleName}"/></br>
-                       ExamNo: <c:out value="${row.ExamNo}"/></br>
-                       Academic Year: <c:out value="${row.AcademicYear}"/></br>
-                       Exam Type(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
-                       Module Degree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br>
-                       Exam Format (P: Paper-based Exam; O: Online Exam): <c:out value="${row.ExamFormat}"/></br></br>
-                       <form action="ViewComments.jsp">
-                        <input type="hidden" value="${row.ExamNo}" name="examNo" />
-                        <input type="submit" value="View comments" />
-                       </form></br>
-                 <h3>Process:</h3>
-                 <div class="progress progress-striped active">
-                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
-                 30% Complete
-                 </div>
-                 </div>
-                </div>
+                <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
+                <c:forEach var = "i" begin="1" end="${examCountInt}">
+                    <sql:query dataSource = "${connection}" var = "result">
+                        SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
+                        <sql:param value = "${i}" />
+                    </sql:query>
+                    <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
+                    <c:if test="${resultInt == '4'}">
+                        <sql:query dataSource="${connection}" var="viewExams">
+                            SELECT * FROM Exams WHERE ExamNo = ?
+                            <sql:param value = "${i}" />
+                        </sql:query>
+                        <c:forEach var="row" items="${viewExams.rows}">     
+                        <div class="tab-pane" id="${row.ModuleCode}">
+                            <h3>Module Details:</h3>
+                            Module Name:<c:out value="${row.ModuleName}"/></br>
+                            Exam No:<c:out value="${row.ExamNo}"/></br>
+                            Academic Year:<c:out value="${row.AcademicYear}"/></br>
+                            Exam Type(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
+                            Module Degree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br></br>
+                            <form action="ViewComments.jsp">
+                             <input type="hidden" value="${row.ExamNo}" name="examNo" />
+                             <input type="submit" value="View comments" />
+                            </form></br>
+                        </div>
+                        </c:forEach>
+                    </c:if>
                 </c:forEach>
-              </div>
-            </div>
-            
-        </div>   
+                </div>
+            </div>      
+-        </div>   
         <!-- /#page-wrapper -->
 
     </div>
@@ -309,7 +257,7 @@
 
     <!-- Morris Charts JavaScript -->
     <script src="../vendor/raphael/raphael.min.js"></script>
-    <script src="../vendor/morrisjs/morr is.min.js"></script>
+    <script src="../vendor/morrisjs/morris.min.js"></script>
     <script src="../data/morris-data.js"></script>
 
     <!-- Custom Theme JavaScript -->
