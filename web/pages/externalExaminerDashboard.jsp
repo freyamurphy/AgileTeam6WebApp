@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Team 6</title>
+    <title>Team 6 -- External Examiner</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="teachingStaffDashboard.html">Team 6 -- the best team :)</a>
+                <a class="navbar-brand" href="externalExaminerDashboard.jsp">Team 6 -- the best team :)</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -86,16 +86,13 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="teachingStaffDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="externalExaminerDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="teachingStaffUploadExam.html">Upload Exam</a>
-                                </li>
-                                <li>
-                                    <a href="teachingStaffViewExams.jsp">View All Exams</a>
+                                    <a href="externalExaminerViewExams.jsp">View Exams</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -106,7 +103,7 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-        
+
          <c:set var = "newExam" value = "${0}" />
             <c:set var = "inProgressExam" value = "${0}" />
             <c:set var = "completedExam" value = "${0}" />

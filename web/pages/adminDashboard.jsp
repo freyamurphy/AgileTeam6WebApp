@@ -85,16 +85,19 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="adminDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="adminDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="createExam.html">Create Exam</a>
-                                </li>
-                                <li>
                                     <a href="adminViewAllExams.jsp">View All Exams</a>
+                                </li>
+                                 <li>
+                                    <a href="adminCreateExam.html">Create Exam</a>
+                                </li>
+                                 <li>
+                                    <a href="adminCreateUser.jsp">Create User</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

@@ -50,9 +50,20 @@
             <c:choose>
             <c:when test="${password == row.Password}">
                 <p>Correct password</p>
+                Jumping into dashboard page...
+                <% if(role.equals("admin")) %><meta http-equiv="refresh" content="3;url=adminDashboard.jsp"><%
+                    else if(role.equals("examSetter")) %><meta http-equiv="refresh" content="3;url=examSetterDashboard.jsp"><%
+                    else if(role.equals("internalModerator")) %><meta http-equiv="refresh" content="3;url=internalMouderatorDashboard.jsp"><%
+                    else if(role.equals("examVettingCommittee")) %><meta http-equiv="refresh" content="3;url=examVCDashboard.jsp"><%
+                    else if(role.equals("externalExaminer")) %><meta http-equiv="refresh" content="3;url=externalExaminerDashboard.jsp"><%
+                    else %><meta http-equiv="refresh" content="3;url=schoolOfficeDashboard.jsp"><%
+                %>
+   
             </c:when>
             <c:otherwise>
                 <p>Incorrect password </p>
+                </br>Jumping back to log in page...
+                 <meta http-equiv="refresh" content="3;url=login.html">
             </c:otherwise>
             </c:choose>
          </c:forEach>

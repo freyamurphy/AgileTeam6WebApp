@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Team 6</title>
+    <title>Team 6 -- School Office</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="examSetterDashboard.jsp">Team 6 -- the best team :)</a>
+                <a class="navbar-brand" href="schoolOfficeDashboard.jsp">Team 6 -- the best team :)</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -86,16 +86,13 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="examSetterDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="schoolOfficeDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="examSetterUploadExam.jsp">Upload Exam</a>
-                                </li>
-                                <li>
-                                    <a href="examSetterViewExams.jsp">View All Exams</a>
+                                    <a href="schoolOfficeViewUploadedFiles.jsp">View Uploaded Files</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

@@ -36,3 +36,6 @@
         <sql:param value="${row}"/>
     </sql:update>
 </c:forEach>
+</br>
+Create user successfully! Jummping back to the create user page...
+<meta http-equiv="refresh" content="3;url=adminCreateUser.jsp">
