@@ -1,8 +1,11 @@
-<%@page import="staff.*"%>
-<%@include file="../dbConnection.jsp"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html lang="en">
+
 <head>
 
     <meta charset="utf-8">
@@ -11,8 +14,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Create Exam</title>
-
+    <title>Sign Exam</title>
+    <%@include file="dbConnection.jsp"%>
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -50,11 +53,77 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="adminDashboard.jsp">Team 6 -- the best team :)</a>
+                <a class="navbar-brand" href="adminDashboard.html">Team 6 -- the best team :)</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -85,7 +154,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="adminDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="adminDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
@@ -93,14 +162,13 @@
                                 <li>
                                     <a href="adminViewAllExams.jsp">View All Exams</a>
                                 </li>
-                                <li>
-                                    <a href="adminCreateExam.html">Create Exam</a>
+                                 <li>
+                                    <a href="createExam.html">Create Exam</a>
                                 </li>
                                 <li>
-                                    <a href="adminCreateUser.jsp">Create User</a>
+                                    <a href="signExamForm.jsp">Sign Exam</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                 </div>
@@ -112,97 +180,28 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Create Exam Successfully</h1>
+                    <h1 class="page-header">Sign Exam</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-<%
-    //for getting username from cookie later
-    String username = "";
-    
-    //input gets fetched from HTML form (createExam.html)
-    
-    String moduleCode = request.getParameter("moduleCode");
-    String moduleName = request.getParameter("moduleName");
-    String academicYear = request.getParameter("academicYear");
-    String examType = request.getParameter("examType");
-    String moduleDegree = request.getParameter("moduleDegree");
-    String examFormat = request.getParameter("examFormat");
-    
-    //Get username value from cookie to know who is trying to create
-    
-    //Fetch username value from cookies
-    Cookie cookie = null;
-    Cookie[] cookies = null;
-    //Get cookies array
-    cookies = request.getCookies();
-    //check if cookies exist
-    if( cookies != null ) {
-        //go through cookie array, find username cookie and store value
-        for (int i = 0; i < cookies.length; i++) {
-            cookie = cookies[i];
-            //check if cookie is the username cookie
-            if (cookie.getName().equals("username")) {
-                //Store username cookie's value as JSP variable
-                username = cookie.getValue();
-            }                 
-        }
-    }
-    else {
-        //browser didn't store cookies
-        out.println("<h2>No cookies found</h2>");
-    }    
-    
-    //legacy code does not work atm, since users in Hashtable are different to users in SQL DB
-    //Cookies are getting DB users and trying to feed into Hashtable so clearly won't work
-    
-    /*
-    staff.StaffHandler staffhandler = new StaffHandler();
-    //creating admin project with username fetched from cookie
-    staff.Admin admin = staffhandler.getAdmin(username);    
-    
-    //calling create method in Exam Java class
-    admin.createExam(academicYear, moduleCode, moduleName, examType, moduleDegree);
-    */
-    
-    
-    
-    //taking the JSP variables and converting them into JSTL attributes (essentially also variables...)
-    //This allows usage of variables outside of JSP brackets
-    pageContext.setAttribute("academicYear",academicYear);
-    pageContext.setAttribute("moduleCode",moduleCode);
-    pageContext.setAttribute("moduleName",moduleName);
-    pageContext.setAttribute("examType",examType);
-    pageContext.setAttribute("moduleDegree",moduleDegree);
-    pageContext.setAttribute("examFormat", examFormat);
-    
-%>
-
-        <!--
-            SQL Insert statement to insert exam into database   
-        -->
-        <sql:update sql="INSERT INTO Exams (AcademicYear, ModuleCode, ModuleName, ExamType, ModuleDegree, ExamFormat) VALUES (?,?,?,?,?,?)"
-                    dataSource = "${connection}" var = "result">
-            
-            <!-- Parameters ('?') in SQL statement replaced with the JSTL attributes -->
-            <sql:param value="${academicYear}"/>
-            <sql:param value="${moduleCode}"/>        
-            <sql:param value="${moduleName}"/>
-            <sql:param value="${examType}"/>
-            <sql:param value="${moduleDegree}"/>
-            <sql:param value="${examFormat}"/>
-        </sql:update>
-        <p>
-            Created Successfully!
-        </p>
-        <p>
-            Go to <a href="adminViewAllExams.jsp">view all exams</a>. </br>
-        </p>
-        <p>
-            Or <a href="adminCreateExam.html">create another exam.</a>
-        </p>
-        
+            <div style="margin: auto; width: 100%;">
+            <h3>Choose Exam:</h3><br>
+            <sql:query  dataSource = "${connection}" var = "exams">
+                SELECT ExamNo, ModuleCode, ModuleName, AcademicYear FROM Exams
+            </sql:query>
+            <form role="form" action="signExam.jsp" method="post">
+            <select class="form-control" id="examList" name = "examList">
+            <c:forEach var="i" items="${exams.rows}">
+            <option value="${i.ExamNo}">
+                <c:out value="${i.ModuleCode} ${i.ModuleName} ${i.AcademicYear}"/>
+            </option>
+            </c:forEach>
+            </select>
+                <p></p>
+            <button type="submit" class="btn btn-primary" style="float: right;">Sign Exam</button>
+            </form>
+        </div>
         <!-- /#page-wrapper -->
 
     </div>
@@ -228,3 +227,4 @@
 </body>
 
 </html>
+

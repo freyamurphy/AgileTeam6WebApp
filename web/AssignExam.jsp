@@ -3,14 +3,14 @@
     Created on : 24 Jan 2019, 12:13:11
     Author     : lucymurphy
 --%>
-
-<%@page import="staff.*"%>
-<%@page import="classes.*"%>
 <%@ include file="dbConnection.jsp"%>
 
-   <sql:query sql="SELECT ModuleCode, ModuleName FROM Exams" 
-           var="result" dataSource="${connection}">
+   <sql:query sql="SELECT ModuleCode, ModuleName, AcademicYear FROM Exams"
+               var="Exam" dataSource="${connection}">
+           
 </sql:query>
+
+    
    
    <html>
     <head>
@@ -19,38 +19,69 @@
     </head>
     <body>
         <div style="margin: auto; width: 50%;">
-            <h1> Assign an Exam to an Exam Setter</h1>
+            <h1> Assign an Exam to a member of teaching staff</h1>
             <p> Select an exam from the options available then select a member of Teaching Staff to assign 
             an exam to them.</p>
             <h3>Exams available</h3>
-               <form action= "AssignExamSetter.jsp" method="post" id="AssignExam">
-         <select name = "Exams">
-                <c:forEach var="row" items="${result.rows}">
+               <form action= "AssignExamStaff.jsp" method="post" id="AssignExam">
+                  <select name = "Exam">
+                <c:forEach var="row" items="${Exam.rows}">
                     <option value="${row.ExamNo}">
                         <c:out value="${row.ModuleCode} ${row.ModuleName} ${row.AcademicYear}"/>
                     </option>
                 </c:forEach>
-         </select>
+         </select> 
     
     
          <%
    //get setter from hashmap
    //request.setAttribute("availableSetters", eSList);
     %>
-   <h3>Teaching Staff</h3>
-        <select name="Teaching Staff">
-            <option
-                value="craig">Craig</option> 
-            <option
-                value="Iain">Iain</option>
-            <option
-                value="Rachel">Rachel</option>
-            
-        </select>
+   
   <% //get input from select and send selected exam to selected setter
    //make sure the exam has sent (use counter?)
 %>
-
+ <h3>Teaching Staff Available</h3>
+         <sql:query sql="SELECT ID, FirstName, LastName FROM Staff
+           WHERE Role = 'examSetter'"
+           var="TeachStaff" dataSource="${connection}">
+</sql:query>      
+                  <select name = "TeachStaff">
+                <c:forEach var="row" items="${TeachStaff.rows}">
+                    <option value="${row.ID}">
+                        <c:out value="${row.FirstName} ${row.LastName}"/>
+                    </option>
+                </c:forEach>
+         </select> 
+ 
+ <h3>Internal Moderators Available</h3>
+ <sql:query sql="SELECT ID, FirstName, LastName FROM Staff
+           WHERE Role = 'internalModerator'"
+           var="IM" dataSource="${connection}">
+</sql:query>
+ <select name = "IM">
+                <c:forEach var="row" items="${IM.rows}">
+                    <option value="${row.ID}">
+                        <c:out value="${row.FirstName} ${row.LastName}"/>
+                    </option>
+                </c:forEach>
+         </select> 
+ 
+ 
+ <h3>External Examiners Available</h3>
+ <sql:query sql="SELECT ID, FirstName, LastName FROM Staff
+           WHERE Role = 'externalExaminer'"
+           var="EE" dataSource="${connection}">
+</sql:query>
+ <select name = "EE">
+                <c:forEach var="row" items="${EE.rows}">
+                    <option value="${row.ID}">
+                        <c:out value="${row.FirstName} ${row.LastName}"/>
+                    </option>
+                </c:forEach>
+         </select> 
+ 
+ <h1> </h1>
 <input type="submit" value="Assign"/>
         
         </form>

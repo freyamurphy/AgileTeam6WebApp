@@ -159,7 +159,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="viewExamsNotStarted.jsp">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -181,7 +181,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="viewExamsInProgress.jsp">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -203,7 +203,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="viewCompletedExams.jsp">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

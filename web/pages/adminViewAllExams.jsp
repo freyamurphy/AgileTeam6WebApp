@@ -120,9 +120,9 @@
             <div class="tabbable" style="margin-bottom: 18px;">
              <ul class="nav nav-tabs">   
              <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-            <sql:query dataSource="${connection}" var="result">
-            SELECT * FROM Exams;     
-            </sql:query>   
+             <sql:query dataSource="${connection}" var="result">
+                SELECT * FROM Exams;     
+             </sql:query>   
                 <c:forEach var="row" items="${result.rows}"> 
                 <li><a href="#${row.ModuleCode}" data-toggle="tab"><c:out value="${row.ModuleCode}"/></a></li>
                 </c:forEach>
@@ -138,11 +138,12 @@
                 <c:forEach var="row" items="${result.rows}">     
                 <div class="tab-pane" id="${row.ModuleCode}">
                       <h3>Module Details:</h3>
-                       ModuleName:<c:out value="${row.ModuleName}"/></br>
-                       ExamNo:<c:out value="${row.ExamNo}"/></br>
-                       AcademicYear:<c:out value="${row.AcademicYear}"/></br>
-                       ExamType(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
-                       ModuleDegree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br></br>
+                       ModuleName: <c:out value="${row.ModuleName}"/></br>
+                       ExamNo: <c:out value="${row.ExamNo}"/></br>
+                       Academic Year: <c:out value="${row.AcademicYear}"/></br>
+                       Exam Type(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
+                       Module Degree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br>
+                       Exam Format (P: Paper-based Exam; O: Online Exam): <c:out value="${row.ExamFormat}"/></br></br>
                        <form action="ViewComments.jsp">
                         <input type="hidden" value="${row.ExamNo}" name="examNo" />
                         <input type="submit" value="View comments" />
@@ -154,11 +155,11 @@
                  </div>
                  </div>
                 </div>
-                 </c:forEach>
+                </c:forEach>
               </div>
             </div>
             
--        </div>   
+        </div>   
         <!-- /#page-wrapper -->
 
     </div>
@@ -175,7 +176,7 @@
 
     <!-- Morris Charts JavaScript -->
     <script src="../vendor/raphael/raphael.min.js"></script>
-    <script src="../vendor/morrisjs/morris.min.js"></script>
+    <script src="../vendor/morrisjs/morr is.min.js"></script>
     <script src="../data/morris-data.js"></script>
 
     <!-- Custom Theme JavaScript -->
