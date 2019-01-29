@@ -42,7 +42,7 @@
                     <p>
                         <c:out value="${staff.role}" />
                     </p>
-                    <br
+                    <br>
                 </div>
             </c:forEach>
         </c:forEach>

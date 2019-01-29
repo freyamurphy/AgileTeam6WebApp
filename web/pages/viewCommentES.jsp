@@ -7,7 +7,6 @@
 <%@include file="../dbConnection.jsp"%>
 <% 
     String examNo = request.getParameter("examNo");
-    examNo = "1";
     // Make variable accessible to JSTL
     pageContext.setAttribute("examNo", examNo);
 %>
@@ -42,7 +41,7 @@
                     <p>
                         <c:out value="${staff.role}" />
                     </p>
-                    <form action="addReply.jsp">
+                    <form action="addReplyForm.jsp">
                         <input type="hidden" value="${row.CommentID}" name="commentID"/>
                         <input type="submit" value="Reply" />
                     </form>
