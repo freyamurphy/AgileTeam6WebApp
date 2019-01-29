@@ -287,7 +287,7 @@
         //browser didn't store cookies
         out.println("<h2>No cookies found</h2>");
     }    
-    out.print("Name: "+username+"<br/>");
+    out.print("Thanks, "+username+"!<br/>");
     
     //legacy code does not work atm, since users in Hashtable are different to users in SQL DB
     //Cookies are getting DB users and trying to feed into Hashtable so clearly won't work
@@ -297,7 +297,7 @@
     //creating admin project with username fetched from cookie
     staff.Admin admin = staffhandler.getAdmin(username);    
     
-    //calling create method in Exsm Java class
+    //calling create method in Exam Java class
     admin.createExam(academicYear, moduleCode, moduleName, examType, moduleDegree);
     */
     
@@ -326,8 +326,15 @@
             <sql:param value="${examType}"/>
             <sql:param value="${moduleDegree}"/>
         </sql:update>
-        Create Successfully! You can check in view all exams:<a href="viewAllExams.jsp">CHECK</a></br>
-        </br>Or <a href="createExam.html">CREATE AGAIN</a>
+        <p>
+            Created Successfully!
+        </p>
+        <p>
+            Go to <a href="viewAllExams.jsp">view all exams</a>. </br>
+        </p>
+        <p>
+            Or <a href="createExam.html">create another exam.</a>
+        </p>
         
         <!-- /#page-wrapper -->
 
