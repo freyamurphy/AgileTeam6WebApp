@@ -271,11 +271,12 @@
                 <c:forEach var="row" items="${result.rows}">     
                 <div class="tab-pane" id="${row.ModuleCode}">
                       <h3>Module Details:</h3>
-                       ModuleName:<c:out value="${row.ModuleName}"/></br>
-                       ExamNo:<c:out value="${row.ExamNo}"/></br>
-                       AcademicYear:<c:out value="${row.AcademicYear}"/></br>
-                       ExamType(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
-                       ModuleDegree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br></br>
+                       ModuleName: <c:out value="${row.ModuleName}"/></br>
+                       ExamNo: <c:out value="${row.ExamNo}"/></br>
+                       Academic Year: <c:out value="${row.AcademicYear}"/></br>
+                       Exam Type(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
+                       Module Degree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br>
+                       Exam Format (P: Paper-based Exam; O: Online Exam): <c:out value="${row.ExamFormat}"/></br></br>
                        <form action="ViewComments.jsp">
                         <input type="hidden" value="${row.ExamNo}" name="examNo" />
                         <input type="submit" value="View comments" />
