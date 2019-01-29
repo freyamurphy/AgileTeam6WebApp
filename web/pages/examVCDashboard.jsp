@@ -1,5 +1,6 @@
 <%@ include file="dbConnection.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Team 6 -- admin</title>
+    <title>Team 6 -- Exam Vetting Committe</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="adminDashboard.html">Team 6 -- the best team :)</a>
+                <a class="navbar-brand" href="examVCDashboard.jsp">Team 6 -- the best team :)</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -85,19 +86,16 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="adminDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="examVCDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="adminViewAllExams.jsp">View All Exams</a>
+                                    <a href="examVCUploadExam.jsp">Upload Exam</a>
                                 </li>
-                                 <li>
-                                    <a href="adminCreateExam.html">Create Exam</a>
-                                </li>
-                                 <li>
-                                    <a href="adminCreateUser.jsp">Create User</a>
+                                <li>
+                                    <a href="examVCViewAllExams.jsp">View All Exams</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -109,15 +107,7 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-
-            <c:set var = "newExam" value = "${0}" />
+         <c:set var = "newExam" value = "${0}" />
             <c:set var = "inProgressExam" value = "${0}" />
             <c:set var = "completedExam" value = "${0}" />
             <sql:query dataSource ="${connection}" var = "examCount">
@@ -142,11 +132,15 @@
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
-            
-                
-            <!-- /.row -->
+
+        <div id="page-wrapper">
             <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="col-lg-3 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
@@ -200,6 +194,30 @@
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><c:out value = "${completedExam}" /></div>
                                     <div>Exams Finished</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-comments fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">26</div>
+                                    <div>Comments to Review!</div>
                                 </div>
                             </div>
                         </div>

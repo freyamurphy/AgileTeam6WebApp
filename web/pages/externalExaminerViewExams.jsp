@@ -49,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="internalMouderatorDashboard.jsp">Team 6 -- the best team :)</a>
+                <a class="navbar-brand" href="externalExaminerDashboard.jsp">Team 6 -- the best team :)</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -84,19 +84,13 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="internalMouderatorDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="externalExaminerDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="internalMouderatorUploadExam.jsp">Upload Exam</a>
-                                </li>
-                                <li>
-                                    <a href="internalMouderatorViewExams.jsp">View Exams</a>
-                                </li>
-                                 <li>
-                                    <a href="internalMouderatorViewUploadedFiles.jsp">View Uploaded Files</a>
+                                    <a href="externalExaminerViewExams.jsp">View Exams</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -116,7 +110,6 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-
             <div class="tabbable" style="margin-bottom: 18px;">
              <ul class="nav nav-tabs">   
              <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
@@ -156,8 +149,7 @@
                 </div>
                  </c:forEach>
               </div>
-            </div>
-    
+            </div>      
         </div>
         <!-- /#page-wrapper -->
 

@@ -19,14 +19,16 @@ and open the template in the editor.
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="../pages/login.jsp" method="post">
+                        <form role="form" action="login.jsp" method="post">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Please input your username" name="username">
+                                    Username: <input class="form-control" type="text"  name="username">
                                 </div>
+                                </br>
                                 <div class="form-group">
-                                    <input class="form-control" name="password" type="password" >
+                                    Password: <input class="form-control" name="password" type="password" >
                                 </div>
+                                </br>
                                 <div class="form-group">
                                     <select name="role">
                                         <option value="admin">Admin</option>
@@ -34,6 +36,7 @@ and open the template in the editor.
                                         <option value="internalModerator">Internal moderator</option>
                                         <option value="examVettingCommittee">Exam vetting committee</option>
                                         <option value="externalExaminer">External examiner</option>
+                                        <option value="schoolOffice">School Office</option>
                                     </select>
                                 </div>
                                 <div class="checkbox">
