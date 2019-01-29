@@ -47,7 +47,7 @@
     
     
     /*Convert JSP variables to JSTL attributes
-     *Not needed at the moment since username and role variable not used outside of JSP tags
+     *Not needed since username and role variable not used outside of JSP tags
     */
     //pageContext.setAttribute("username",username);
     //pageContext.setAttribute("role",role);
