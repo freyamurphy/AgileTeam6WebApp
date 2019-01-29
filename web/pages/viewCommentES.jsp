@@ -1,18 +1,17 @@
 <%-- 
-    Document   : ViewComments
-    Created on : 24 Jan 2019, 17:15:37
+    Document   : viewCommentES
+    Created on : 29 Jan 2019, 14:40:38
     Author     : freyamurphy
 --%>
 
 <%@include file="../dbConnection.jsp"%>
-<%@page import="classes.Comment"%>
 <% 
     String examNo = request.getParameter("examNo");
     // Make variable accessible to JSTL
     pageContext.setAttribute("examNo", examNo);
 %>
 
-<sql:query sql="SELECT Content, Author, TimeOfComment FROM Comments WHERE ExamNo = ${examNo}" 
+<sql:query sql="SELECT CommentID, Content, Author, TimeOfComment FROM Comments WHERE ExamNo = ${examNo}" 
            var="result" dataSource="${connection}">
 </sql:query>
 
@@ -42,6 +41,10 @@
                     <p>
                         <c:out value="${staff.role}" />
                     </p>
+                    <form action="addReplyForm.jsp">
+                        <input type="hidden" value="${row.CommentID}" name="commentID"/>
+                        <input type="submit" value="Reply" />
+                    </form>
                     <br>
                 </div>
             </c:forEach>

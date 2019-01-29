@@ -261,7 +261,7 @@
                 AcademicYear:<c:out value="${row.AcademicYear}"/></br>
                 ExamType:<c:out value="${row.ExamType}"/></br>
                 ModuleDegree:<c:out value="${row.ModuleDegree}"/></br></br>
-                    <form action="ViewComments.jsp">
+                    <form action="viewCommentE.jsp">
                         <input type="hidden" value="${row.ExamNo}" name="examNo" />
                         <input type="submit" value="View comments" />
                     </form></br>
