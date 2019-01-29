@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Create or Edit User</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form action="createUser.jsp">
+                <label>First name: </label>
+                <input type="text" name="firstName" />
+                
+                <label>Last name: </label>
+                <input type="text" name="lastName" />
+                
+                <label>Username: </label>
+                <input type="text" name="username" />
+                
+                <label>Password: </label>
+                <input type="text" name="password" />
+                
+                <label>Admin: </label>
+                <input type="checkbox" name="role" value="admin"/>
+                
+                <label>Exam setter: </label>
+                <input type="checkbox" name="role" value="examSetter" />
+                
+                <label>Internal moderator:</label>
+                <input type="checkbox" name="role" value="internalModerator" />
+                
+                <label>Exam vetting committee</label>
+                <input type="checkbox" name="role" value="examVettingCommittee" />
+                
+                <label>External examiner</label>
+                <input type="checkbox" name="role" value="externalExaminer" />
+                
+                <label>School office</label>
+                <input type="checkbox" name="role" value="schoolOffice" />
+                
+                <input type="submit" value="Create user" />
+            </form>
+        </div>
+    </body>
+</html>
