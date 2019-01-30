@@ -125,7 +125,7 @@
                     </br>
                     *Example: 2018-2019_AC31012_mainExam.pdf
                     </br>
-                    <form action="../uploadhandle.jsp?folder=<%=request.getParameter("module")%>" method="post" enctype="multipart/form-data"></br>
+                    <form action="uploadhandle.jsp?code=IM&folder=<%=request.getParameter("module")%>" method="post" enctype="multipart/form-data"></br>
                     <input type="file" name="file" size="50" /></br>
                     <input type="submit" value="submit" /></br>
                     </form>
