@@ -92,6 +92,9 @@
                                 <li>
                                     <a href="externalExaminerViewExams.jsp">View Exams</a>
                                 </li>
+                                <li>
+                                    <a href="externalExaminerViewUploadedFiles.jsp">View Uploaded Files</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
