@@ -3,10 +3,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    //get user input from HTML form
-    String content = request.getParameter("commentBox");
-    String examNo = request.getParameter("examNo");
-    
     //String staffID = "5";
     String username ="";
     String role ="";
@@ -38,15 +34,8 @@
     }
     
     //turn JSP var into JSTL attributes
-    pageContext.setAttribute("content", content);
-    pageContext.setAttribute("examNo", examNo);
     pageContext.setAttribute("username", username);  
     pageContext.setAttribute("role", role);
-    
-    
-    //create a timestamp attribute
-    Timestamp timePosted = new Timestamp(System.currentTimeMillis());
-    pageContext.setAttribute("timePosted", timePosted);
     
 %>
 <!DOCTYPE html>
@@ -86,6 +75,17 @@
 </head>
 
 <body>
+        <!-- SQL Query to get staffID -->
+        <sql:query dataSource = "${connection}" var = "IDlist">
+            SELECT ID FROM Staff WHERE Role = ? AND Username = ?
+            <sql:param value="${role}"/>
+            <sql:param value="${username}"/>
+        </sql:query>
+        
+        <!-- Take results and store in ID var -->
+        <c:forEach var="IDRow" items="${IDlist.rows}">
+            <c:set var="staffID" value="${IDRow.ID}" scope="session"/>
+        </c:forEach>
 
     <div id="wrapper">
 
@@ -98,7 +98,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="adminDashboard.jsp">Team 6 -- the best team :)</a>
+                <!-- uses cookies to redirect the user to the correct dashboard.-->
+                <c:choose>
+                    <c:when test="${role.equals('admin')}">
+                        <a class="navbar-brand" href="adminDashboard.jsp">Team 6 -- the best team :)</a>
+                    </c:when>
+                    <c:when test="${role.equals('examSetter')}">
+                        <a class="navbar-brand" href="examSetterDashboard.jsp">Team 6 -- the best team :)</a>
+                    </c:when>
+                    <c:when test="${role.equals('internalModerator')}">
+                        <a class="navbar-brand" href="internalMouderatorDashboard.jsp">Team 6 -- the best team :)</a>
+                    </c:when>
+                    <c:when test="${role.equals('examVettingCommittee')}">
+                        <a class="navbar-brand" href="examVCDashboard.jsp">Team 6 -- the best team :)</a>
+                    </c:when>
+                    <c:when test="${role.equals('externalExaminer')}">
+                        <a class="navbar-brand" href="externalExaminer.jsp">Team 6 -- the best team :)</a>
+                    </c:when>
+                </c:choose>
             </div>
             <!-- /.navbar-header -->
 
@@ -133,9 +150,27 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="adminDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <!-- uses cookies to redirect the user to the correct dashboard.-->
+                            <c:choose>
+                                <c:when test="${role.equals('admin')}">
+                                    <a href="adminDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                </c:when>
+                                <c:when test="${role.equals('examSetter')}">
+                                    <a href="examSetterDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                </c:when>
+                                <c:when test="${role.equals('internalModerator')}">
+                                    <a href="internalMouderatorDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                </c:when>
+                                <c:when test="${role.equals('examVettingCommittee')}">
+                                    <a href="examVCDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                </c:when>
+                                <c:when test="${role.equals('externalExaminer')}">
+                                    <a href="externalExaminerDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                </c:when>
+                            </c:choose>
                         </li>
                         <li>
+                            <!-- will need to change this part later when the website is nearly complete! -->
                             <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -166,7 +201,8 @@
              <ul class="nav nav-tabs">   
              <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
              <sql:query dataSource ="${connection}" var = "examCount">
-                    SELECT COUNT(*) FROM Exams
+                    SELECT COUNT(*) FROM Exams WHERE ExamSetter = ?
+                    <sql:param value="${staffID}"/>
              </sql:query>
                 <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
                 <c:forEach var = "i" begin="1" end="${examCountInt}">
@@ -177,8 +213,9 @@
                     <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
                     <c:if test="${resultInt == '0'}">
                         <sql:query dataSource="${connection}" var="examResult">
-                            SELECT * FROM Exams WHERE ExamNo = ? 
+                            SELECT * FROM Exams WHERE ExamNo = ? AND ExamSetter = ?
                             <sql:param value = "${i}" />
+                            <sql:param value="${staffID}"/>
                         </sql:query>   
                         <c:forEach var="row" items="${examResult.rows}"> 
                             <li><a href="#${row.ModuleCode}" data-toggle="tab"><c:out value="${row.ModuleCode}"/></a></li>
@@ -192,7 +229,8 @@
                      <p>You can get the information of the module and view comments here</p>
                     </div>
                 <sql:query dataSource ="${connection}" var = "examCount">
-                    SELECT COUNT(*) FROM Exams
+                    SELECT COUNT(*) FROM Exams WHERE ExamSetter = ?
+                    <sql:param value="${staffID}"/>
                 </sql:query>
                 <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
                 <c:forEach var = "i" begin="1" end="${examCountInt}">
@@ -203,8 +241,9 @@
                     <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
                     <c:if test="${resultInt == '0'}">
                         <sql:query dataSource="${connection}" var="viewExams">
-                            SELECT * FROM Exams WHERE ExamNo = ?
+                            SELECT * FROM Exams WHERE ExamNo = ? AND ExamSetter = ?
                             <sql:param value = "${i}" />
+                            <sql:param value="${staffID}"/>
                         </sql:query>
                         <c:forEach var="row" items="${viewExams.rows}">     
                         <div class="tab-pane" id="${row.ModuleCode}">
