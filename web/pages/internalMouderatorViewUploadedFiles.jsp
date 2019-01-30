@@ -116,6 +116,18 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            Please select the module code of the exam you want to download: 
+                    <form action="internalMouderatorViewUploadedFilesHandle.jsp" method="post"></br>
+                        <select name="module">
+                            <sql:query dataSource="${connection}" var="result">
+                              SELECT * FROM Exams;     
+                             </sql:query>   
+                             <c:forEach var="row" items="${result.rows}"> 
+                             <option value="${row.ModuleCode}"><c:out value="${row.ModuleCode}"/></option>
+                             </c:forEach>
+                        </select>     
+                    <input type="submit" value="submit" /></br>
+                    </form>
 
         </div>
         <!-- /#page-wrapper -->
