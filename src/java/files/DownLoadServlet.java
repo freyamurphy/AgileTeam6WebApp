@@ -19,7 +19,7 @@ public class DownLoadServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String fileName = request.getParameter("filename"); 
         fileName = new String(fileName.getBytes("iso8859-1"),"UTF-8");
-        String fileSaveRootPath=this.getServletContext().getRealPath("/WEB-INF/upload/AC31012");
+        String fileSaveRootPath=this.getServletContext().getRealPath("/WEB-INF/upload");
         String path = findFileSavePathByFileName(fileName,fileSaveRootPath);
         File file = new File(path + "\\" + fileName);
         if(!file.exists()){
