@@ -97,6 +97,9 @@
                                 <li>
                                     <a href="examVCViewAllExams.jsp">View All Exams</a>
                                 </li>
+                                <li>
+                                    <a href="examVCViewUploadedFiles.jsp">View Uploaded Files</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

@@ -94,6 +94,9 @@
                                 <li>
                                     <a href="examSetterViewExams.jsp">View Exams</a>
                                 </li>
+                                 <li>
+                                    <a href="examSetterViewUploadedFiles.jsp">View Uploaded Files</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
