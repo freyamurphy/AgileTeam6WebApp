@@ -20,7 +20,7 @@
     <body>
         <form action="addReply.jsp" method="POST" id="comment"> 
             <input type="submit" value="Submit"/>
-            <input type="hidden" value="${commentID}" name="commentID"
+            <input type="hidden" value="${commentID}" name="commentID" />
             <label>Reply:</label>
         </form>
         <textarea name="commentBox" form="comment"></textarea>

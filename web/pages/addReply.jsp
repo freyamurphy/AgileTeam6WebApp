@@ -3,7 +3,7 @@
     Created on : 29 Jan 2019, 16:10:44
     Author     : freyamurphy
 --%>
-
+<%@include file="../dbConnection.jsp"%>
 <%@page import="java.sql.Timestamp"%>
 
 <%
@@ -22,11 +22,11 @@
     
 %>
 
-<sql:update sql="INSERT INTO Replies (Content, Author, TimeOfReply, CommentID) VALUES (?,?,?,?)"
+<sql:update sql="INSERT INTO Replies (Content, TimeOfReply, Author, CommentID) VALUES (?,?,?,?)"
             dataSource = "${connection}" var = "result">
     <sql:param value="${content}"/>
-    <sql:param value="${staffID}"/>        
-    <sql:param value="${timePosted}"/>
+    <sql:param value="${timePosted}"/>        
+    <sql:param value="${staffID}"/>
     <sql:param value="${commentID}" />
  </sql:update>
 <c:if test="${result == 1}" >
