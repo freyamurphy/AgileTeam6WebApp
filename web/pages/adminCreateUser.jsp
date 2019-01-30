@@ -95,12 +95,21 @@
                                 <li>
                                     <a href="adminCreateExam.html">Create Exam</a>
                                 </li>
-                                 <li>
-                                    <a href="adminCreateUser.jsp">Create User</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <li>
+                                <a href="#"><i class="fa fa-users"></i> Users<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="adminViewAllUsers.jsp">View All Users</a>
+                                    </li>
+                                    <li>
+                                        <a href="adminCreateUser.jsp">Create User</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

@@ -107,10 +107,13 @@
                                     <li>
                                         <a href="adminViewAllUsers.jsp">View All Users</a>
                                     </li>
+                                    <li>
+                                        <a href="adminCreateUser.jsp">Create User</a>
+                                    </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
-                            
+
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
