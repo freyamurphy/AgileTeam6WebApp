@@ -5,7 +5,6 @@
 --%>
 
 <%@include file="../dbConnection.jsp"%>
-<%@page import="classes.Comment"%>
 <% 
     String examNo = request.getParameter("examNo");
     // Make variable accessible to JSTL

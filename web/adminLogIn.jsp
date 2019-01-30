@@ -1,10 +1,12 @@
 
-<%@page import="staff.StaffHandler"%>
+
 <%-- 
+PRETTY SURE THIS IS ALL LEGACY CODE
+<%@page import="staff.StaffHandler"%>
     Document   : adminLogIn
     Created on : 22 Jan 2019, 10:39:36
     Author     : freyamurphy
---%>
+
 
 <% 
     
@@ -33,3 +35,4 @@
       <%
     }
 %>
+--%>

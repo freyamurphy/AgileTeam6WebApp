@@ -4,7 +4,6 @@
     Author     : Lucy Taylor
 --%>
 
-<%@page import="staff.*"%>
 <%@include file="dbConnection.jsp"%>
 
 <html>
