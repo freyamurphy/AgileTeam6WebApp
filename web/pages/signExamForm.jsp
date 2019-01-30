@@ -16,6 +16,54 @@ and open the template in the editor.
 
     <title>Sign Exam</title>
     <%@include file="dbConnection.jsp"%>
+    <%
+    
+    String username = "noName";
+    String role = "noRole";
+    int examID;
+    
+    //Fetch username and role values from cookies
+    Cookie cookie = null;
+    Cookie[] cookies = null;
+    //Get cookies array
+    cookies = request.getCookies();
+    //check if cookies exist
+    if( cookies != null ) {
+        //
+        for (int i = 0; i < cookies.length; i++) {
+            cookie = cookies[i];
+            //check if cookie is the username cookie
+            if (cookie.getName().equals("username")) {
+                //Store username cookie's value as JSP variable
+                username = cookie.getValue();
+                pageContext.setAttribute("username", username);
+            }
+            else if (cookie.getName().equals("role")) {
+                //Store role cookie's value as JSP variable
+                role = cookie.getValue();
+                pageContext.setAttribute("role", "ExamSetter");
+            }
+                       
+        }
+        
+    }
+    else {
+        //browser didn't store cookies
+        out.println("<h2>No cookies found</h2>");
+    }    
+    
+    %>
+    
+    <!-- SQL Query to get staffID -->
+        <sql:query dataSource = "${connection}" var = "IDlist">
+            SELECT ID FROM Staff WHERE Role = ? AND Username = ?
+            <sql:param value="${role}"/>
+            <sql:param value="${username}"/>   
+        </sql:query>
+            
+        <c:forEach var="IDRow" items="${IDlist.rows}">
+            <c:set var="staffID" value="${IDRow.ID}" scope="session"/>
+        </c:forEach>
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -187,19 +235,44 @@ and open the template in the editor.
             <!-- /.row -->
             <div style="margin: auto; width: 100%;">
             <h3>Choose Exam:</h3><br>
+            
+            <c:if test = "${role == 'ExamSetter'}">
             <sql:query  dataSource = "${connection}" var = "exams">
-                SELECT ExamNo, ModuleCode, ModuleName, AcademicYear FROM Exams
+                SELECT ExamNo, ModuleCode, ModuleName, AcademicYear FROM Exams WHERE ExamSetter = ?
+                <sql:param value="${staffID}"/>  
             </sql:query>
+            </c:if>
+                
+            <c:if test = "${role == 'InternalModerator'}">
+            <sql:query  dataSource = "${connection}" var = "exams">
+                SELECT ExamNo, ModuleCode, ModuleName, AcademicYear FROM Exams WHERE InternalModerator = ?
+                <sql:param value="${staffID}"/>  
+            </sql:query>
+            </c:if>
+                
+            <c:if test = "${role == 'ExternalExaminer'}">
+            <sql:query  dataSource = "${connection}" var = "exams">
+                SELECT ExamNo, ModuleCode, ModuleName, AcademicYear FROM Exams WHERE InternalModerator = ?
+                <sql:param value="${staffID}"/>  
+            </sql:query>
+            </c:if>
+                
+            <c:if test = "${role == 'ExamVettingCommittee'}">
+            <sql:query  dataSource = "${connection}" var = "exams">
+                SELECT ExamNo, ModuleCode, ModuleName, AcademicYear FROM Exams 
+            </sql:query>
+            </c:if>
+                
             <form role="form" action="signExam.jsp" method="post">
             <select class="form-control" id="examList" name = "examList">
             <c:forEach var="i" items="${exams.rows}">
             <option value="${i.ExamNo}">
-                <c:out value="${i.ModuleCode} ${i.ModuleName} ${i.AcademicYear}"/>
+                    <c:out value="${i.ModuleCode} ${i.ModuleName} ${i.AcademicYear}"/>
             </option>
             </c:forEach>
             </select>
-                <p></p>
-            <button type="submit" class="btn btn-primary" style="float: right;">Sign Exam</button>
+            <p></p>
+                <button type="submit" class="btn btn-primary" style="float: right;">Sign Exam</button>
             </form>
         </div>
         <!-- /#page-wrapper -->
