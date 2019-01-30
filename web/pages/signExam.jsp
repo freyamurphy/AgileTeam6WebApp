@@ -99,7 +99,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Create Exam</title>
+    <title>Sign Exam</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -167,6 +167,9 @@
                 <sql:param value="${emSig}"/>
                 <sql:param value="${examID}"/>
             </sql:update>
+            <sql:update sql="UPDATE Exams SET InternalModerator = NULL WHERE ExamNo = ?" dataSource = "${connection}" var = "result">
+                <sql:param value="${examID}"/>  
+            </sql:update>
         </c:if>
         <c:if test="${evSig != null}">
             <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE ExamVettingCommitteeSignatures=values(ExamVettingCommitteeSignatures)" dataSource = "${connection}" var = "result">
@@ -185,6 +188,9 @@
                 <sql:param value="${emSig}"/>
                 <sql:param value="${examID}"/>
             </sql:update>
+            <sql:update sql="UPDATE Exams SET ExternalExaminer = NULL WHERE ExamNo = ?" dataSource = "${connection}" var = "result">
+                <sql:param value="${examID}"/>  
+            </sql:update>
         </c:if>
         <c:if test="${esSig != null}">
             <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE ExamSetterSignatures=values(ExamSetterSignatures)" dataSource = "${connection}" var = "result">
@@ -193,6 +199,9 @@
                 <sql:param value="${evSig}"/>
                 <sql:param value="${emSig}"/>
                 <sql:param value="${examID}"/>
+            </sql:update>
+            <sql:update sql="UPDATE Exams SET ExamSetter = NULL WHERE ExamNo = ?" dataSource = "${connection}" var = "result">
+                <sql:param value="${examID}"/>  
             </sql:update>
         </c:if>
          
