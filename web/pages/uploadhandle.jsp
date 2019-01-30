@@ -16,7 +16,7 @@
     //String filePath = request.getContextPath(); 
     String Code = request.getParameter("code");
     String addfold = request.getParameter("folder");
-    String fold = "WEB-INF/upload/";
+    String fold = "../../web/pages/upload_files/";
     filePath = filePath + fold + addfold + "/";
     System.out.println("filePath => " + filePath);
     // Verify the content type
@@ -99,6 +99,5 @@
 %>
       <% if(Code.equals("IM"))  %><meta http-equiv="refresh" content="3;url=internalMouderatorUploadExam.jsp"><%
               else if(Code.equals("EVC"))  %><meta http-equiv="refresh" content="3;url=examVCUploadExam.jsp"><%
-                      else if(Code.equals("ES"))   %><meta http-equiv="refresh" content="3;url=examSetterUploadExam.jsp"><%
-                      %>
+                      else if(Code.equals("ES"))   %><meta http-equiv="refresh" content="3;url=examSetterUploadExam.jsp">
 
