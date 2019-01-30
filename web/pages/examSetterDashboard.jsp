@@ -153,7 +153,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="viewExamsNotStarted.jsp">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="viewExamsInProgress.jsp">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -197,7 +197,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="viewCompletedExams.jsp">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -216,7 +216,11 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
+                                    <sql:query sql="SELECT COUNT(*) FROM Comments LEFT JOIN Replies On Comments.CommentID = Replies.CommentID WHERE Replies.CommentID IS NULL"
+                                               dataSource ="${connection}" var="countResult">
+                                    </sql:query>
+                                    <c:set var = "resultInt" scope = "page" value = "${countResult.getRowsByIndex()[0][0]}"/>
+                                    <div class="huge">${resultInt}</div>
                                     <div>Comments to Review!</div>
                                 </div>
                             </div>
