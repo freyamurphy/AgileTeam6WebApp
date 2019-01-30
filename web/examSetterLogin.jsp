@@ -1,9 +1,11 @@
-<%@page import="staff.StaffHandler"%>
 <%-- 
+LEGACY CODE
+<%@page import="staff.StaffHandler"%>
+
     Document   : examSetterLogin
     Created on : 23 Jan 2019, 11:30:51
     Author     : freyamurphy
---%>
+
 
 <% 
     
@@ -31,3 +33,4 @@
       <%
     }
 %>
+--%>

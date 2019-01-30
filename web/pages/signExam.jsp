@@ -3,8 +3,6 @@
     Created on : 24.01.2019, 13:18:12
     Author     : Lucy Taylor
 --%>
-
-<%@page import="staff.*"%>
 <%@include file="dbConnection.jsp"%>
 
 <%

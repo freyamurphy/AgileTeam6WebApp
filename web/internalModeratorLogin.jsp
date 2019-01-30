@@ -1,9 +1,10 @@
+<%-- LEGACY CODE
 <%@page import="staff.StaffHandler"%>
-<%-- 
+
     Document   : internalModeratorLogin
     Created on : 23 Jan 2019, 11:28:06
     Author     : freyamurphy
---%>
+
 
 <% 
     
@@ -31,3 +32,4 @@
       <%
     }
 %>
+--%>
