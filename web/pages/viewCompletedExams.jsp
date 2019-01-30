@@ -211,70 +211,252 @@
             <div class="tabbable" style="margin-bottom: 18px;">
              <ul class="nav nav-tabs">   
              <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-             <sql:query dataSource ="${connection}" var = "examCount">
-                    SELECT COUNT(*) FROM Exams WHERE ExamSetter = ?
-                    <sql:param value="${staffID}"/>
-             </sql:query>
-                <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
-                <!-- ends here -->
-                <c:forEach var = "i" begin="1" end="${examCountInt}">
-                    <sql:query dataSource = "${connection}" var = "result">
-                        SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
-                        <sql:param value = "${i}" />
-                    </sql:query>
-                    <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
-                    <c:if test="${resultInt == '4'}">
-                        <sql:query dataSource="${connection}" var="examResult">
-                            SELECT * FROM Exams WHERE ExamNo = ? AND ExamSetter = ? 
+             <!-- admin and Exam Vetting Committee -->
+             <c:if test= "${role.equals('admin') || role.equals('examVettingCommittee')}">
+                <sql:query dataSource ="${connection}" var = "examCount">
+                        SELECT COUNT(*) FROM Exams
+                </sql:query>
+                    <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
+                    <c:forEach var = "i" begin="1" end="${examCountInt}">
+                        <sql:query dataSource = "${connection}" var = "result">
+                            SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
                             <sql:param value = "${i}" />
-                            <sql:param value="${staffID}"/>
-                        </sql:query>   
-                        <c:forEach var="row" items="${examResult.rows}"> 
-                            <li><a href="#${row.ModuleCode}" data-toggle="tab"><c:out value="${row.ModuleCode}"/></a></li>
-                        </c:forEach>
-                    </c:if>
-                </c:forEach>
+                        </sql:query>
+                        <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
+                        <c:if test="${resultInt == '4'}">
+                            <sql:query dataSource="${connection}" var="examResult">
+                                SELECT * FROM Exams WHERE ExamNo = ? 
+                                <sql:param value = "${i}" />
+                            </sql:query>   
+                            <c:forEach var="Examsrow" items="${examResult.rows}"> 
+                                <li><a href="#${Examsrow.ModuleCode}" data-toggle="tab"><c:out value="${Examsrow.ModuleCode}"/></a></li>
+                            </c:forEach>
+                        </c:if>
+                    </c:forEach>
+             </c:if>
+            <!-- exam setter -->
+            <c:if test= "${role.equals('examSetter')}">
+                <sql:query dataSource ="${connection}" var = "examCount">
+                        SELECT COUNT(*) FROM Exams WHERE ExamSetter = ?
+                        <sql:param value="${staffID}"/>
+                </sql:query>
+                    <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
+                    <c:forEach var = "i" begin="1" end="${examCountInt}">
+                        <sql:query dataSource = "${connection}" var = "result">
+                            SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
+                            <sql:param value = "${i}" />
+                        </sql:query>
+                        <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
+                        <c:if test="${resultInt == '4'}">
+                            <sql:query dataSource="${connection}" var="examResult">
+                                SELECT * FROM Exams WHERE ExamNo = ? AND ExamSetter = ?
+                                <sql:param value = "${i}" />
+                                <sql:param value="${staffID}"/>
+                            </sql:query>   
+                            <c:forEach var="Examsrow" items="${examResult.rows}"> 
+                                <li><a href="#${Examsrow.ModuleCode}" data-toggle="tab"><c:out value="${Examsrow.ModuleCode}"/></a></li>
+                            </c:forEach>
+                        </c:if>
+                    </c:forEach>
+             </c:if>
+            <!-- internal moderator -->
+            <c:if test= "${role.equals('internalModerator')}">
+                <sql:query dataSource ="${connection}" var = "examCount">
+                        SELECT COUNT(*) FROM Exams WHERE InternalModerator = ?
+                        <sql:param value="${staffID}"/>
+                </sql:query>
+                    <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
+                    <c:forEach var = "i" begin="1" end="${examCountInt}">
+                        <sql:query dataSource = "${connection}" var = "result">
+                            SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
+                            <sql:param value = "${i}" />
+                        </sql:query>
+                        <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
+                        <c:if test="${resultInt == '4'}">
+                            <sql:query dataSource="${connection}" var="examResult">
+                                SELECT * FROM Exams WHERE ExamNo = ? AND InternalModerator = ?
+                                <sql:param value = "${i}" />
+                                <sql:param value="${staffID}"/>
+                            </sql:query>   
+                            <c:forEach var="Examsrow" items="${examResult.rows}"> 
+                                <li><a href="#${Examsrow.ModuleCode}" data-toggle="tab"><c:out value="${Examsrow.ModuleCode}"/></a></li>
+                            </c:forEach>
+                        </c:if>
+                    </c:forEach>
+             </c:if>
+            <!-- external examiner -->
+            <c:if test= "${role.equals('externalExaminer')}">
+                <sql:query dataSource ="${connection}" var = "examCount">
+                        SELECT COUNT(*) FROM Exams WHERE ExternalExaminer = ?
+                        <sql:param value="${staffID}"/>
+                </sql:query>
+                    <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
+                    <c:forEach var = "i" begin="1" end="${examCountInt}">
+                        <sql:query dataSource = "${connection}" var = "result">
+                            SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
+                            <sql:param value = "${i}" />
+                        </sql:query>
+                        <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
+                        <c:if test="${resultInt == '4'}">
+                            <sql:query dataSource="${connection}" var="examResult">
+                                SELECT * FROM Exams WHERE ExamNo = ? AND ExternalExaminer = ?
+                                <sql:param value = "${i}" />
+                                <sql:param value="${staffID}"/>
+                            </sql:query>   
+                            <c:forEach var="Examsrow" items="${examResult.rows}"> 
+                                <li><a href="#${Examsrow.ModuleCode}" data-toggle="tab"><c:out value="${Examsrow.ModuleCode}"/></a></li>
+                            </c:forEach>
+                        </c:if>
+                    </c:forEach>
+             </c:if>
              </ul>
                 <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
                     <div class="tab-pane  active" id="home">
                     <h3>Home</h3>
                      <p>You can get the information of the module and view comments here</p>
                     </div>
-                <!-- add cookie thing here too -->
-                <sql:query dataSource ="${connection}" var = "examCount">
-                    SELECT COUNT(*) FROM Exams WHERE ExamSetter = ?
-                    <sql:param value="${staffID}"/>
-                </sql:query>
-                <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
-                <!-- it might end here -->
-                <c:forEach var = "i" begin="1" end="${examCountInt}">
-                    <sql:query dataSource = "${connection}" var = "result">
-                        SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
-                        <sql:param value = "${i}" />
-                    </sql:query>
-                    <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
-                    <c:if test="${resultInt == '4'}">
-                        <sql:query dataSource="${connection}" var="viewExams">
-                            SELECT * FROM Exams WHERE ExamNo = ? AND ExamSetter = ?
-                            <sql:param value = "${i}" />
-                            <sql:param value="${staffID}"/>
+                <!-- admin and exam vetting committee -->
+                    <c:if test="${role.equals('admin') || role.equals('examVettingCommittee')}">
+                        <sql:query dataSource ="${connection}" var = "examCount">
+                            SELECT COUNT(*) FROM Exams 
                         </sql:query>
-                        <c:forEach var="row" items="${viewExams.rows}">     
-                        <div class="tab-pane" id="${row.ModuleCode}">
-                            <h3>Module Details:</h3>
-                            Module Name:<c:out value="${row.ModuleName}"/></br>
-                            Exam No:<c:out value="${row.ExamNo}"/></br>
-                            Academic Year:<c:out value="${row.AcademicYear}"/></br>
-                            Exam Type(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
-                            Module Degree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br></br>
-                            <form action="ViewComments.jsp">
-                             <input type="hidden" value="${row.ExamNo}" name="examNo" />
-                             <input type="submit" value="View comments" />
-                            </form></br>
-                        </div>
+                        <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
+                        <c:forEach var = "i" begin="1" end="${examCountInt}">
+                            <sql:query dataSource = "${connection}" var = "result">
+                                SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
+                                <sql:param value = "${i}" />
+                            </sql:query>
+                            <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
+                            <c:if test="${resultInt == '4'}">
+                                <sql:query dataSource="${connection}" var="viewExams">
+                                    SELECT * FROM Exams WHERE ExamNo = ? 
+                                    <sql:param value = "${i}" />
+                                </sql:query>
+                                <c:forEach var="row" items="${viewExams.rows}">     
+                                    <div class="tab-pane" id="${row.ModuleCode}">
+                                    <h3>Module Details:</h3>
+                                    Module Name:<c:out value="${row.ModuleName}"/></br>
+                                    Exam No:<c:out value="${row.ExamNo}"/></br>
+                                    Academic Year:<c:out value="${row.AcademicYear}"/></br>
+                                    Exam Type(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
+                                    Module Degree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br></br>
+                                    <form action="ViewComments.jsp">
+                                        <input type="hidden" value="${row.ExamNo}" name="examNo" />
+                                        <input type="submit" value="View comments" />
+                                    </form></br>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
                         </c:forEach>
                     </c:if>
-                </c:forEach>
+                    <!-- exam setter -->
+                    <c:if test="${role.equals('examSetter')}">
+                        <sql:query dataSource ="${connection}" var = "examCount">
+                                SELECT COUNT(*) FROM Exams WHERE ExamSetter = ?
+                                <sql:param value="${staffID}"/>
+                        </sql:query>
+                        <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
+                        <c:forEach var = "i" begin="1" end="${examCountInt}">
+                            <sql:query dataSource = "${connection}" var = "result">
+                                SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
+                                <sql:param value = "${i}" />
+                            </sql:query>
+                            <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
+                            <c:if test="${resultInt == '4'}">
+                                <sql:query dataSource="${connection}" var="viewExams">
+                                    SELECT * FROM Exams WHERE ExamNo = ? AND ExamSetter = ?
+                                    <sql:param value = "${i}" />
+                                    <sql:param value="${staffID}"/>
+                                </sql:query>
+                                <c:forEach var="row" items="${viewExams.rows}">     
+                                    <div class="tab-pane" id="${row.ModuleCode}">
+                                    <h3>Module Details:</h3>
+                                    Module Name:<c:out value="${row.ModuleName}"/></br>
+                                    Exam No:<c:out value="${row.ExamNo}"/></br>
+                                    Academic Year:<c:out value="${row.AcademicYear}"/></br>
+                                    Exam Type(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
+                                    Module Degree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br></br>
+                                    <form action="ViewComments.jsp">
+                                        <input type="hidden" value="${row.ExamNo}" name="examNo" />
+                                        <input type="submit" value="View comments" />
+                                    </form></br>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
+                    <!-- internal moderator -->
+                    <c:if test="${role.equals('internalModerator')}">
+                        <sql:query dataSource ="${connection}" var = "examCount">
+                                SELECT COUNT(*) FROM Exams WHERE InternalModerator = ?
+                                <sql:param value="${staffID}"/>
+                        </sql:query>
+                        <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
+                        <c:forEach var = "i" begin="1" end="${examCountInt}">
+                            <sql:query dataSource = "${connection}" var = "result">
+                                SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
+                                <sql:param value = "${i}" />
+                            </sql:query>
+                            <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
+                            <c:if test="${resultInt == '4'}">
+                                <sql:query dataSource="${connection}" var="viewExams">
+                                    SELECT * FROM Exams WHERE ExamNo = ? AND InternalModerator = ?
+                                    <sql:param value = "${i}" />
+                                    <sql:param value="${staffID}"/>
+                                </sql:query>
+                                <c:forEach var="row" items="${viewExams.rows}">     
+                                    <div class="tab-pane" id="${row.ModuleCode}">
+                                    <h3>Module Details:</h3>
+                                    Module Name:<c:out value="${row.ModuleName}"/></br>
+                                    Exam No:<c:out value="${row.ExamNo}"/></br>
+                                    Academic Year:<c:out value="${row.AcademicYear}"/></br>
+                                    Exam Type(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
+                                    Module Degree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br></br>
+                                    <form action="ViewComments.jsp">
+                                        <input type="hidden" value="${row.ExamNo}" name="examNo" />
+                                        <input type="submit" value="View comments" />
+                                    </form></br>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
+                    <!-- external examiner -->
+                    <c:if test="${role.equals('examExaminer')}">
+                        <sql:query dataSource ="${connection}" var = "examCount">
+                                SELECT COUNT(*) FROM Exams WHERE ExternalExaminer = ?
+                                <sql:param value="${staffID}"/>
+                        </sql:query>
+                        <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
+                        <c:forEach var = "i" begin="1" end="${examCountInt}">
+                            <sql:query dataSource = "${connection}" var = "result">
+                                SELECT COUNT(*) FROM Signatures WHERE ExamID = ?
+                                <sql:param value = "${i}" />
+                            </sql:query>
+                            <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
+                            <c:if test="${resultInt == '4'}">
+                                <sql:query dataSource="${connection}" var="viewExams">
+                                    SELECT * FROM Exams WHERE ExamNo = ? AND ExternalExaminer = ?
+                                    <sql:param value = "${i}" />
+                                    <sql:param value="${staffID}"/>
+                                </sql:query>
+                                <c:forEach var="row" items="${viewExams.rows}">     
+                                    <div class="tab-pane" id="${row.ModuleCode}">
+                                    <h3>Module Details:</h3>
+                                    Module Name: <c:out value="${row.ModuleName}"/></br>
+                                    Exam No: <c:out value="${row.ExamNo}"/></br>
+                                    Academic Year:<c:out value="${row.AcademicYear}"/></br>
+                                    Exam Type(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
+                                    Module Degree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br></br>
+                                    <form action="ViewComments.jsp">
+                                        <input type="hidden" value="${row.ExamNo}" name="examNo" />
+                                        <input type="submit" value="View comments" />
+                                    </form></br>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
                 </div>
             </div>      
 -        </div>   
