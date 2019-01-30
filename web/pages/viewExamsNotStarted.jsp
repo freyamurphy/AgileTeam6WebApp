@@ -1,10 +1,54 @@
-<%-- 
-    Document   : viewAllExams
-    Created on : 2019年1月24日, 下午3:03:31
-    Author     : YHSSSS
---%>
+
 <%@include file="../dbConnection.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    //get user input from HTML form
+    String content = request.getParameter("commentBox");
+    String examNo = request.getParameter("examNo");
+    
+    //String staffID = "5";
+    String username ="";
+    String role ="";
+    
+    //Fetch username and role values from cookies
+    Cookie cookie = null;
+    Cookie[] cookies = null;
+    //Get cookies array
+    cookies = request.getCookies();
+    //check if cookies exist
+    if( cookies != null ) {
+        //loop through cookie array
+        for (int i = 0; i < cookies.length; i++) {
+            cookie = cookies[i];
+            //check if cookie is the username cookie
+            if (cookie.getName().equals("username")) {
+                //Store username cookie's value as JSP variable
+                username = cookie.getValue();
+            }
+            else if (cookie.getName().equals("role")) {
+                //Store role cookie's value as JSP variable
+                role = cookie.getValue();
+            }
+        }
+    }
+    else {
+        //browser didn't store cookies
+        out.println("<h2>No cookies found</h2>");
+    }
+    
+    //turn JSP var into JSTL attributes
+    pageContext.setAttribute("content", content);
+    pageContext.setAttribute("examNo", examNo);
+    pageContext.setAttribute("username", username);  
+    pageContext.setAttribute("role", role);
+    
+    
+    //create a timestamp attribute
+    Timestamp timePosted = new Timestamp(System.currentTimeMillis());
+    pageContext.setAttribute("timePosted", timePosted);
+    
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,71 +98,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="adminDashboard.html">Team 6 -- the best team :)</a>
+                <a class="navbar-brand" href="adminDashboard.jsp">Team 6 -- the best team :)</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-alerts -->
-                </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -149,7 +133,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="adminDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="adminDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
