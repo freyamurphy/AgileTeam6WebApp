@@ -136,7 +136,23 @@ and open the template in the editor.
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="adminDashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <c:choose>
+                                    <c:when test="${role.equals('admin')}">
+                                        <a class="navbar-brand" href="adminDashboard.jsp">Exam Workflow Management System</a>
+                                    </c:when>
+                                    <c:when test="${role.equals('examSetter')}">
+                                        <a class="navbar-brand" href="examSetterDashboard.jsp">Exam Workflow Management System</a>
+                                    </c:when>
+                                    <c:when test="${role.equals('internalModerator')}">
+                                        <a class="navbar-brand" href="internalMouderatorDashboard.jsp">Exam Workflow Management System</a>
+                                    </c:when>
+                                    <c:when test="${role.equals('examVettingCommittee')}">
+                                        <a class="navbar-brand" href="examVCDashboard.jsp">Exam Workflow Management System0</a>
+                                    </c:when>
+                                    <c:when test="${role.equals('externalExaminer')}">
+                                        <a class="navbar-brand" href="externalExaminer.jsp">Exam Workflow Management System</a>
+                                    </c:when>
+                                </c:choose>
                             </li>
                             <c:choose>
                                 <c:when test="${role.equals('admin')}">
