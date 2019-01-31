@@ -52,7 +52,7 @@ and open the template in the editor.
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="adminDashboard.jsp">Team 6 -- the best team :)</a>
+                    <a class="navbar-brand" href="adminDashboard.jsp">Exam Workflow Management System</a>
                 </div>
                 <!-- /.navbar-header -->
 
@@ -90,7 +90,7 @@ and open the template in the editor.
                                 <a href="adminDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="adminViewAllExams.jsp">View All Exams</a>
@@ -98,8 +98,11 @@ and open the template in the editor.
                                     <li>
                                         <a href="adminCreateExam.html">Create Exam</a>
                                     </li>
+                                    <li>
+                                        <a href="../AssignExam.jsp">Assign Exams</a>
+                                    </li>
+
                                 </ul>
-                                <!-- /.nav-second-level -->
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-users"></i> Users<span class="fa arrow"></span></a>
@@ -110,8 +113,10 @@ and open the template in the editor.
                                     <li>
                                         <a href="adminCreateUser.jsp">Create User</a>
                                     </li>
+                                    <li>
+                                        <a href="chooseUserToEdit.jsp">Edit Users</a>
+                                    </li>
                                 </ul>
-                                <!-- /.nav-second-level -->
                             </li>
                         </ul>
                     </div>
@@ -132,30 +137,79 @@ and open the template in the editor.
                     <h4>Please fill in the information on the exam: </h4><br>
 
                     <form action="createExamSuccess.jsp" method="post">
+                        <div class="form-group">
+                            <label>Module Code</label><br>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="moduleCode"/>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="form-group">
+                            <label>Module Name</label><br>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="moduleName"/>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="form-group">
+                            <label>Academic Year [Format: yyyy]</label><br>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="academicYear"/>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="form-group">
+                            <label>Exam Type</label><br>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="examType" value="M" checked>
+                                    Main Exam                            
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="examType" value="R">
+                                    Resit Exam                            
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Module Degree</label><br>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="moduleDegree" value="UG" checked>
+                                    Undergraduate Exam                            
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="moduleDegree" value="PG">
+                                    Postgraduate Exam                            
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Module Degree</label><br>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="examFormat" value="P" checked>
+                                    Paper-based Exam                            
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="examFormat" value="P">
+                                    Online Exam                            
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-default" value="Create">Create Exam</button>
 
-                        Module Code <br>
-                        <input type="text" name="moduleCode"/><br><br>
-
-                        Module Name <br>
-                        <input type="text" name="moduleName"/><br><br>
-
-                        Academic Year [Format: yyyy]<br>
-                        <input type="text" name="academicYear"/><br><br>
-
-                        Exam Type<br>
-                        <input type="radio" name="examType" value="M" checked/> Main Exam<br>
-                        <input type="radio" name="examType" value="R"/> Resit Exam<br><br>
-
-                        Module Degree<br>
-                        <input type="radio" name="moduleDegree" value="UG" checked/> Undergraduate Exam<br>
-                        <input type="radio" name="moduleDegree" value="PG"/> Postgraduate Exam<br><br>
-
-                        Exam Format<br>
-                        <input type="radio" name="examFormat" value="O" checked/> Paper-based Exam<br>
-                        <input type="radio" name="examFormat" value="P"/> Online Exam<br><br>
-
-                        <input type="submit" value="Create"/>
-                        <br><br><br><br>
+                        
+                        <br><br><br><br><br>
                     </form>
                 </div>
                 <!-- /#page-wrapper -->

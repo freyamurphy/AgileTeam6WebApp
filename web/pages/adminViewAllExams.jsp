@@ -49,7 +49,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="adminDashboard.jsp">Team 6 -- the best team :)</a>
+                    <a class="navbar-brand" href="adminDashboard.jsp">Exam Workflow Management System</a>
                 </div>
                 <!-- /.navbar-header -->
 
@@ -87,7 +87,7 @@
                                 <a href="adminDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Exams<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="adminViewAllExams.jsp">View All Exams</a>
@@ -95,8 +95,11 @@
                                     <li>
                                         <a href="adminCreateExam.html">Create Exam</a>
                                     </li>
+                                    <li>
+                                        <a href="../AssignExam.jsp">Assign Exams</a>
+                                    </li>
+
                                 </ul>
-                                <!-- /.nav-second-level -->
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-users"></i> Users<span class="fa arrow"></span></a>
@@ -107,8 +110,10 @@
                                     <li>
                                         <a href="adminCreateUser.jsp">Create User</a>
                                     </li>
+                                    <li>
+                                        <a href="chooseUserToEdit.jsp">Edit Users</a>
+                                    </li>
                                 </ul>
-                                <!-- /.nav-second-level -->
                             </li>
                         </ul>
                     </div>

@@ -1,26 +1,19 @@
 <%-- 
-    Document   : EditUserForm
-    Created on : 29 Jan 2019, 09:47:45
-    Author     : freyamurphy
+    Document   : AssignExam
+    Created on : 24 Jan 2019, 12:13:11
+    Author     : lucymurphy
 --%>
+<%@ include file="dbConnection.jsp"%>
 
-<%@ include file="../dbConnection.jsp"%>
-
-<%-- 
-    Each username is unique, but may appear in different
-    rows for different roles (my dodgy database design)
-    Hence only select distinct usernames.
-    Distinct so that bob only drops down once
---%>
-<sql:query sql="SELECT DISTINCT Username FROM Staff" 
-           var="result" dataSource="${connection}">
+<sql:query sql="SELECT ExamNo, ModuleCode, ModuleName, AcademicYear FROM Exams"
+           var="Exam" dataSource="${connection}">
 </sql:query>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Choose user to edit</title>
+        <title>Assign Exam Setter</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +43,6 @@
     </head>
     <body>
         <div id="wrapper">
-
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
@@ -132,39 +124,94 @@
                 </div>
                 <!-- /.navbar-static-side -->
             </nav>
-
-
             <div id="page-wrapper">
-                <form action="editUserForm.jsp" method="POST" id="comment"> 
-                    <label>Choose a user to edit:</label>
+                <h1> Assign an Exam to a member of teaching staff</h1>
+                <p> Select an exam from the options available then select a member of Teaching Staff to assign 
+                    an exam to them.</p>
+                <h3>Exams available</h3>
 
-                    <select name = "username">
-                        <c:forEach var="row" items="${result.rows}">
-                            <option value="${row.Username}">
-                                <c:out value="${row.Username}"/>
+
+                <%
+                //get setter from hashmap
+                //request.setAttribute("availableSetters", eSList);
+                %>
+
+                <% //get input from select and send selected exam to selected setter
+                 //make sure the exam has sent (use counter?)
+                %>
+
+
+                <form action= "AssignExamStaff.jsp" method="post" id="AssignExam">
+                    <select name = "Exam">
+                        <c:forEach var="row" items="${Exam.rows}">
+                            <option value="${row.ExamNo}">
+                                <c:out value="${row.ModuleCode} ${row.ModuleName} ${row.AcademicYear}"/>
                             </option>
                         </c:forEach>
-                    </select>
+                    </select> 
+                    <c:out value="${row.ExamNo}"/>
+                    <h3>Teaching Staff Available</h3>
+                    <sql:query sql="SELECT ID, FirstName, LastName FROM Staff
+                               WHERE Role = 'examSetter'"
+                               var="TeachStaff" dataSource="${connection}">
+                    </sql:query>      
+                    <select name = "TeachStaff">
+                        <c:forEach var="row" items="${TeachStaff.rows}">
+                            <option value="${row.ID}">
+                                <c:out value="${row.FirstName} ${row.LastName}"/>
+                            </option>
+                        </c:forEach>
+                    </select> 
 
-                    <input type="submit" value="Submit"/>
+                    <h3>Internal Moderators Available</h3>
+                    <sql:query sql="SELECT ID, FirstName, LastName FROM Staff
+                               WHERE Role = 'internalModerator'"
+                               var="IM" dataSource="${connection}">
+                    </sql:query>
+                    <select name = "IM">
+                        <c:forEach var="row" items="${IM.rows}">
+                            <option value="${row.ID}">
+                                <c:out value="${row.FirstName} ${row.LastName}"/>
+                            </option>
+                        </c:forEach>
+                    </select> 
+
+
+                    <h3>External Examiners Available</h3>
+                    <sql:query sql="SELECT ID, FirstName, LastName FROM Staff
+                               WHERE Role = 'externalExaminer'"
+                               var="EE" dataSource="${connection}">
+                    </sql:query>
+                    <select name = "EE">
+                        <c:forEach var="row" items="${EE.rows}">
+                            <option value="${row.ID}">
+                                <c:out value="${row.FirstName} ${row.LastName}"/>
+                            </option>
+                        </c:forEach>
+                    </select> 
+
+                    <h1> </h1>
+                    <input type="submit" value="Assign"/>
+
                 </form>
+
             </div>
-            <!-- jQuery -->
-            <script src="../vendor/jquery/jquery.min.js"></script>
+        </div>  
+        <!-- jQuery -->
+        <script src="../vendor/jquery/jquery.min.js"></script>
 
-            <!-- Bootstrap Core JavaScript -->
-            <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
-            <!-- Metis Menu Plugin JavaScript -->
-            <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../vendor/metisMenu/metisMenu.min.js"></script>
 
-            <!-- Morris Charts JavaScript -->
-            <script src="../vendor/raphael/raphael.min.js"></script>
-            <script src="../vendor/morrisjs/morris.min.js"></script>
-            <script src="../data/morris-data.js"></script>
+        <!-- Morris Charts JavaScript -->
+        <script src="../vendor/raphael/raphael.min.js"></script>
+        <script src="../vendor/morrisjs/morris.min.js"></script>
+        <script src="../data/morris-data.js"></script>
 
-            <!-- Custom Theme JavaScript -->
-            <script src="../dist/js/sb-admin-2.js"></script>
-
+        <!-- Custom Theme JavaScript -->
+        <script src="../dist/js/sb-admin-2.js"></script>
     </body>
 </html>

@@ -101,19 +101,19 @@
                 <!-- uses cookies to redirect the user to the correct dashboard.-->
                 <c:choose>
                     <c:when test="${role.equals('admin')}">
-                        <a class="navbar-brand" href="adminDashboard.jsp">Team 6 -- the best team :)</a>
+                        <a class="navbar-brand" href="adminDashboard.jsp">Exam Workflow Management System</a>
                     </c:when>
                     <c:when test="${role.equals('examSetter')}">
-                        <a class="navbar-brand" href="examSetterDashboard.jsp">Team 6 -- the best team :)</a>
+                        <a class="navbar-brand" href="examSetterDashboard.jsp">Exam Workflow Management System</a>
                     </c:when>
                     <c:when test="${role.equals('internalModerator')}">
-                        <a class="navbar-brand" href="internalMouderatorDashboard.jsp">Team 6 -- the best team :)</a>
+                        <a class="navbar-brand" href="internalMouderatorDashboard.jsp">Exam Workflow Management System</a>
                     </c:when>
                     <c:when test="${role.equals('examVettingCommittee')}">
-                        <a class="navbar-brand" href="examVCDashboard.jsp">Team 6 -- the best team :)</a>
+                        <a class="navbar-brand" href="examVCDashboard.jsp">Exam Workflow Management System</a>
                     </c:when>
                     <c:when test="${role.equals('externalExaminer')}">
-                        <a class="navbar-brand" href="externalExaminer.jsp">Team 6 -- the best team :)</a>
+                        <a class="navbar-brand" href="externalExaminer.jsp">Exam Workflow Management System</a>
                     </c:when>
                 </c:choose>
             </div>
@@ -170,16 +170,112 @@
                             </c:choose>
                         </li>
                         <li>
-                            <!-- will need to change this part later when the website is nearly complete! -->
-                            <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="adminViewAllExams.jsp">View All Exams</a>
-                                </li>
-                                <li>
-                                    <a href="createExam.html">Create Exam</a>
-                                </li>
-                            </ul>
+                            <c:choose>
+                                <c:when test="${role.equals('admin')}">
+                                    <li>
+                                        <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a href="adminViewAllExams.jsp">View All Exams</a>
+                                            </li>
+                                            <li>
+                                                <a href="createExam.html">Create Exam</a>
+                                            </li>
+                                            <li>
+                                                <a href="../AssignExam.jsp">Assign Exams</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-users"></i> Users<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a href="adminViewAllUsers.jsp">View All Users</a>
+                                            </li>
+                                            <li>
+                                                <a href="adminCreateUser.jsp">Create User</a>
+                                            </li>
+                                            <li>
+                                                <a href="chooseUserToEdit.jsp">Edit Users</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </c:when>
+                                <c:when test="${role.equals('examSetter')}">
+                                    <li>
+                                        <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a href="examSetterViewExams.jsp">View Exams</a>
+                                            </li>
+                                            <li>
+                                                <a href="examSetterUploadExam.jsp">Upload Exam</a>
+                                            </li>
+                                            <li>
+                                                <a href="examSetterViewUploadedFiles.jsp">View Uploaded Exam Files</a>
+                                            </li>
+                                            <li>
+                                                <a href="signExamForm.jsp">Sign Exam</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </c:when>
+                                <c:when test="${role.equals('internalModerator')}">
+                                    <li>
+                                        <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a href="internalMouderatorViewExams.jsp">View Exams</a>
+                                            </li>
+                                            <li>
+                                                <a href="internalMouderatorUploadExam.jsp">Upload Exam</a>
+                                            </li>
+                                            <li>
+                                                <a href="internalMouderatorViewUploadedFiles.jsp">View Uploaded Exam Files</a>
+                                            </li>
+                                            <li>
+                                                <a href="signExamForm.jsp">Sign Exam</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </c:when>
+                                <c:when test="${role.equals('externalExaminer')}">
+                                    <li>
+                                        <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a href="externalExaminerViewExams.jsp">View Exams</a>
+                                            </li>
+                                            <li>
+                                                <a href="externalExaminerViewUploadedFiles.jsp">View Uploaded Exam Files</a>
+                                            </li>
+                                            <li>
+                                                <a href="signExamForm.jsp">Sign Exam</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </c:when>
+                                <c:when test="${role.equals('examVettingCommittee')}">
+                                    <li>
+                                        <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a href="examVCViewExams.jsp">View Exams</a>
+                                            </li>
+                                            <li>
+                                                <a href="examVCUploadExam.jsp">Upload Exam</a>
+                                            </li>
+                                            <li>
+                                                <a href="examVCViewUploadedFiles.jsp">View Uploaded Exam Files</a>
+                                            </li>
+                                            <li>
+                                                <a href="signExamForm.jsp">Sign Exam</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </c:when>
+                            </c:choose>
                             <!-- /.nav-second-level -->
                         </li>
                     </ul>
