@@ -54,7 +54,7 @@
     pageContext.setAttribute("timePosted", timePosted);
     
 %>
-    
+
 <html>
     <head>
         <title>Insert comment</title>
@@ -66,24 +66,34 @@
             <sql:param value="${role}"/>
             <sql:param value="${username}"/>
         </sql:query>
-        
+
         <!-- Take results and store in ID var -->
         <c:forEach var="IDRow" items="${IDlist.rows}">
             <c:set var="staffID" value="${IDRow.ID}" scope="session"/>
-            
+
         </c:forEach>
-                              
+
         <sql:update sql="INSERT INTO Comments (Content, Author, TimeOfComment, ExamNo) VALUES (?,?,?,?)"
                     dataSource = "${connection}" var = "result">
             <sql:param value="${content}"/>
             <sql:param value="${staffID}"/>        
             <sql:param value="${timePosted}"/>
             <sql:param value="${examNo}" />
-     </sql:update>
-     <c:if test="${result == 1}" >
-         <c:out value = "Thanks, ${username}!"/>
-         <br/>Your data was inserted correctly!
-     </c:if>
+        </sql:update>
+        <c:if test="${result == 1}" >
+            <c:out value = "Thanks, ${username}!"/>
+            <br/>Your data was inserted correctly!
+            </br>Jumping back to view exams...
+            <c:if test="${role.equals('examVettingCommittee')}">
+                <meta http-equiv="refresh" content="2;url=pages/examVCViewAllExams.jsp">
+            </c:if>
+            <c:if test="${role.equals('externalExaminer')}">
+                <meta http-equiv="refresh" content="2;url=pages/externalExaminerViewExams.jsp">
+            </c:if>
+            <c:if test="${role.equals('internalModerator')}">
+                <meta http-equiv="refresh" content="2;url=pages/internalMouderatorViewExams.jsp">
+            </c:if>
+        </c:if>
     </body>
 </html>
 

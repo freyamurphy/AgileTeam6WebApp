@@ -155,14 +155,10 @@
                                         <td><c:out value="${row.ExamFormat}"/></td>
                                     </tr>
                                 </table>
-                                <form action="ViewComments.jsp">
+                                <form action="viewCommentES.jsp">
                                     <input type="hidden" value="${row.ExamNo}" name="examNo" />
                                     <button type="submit" class="btn btn-default" value="View comments">View Comments</button>
                                 </form>
-                                <form action="../IMCommentForm.jsp">
-                                    <input type="hidden" value="${row.ExamNo}" name="examNo" />
-                                    <button type="submit" class="btn btn-default" value="Add comments"> Add Comments </button>
-                                </form></br>
                                 <h3>Progress:</h3>
                                 <div class="progress progress-striped active">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%">

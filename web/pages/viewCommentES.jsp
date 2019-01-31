@@ -197,7 +197,6 @@
                                 </blockquote>
 
                                 <br>
-                                <br>
                             </div>
                         </c:forEach>
 

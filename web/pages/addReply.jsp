@@ -52,15 +52,15 @@
 
 <!-- SQL query for staffID -->
 <sql:query dataSource = "${connection}" var = "IDlist">
-            SELECT ID FROM Staff WHERE Role = ? AND Username = ?
-            <sql:param value="${role}"/>
-            <sql:param value="${username}"/>
-        </sql:query>
-        
-        <!-- Take results and store in ID var -->
-        <c:forEach var="IDRow" items="${IDlist.rows}">
-            <c:set var="staffID" value="${IDRow.ID}" scope="session"/>
-        </c:forEach>
+    SELECT ID FROM Staff WHERE Role = ? AND Username = ?
+    <sql:param value="${role}"/>
+    <sql:param value="${username}"/>
+</sql:query>
+
+<!-- Take results and store in ID var -->
+<c:forEach var="IDRow" items="${IDlist.rows}">
+    <c:set var="staffID" value="${IDRow.ID}" scope="session"/>
+</c:forEach>
 
 <!-- SQL Insert of Reply-->
 <sql:update sql="INSERT INTO Replies (Content, TimeOfReply, Author, CommentID) VALUES (?,?,?,?)"
@@ -72,4 +72,6 @@
 </sql:update>
 <c:if test="${result == 1}" >
     <p>Your data was inserted correctly!</p>
+    </br>Jumping back to view exams...
+    <meta http-equiv="refresh" content="2;url=examSetterViewExams.jsp">
 </c:if>
