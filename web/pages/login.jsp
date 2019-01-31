@@ -49,14 +49,13 @@
         <c:forEach var="row" items="${result.rows}">
             <c:choose>
             <c:when test="${password == row.Password}">
-                <p>Correct password</p>
-                Jumping into dashboard page...
-                <% if(role.equals("admin")) %><meta http-equiv="refresh" content="3;url=adminDashboard.jsp"><%
-                    else if(role.equals("examSetter")) %><meta http-equiv="refresh" content="3;url=examSetterDashboard.jsp"><%
-                    else if(role.equals("internalModerator")) %><meta http-equiv="refresh" content="3;url=internalMouderatorDashboard.jsp"><%
-                    else if(role.equals("examVettingCommittee")) %><meta http-equiv="refresh" content="3;url=examVCDashboard.jsp"><%
-                    else if(role.equals("externalExaminer")) %><meta http-equiv="refresh" content="3;url=externalExaminerDashboard.jsp"><%
-                    else %><meta http-equiv="refresh" content="3;url=schoolOfficeDashboard.jsp"><%
+                <p>Redirecting...</p>
+                <% if(role.equals("admin")) %><meta http-equiv="refresh" content="0;url=adminDashboard.jsp"><%
+                    else if(role.equals("examSetter")) %><meta http-equiv="refresh" content="0;url=examSetterDashboard.jsp"><%
+                    else if(role.equals("internalModerator")) %><meta http-equiv="refresh" content="0;url=internalMouderatorDashboard.jsp"><%
+                    else if(role.equals("examVettingCommittee")) %><meta http-equiv="refresh" content="0;url=examVCDashboard.jsp"><%
+                    else if(role.equals("externalExaminer")) %><meta http-equiv="refresh" content="0;url=externalExaminerDashboard.jsp"><%
+                    else %><meta http-equiv="refresh" content="0;url=schoolOfficeDashboard.jsp"><%
                 %>
    
             </c:when>
