@@ -19,13 +19,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Assign Exam</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <c:out value="${param.TeachStaff}"/>
-        <c:out value="${param.IM}"/>
-        <c:out value="${param.EE}"/>
-        <c:out value="${param.Exam}"/>
+        <h1>Redirecting you back to the assign exam page </h1>
+        <script language="javascript">
+            window.location.href = "./pages/AssignExam.jsp"
+        </script>
     </body>
 </html>
