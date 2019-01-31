@@ -163,8 +163,7 @@
                 <form action="examVCViewUploadedFilesHandle.jsp" method="post"></br>
                     <select name="ExamNo">
                         <sql:query dataSource="${connection}" var="result">
-                            SELECT * FROM Exams WHERE ExamVettingCommittee = ? ORDER BY ModuleCode, AcademicYear, ModuleName
-                            <sql:param value="${staffID}"/>
+                            SELECT * FROM Exams ORDER BY ModuleCode, AcademicYear, ModuleName
                         </sql:query>   
                         <c:forEach var="row" items="${result.rows}"> 
                             <option value="${row.ExamNo}"><c:out value="${row.AcademicYear}"/>---<c:out value="${row.ModuleCode}"/>---<c:out value="${row.ModuleName}"/>---<c:out value="${row.ExamType}"/></option>

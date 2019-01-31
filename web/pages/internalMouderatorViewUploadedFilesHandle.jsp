@@ -130,7 +130,6 @@
                 </c:forEach>
                 <%  String path = pageContext.getAttribute("path").toString();%>
                 <%=path%>:<a href="upload_files/<%=path%>"> download</a></br></br>
-
                 <a href="internalMouderatorViewUploadedFiles.jsp"> GO BACK</a></br>
 
         </div>
