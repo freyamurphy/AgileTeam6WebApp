@@ -162,8 +162,7 @@
             <c:set var = "completedExam" value = "${0}" />
             <sql:query dataSource ="${connection}" var = "examCount">
                 SELECT COUNT(*) FROM Exams WHERE ExamSetter = ?
-                <sql:param value="${staffID}"/>
-            </sql:query>
+.            </sql:query>
             <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
             <c:forEach var = "i" begin="1" end="${examCountInt}">
                  <sql:query dataSource = "${connection}" var = "result">
