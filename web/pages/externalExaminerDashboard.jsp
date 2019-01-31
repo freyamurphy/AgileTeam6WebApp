@@ -1,6 +1,42 @@
 <%@ include file="dbConnection.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%
+    //String staffID = "5";
+    String username ="";
+    String role ="";
+    
+    //Fetch username and role values from cookies
+    Cookie cookie = null;
+    Cookie[] cookies = null;
+    //Get cookies array
+    cookies = request.getCookies();
+    //check if cookies exist
+    if( cookies != null ) {
+        //loop through cookie array
+        for (int i = 0; i < cookies.length; i++) {
+            cookie = cookies[i];
+            //check if cookie is the username cookie
+            if (cookie.getName().equals("username")) {
+                //Store username cookie's value as JSP variable
+                username = cookie.getValue();
+            }
+            else if (cookie.getName().equals("role")) {
+                //Store role cookie's value as JSP variable
+                role = cookie.getValue();
+            }
+        }
+    }
+    else {
+        //browser didn't store cookies
+        out.println("<h2>No cookies found</h2>");
+    }
+    
+    //turn JSP var into JSTL attributes
+    pageContext.setAttribute("username", username);  
+    pageContext.setAttribute("role", role);
+    
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +75,17 @@
 </head>
 
 <body>
+    <!-- SQL Query to get staffID -->
+        <sql:query dataSource = "${connection}" var = "IDlist">
+            SELECT ID FROM Staff WHERE Role = ? AND Username = ?
+            <sql:param value="${role}"/>
+            <sql:param value="${username}"/>
+        </sql:query>
+        
+        <!-- Take results and store in ID var -->
+        <c:forEach var="IDRow" items="${IDlist.rows}">
+            <c:set var="staffID" value="${IDRow.ID}" scope="session"/>
+        </c:forEach>
 
     <div id="wrapper">
 
@@ -111,7 +158,8 @@
             <c:set var = "inProgressExam" value = "${0}" />
             <c:set var = "completedExam" value = "${0}" />
             <sql:query dataSource ="${connection}" var = "examCount">
-                SELECT COUNT(*) FROM Exams
+                SELECT COUNT(*) FROM Exams WHERE ExternalExaminer = ?
+                <sql:param value = "${staffID}"/>
             </sql:query>
             <c:set var = "examCountInt" scope = "page" value = "${examCount.getRowsByIndex()[0][0]}"/>
             <c:forEach var = "i" begin="1" end="${examCountInt}">
@@ -194,30 +242,6 @@
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><c:out value = "${completedExam}" /></div>
                                     <div>Exams Finished</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Comments to Review!</div>
                                 </div>
                             </div>
                         </div>

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : viewAllExams
-    Created on : 2019年1月24日, 下午3:03:31
-    Author     : YHSSSS
---%>
 <%@include file="../dbConnection.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
