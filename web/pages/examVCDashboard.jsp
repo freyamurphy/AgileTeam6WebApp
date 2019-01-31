@@ -172,7 +172,7 @@
                 </sql:query>
                 <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
                 <c:choose>
-                    <c:when test="${resultInt == '0'}">
+                    <c:when test="${resultInt == '2'}">
                         <c:set var = "newExam" value = "${newExam+1}" />
                     </c:when>
                     <c:when test="${resultInt == '4'}">
