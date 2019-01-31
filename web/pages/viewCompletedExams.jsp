@@ -100,22 +100,22 @@
                     <!-- uses cookies to redirect the user to the correct dashboard.-->
                     <c:choose>
                         <c:when test="${role.equals('admin')}">
-                            <a class="navbar-brand" href="adminDashboard.jsp">Team 6 -- the best team :)</a>
+                            <a class="navbar-brand" href="adminDashboard.jsp">Exam Workflow Management System</a>
                         </c:when>
                         <c:when test="${role.equals('examSetter')}">
-                            <a class="navbar-brand" href="examSetterDashboard.jsp">Team 6 -- the best team :)</a>
+                            <a class="navbar-brand" href="examSetterDashboard.jsp">Exam Workflow Management System</a>
                         </c:when>
                         <c:when test="${role.equals('internalModerator')}">
-                            <a class="navbar-brand" href="internalMouderatorDashboard.jsp">Team 6 -- the best team :)</a>
+                            <a class="navbar-brand" href="internalMouderatorDashboard.jsp">Exam Workflow Management System</a>
                         </c:when>
                         <c:when test="${role.equals('examVettingCommittee')}">
-                            <a class="navbar-brand" href="examVCDashboard.jsp">Team 6 -- the best team :)</a>
+                            <a class="navbar-brand" href="examVCDashboard.jsp">Exam Workflow Management System</a>
                         </c:when>
                         <c:when test="${role.equals('externalExaminer')}">
-                            <a class="navbar-brand" href="externalExaminer.jsp">Team 6 -- the best team :)</a>
+                            <a class="navbar-brand" href="externalExaminer.jsp">Exam Workflow Management System</a>
                         </c:when>
                         <c:when test="${role.equals('schoolOffice')}">
-                            <a class="navbar-brand" href="schoolOfficeDashboard.jsp">Team 6 -- the best team :)</a>
+                            <a class="navbar-brand" href="schoolOfficeDashboard.jsp">Exam Workflow Management System</a>
                         </c:when>
                     </c:choose>
                 </div>
