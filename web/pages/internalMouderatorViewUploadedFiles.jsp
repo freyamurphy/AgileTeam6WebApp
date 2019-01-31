@@ -163,7 +163,7 @@
                 <form action="internalMouderatorViewUploadedFilesHandle.jsp" method="post"></br>
                     <select name="ExamNo">
                         <sql:query dataSource="${connection}" var="result">
-                            SELECT * FROM Exams WHERE InternalMouderator = ? ORDER BY ModuleCode, AcademicYear, ModuleName
+                            SELECT * FROM Exams WHERE InternalModerator = ? ORDER BY ModuleCode, AcademicYear, ModuleName
                             <sql:param value="${staffID}"/>
                         </sql:query>   
                         <c:forEach var="row" items="${result.rows}"> 
