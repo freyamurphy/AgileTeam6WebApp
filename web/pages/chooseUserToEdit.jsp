@@ -135,19 +135,21 @@
 
 
             <div id="page-wrapper">
+                <div class="col-md-3">
                 <form action="editUserForm.jsp" method="POST" id="comment"> 
-                    <label>Choose a user to edit:</label>
-
-                    <select name = "username">
+                    <h1>Choose a user to edit:</h1>
+                    <br>
+                    <select class="form-control" name = "username">
                         <c:forEach var="row" items="${result.rows}">
                             <option value="${row.Username}">
                                 <c:out value="${row.Username}"/>
                             </option>
                         </c:forEach>
                     </select>
-
-                    <input type="submit" value="Submit"/>
+                    <br>
+                    <input class="btn btn-primary btn-md" type="submit" value="Submit"/>
                 </form>
+                </div>
             </div>
             <!-- jQuery -->
             <script src="../vendor/jquery/jquery.min.js"></script>

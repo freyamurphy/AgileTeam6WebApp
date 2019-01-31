@@ -125,10 +125,7 @@
                 <!-- /.navbar-static-side -->
             </nav>
             <div id="page-wrapper">
-                <h1> Assign an Exam to a member of teaching staff</h1>
-                <p> Select an exam from the options available then select a member of Teaching Staff to assign 
-                    an exam to them.</p>
-                <h3>Exams available</h3>
+                
 
 
                 <%
@@ -140,9 +137,15 @@
                  //make sure the exam has sent (use counter?)
                 %>
 
-
+                <div class="col-md-10">
+                    <h1> Assign an Exam to a member of teaching staff</h1>
+                <p> Select an exam from the options available then select a member of Teaching Staff to assign 
+                    an exam to them.</p>
+                </div>
+                <div class="col-md-5">
+                <h3>Exams available</h3>
                 <form action= "../AssignExamStaff.jsp" method="post" id="AssignExam">
-                    <select name = "Exam">
+                    <select class="form-control" name = "Exam">
                         <c:forEach var="row" items="${Exam.rows}">
                             <option value="${row.ExamNo}">
                                 <c:out value="${row.ModuleCode} ${row.ModuleName} ${row.AcademicYear}"/>
@@ -155,20 +158,19 @@
                                WHERE Role = 'examSetter'"
                                var="TeachStaff" dataSource="${connection}">
                     </sql:query>      
-                    <select name = "TeachStaff">
+                    <select class="form-control" name = "TeachStaff">
                         <c:forEach var="row" items="${TeachStaff.rows}">
                             <option value="${row.ID}">
                                 <c:out value="${row.FirstName} ${row.LastName}"/>
                             </option>
                         </c:forEach>
                     </select> 
-
                     <h3>Internal Moderators Available</h3>
                     <sql:query sql="SELECT ID, FirstName, LastName FROM Staff
                                WHERE Role = 'internalModerator'"
                                var="IM" dataSource="${connection}">
                     </sql:query>
-                    <select name = "IM">
+                    <select class="form-control" name = "IM">
                         <c:forEach var="row" items="${IM.rows}">
                             <option value="${row.ID}">
                                 <c:out value="${row.FirstName} ${row.LastName}"/>
@@ -176,24 +178,23 @@
                         </c:forEach>
                     </select> 
 
-
                     <h3>External Examiners Available</h3>
                     <sql:query sql="SELECT ID, FirstName, LastName FROM Staff
                                WHERE Role = 'externalExaminer'"
                                var="EE" dataSource="${connection}">
                     </sql:query>
-                    <select name = "EE">
+                    <select class="form-control" name = "EE">
                         <c:forEach var="row" items="${EE.rows}">
                             <option value="${row.ID}">
                                 <c:out value="${row.FirstName} ${row.LastName}"/>
                             </option>
                         </c:forEach>
                     </select> 
-
                     <h1> </h1>
-                    <input type="submit" value="Assign"/>
+                    <input class="btn btn-primary btn-md btn-block" type="submit" value="Assign" />
 
                 </form>
+                </div>
 
             </div>
         </div>  
