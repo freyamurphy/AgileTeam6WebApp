@@ -1,5 +1,6 @@
+<%@include file="../dbConnection.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*, javax.servlet.*"%>
 <%@ page import="javax.servlet.http.*"%>
 <%@ page import="org.apache.commons.fileupload.*"%>
@@ -11,24 +12,31 @@
     int maxFileSize = 5000 * 1024;
     int maxMemSize = 5000 * 1024;
     ServletContext context = pageContext.getServletContext();
-    //String filePath = context.getInitParameter("file-upload");
     String filePath = request.getSession().getServletContext().getRealPath("");
-    //String filePath = request.getContextPath(); 
     String Code = request.getParameter("code");
-    String addfold = request.getParameter("folder");
+    String examNo = request.getParameter("ExamNo");
+
+    pageContext.setAttribute("examNo", examNo);
+%>
+<sql:query dataSource="${connection}" var="result">
+    SELECT ModuleCode FROM Exams WHERE ExamNo = ?
+    <sql:param value = "${examNo}"/>
+</sql:query>  
+<c:forEach var="row" items="${result.rows}"> 
+    <c:set var="addfold" value="${row.ModuleCode}" />
+</c:forEach>
+<%
+    String folder = pageContext.getAttribute("addfold").toString();
     String fold = "../../web/pages/upload_files/";
-    filePath = filePath + fold + addfold + "/";
+    filePath = filePath + fold + folder + "/";
     System.out.println("filePath => " + filePath);
-    // Verify the content type
     java.io.File dir;
-    dir = new java.io.File(filePath); 
+    dir = new java.io.File(filePath);
     if (!dir.exists() && !dir.isDirectory()) {
-    dir.mkdirs();
-    System.out.println("create folder");
-    }
-    
+        dir.mkdirs();
+        System.out.println("create folder");
+    }//check whether the folder is exist, if no, create a new one.        
     String contentType = request.getContentType();
-  
     if (contentType == null) {
         System.out.println("contentType => " + contentType);
         contentType = "";
@@ -37,23 +45,17 @@
         DiskFileItemFactory factory = new DiskFileItemFactory();
         // maximum size that will be stored in memory
         factory.setSizeThreshold(maxMemSize);
-
         // Location to save data that is larger than maxMemSize.
         factory.setRepository(new File("c:\\temp"));
-
         // Create a new file upload handler
         ServletFileUpload upload = new ServletFileUpload(factory);
-
         // maximum file size to be uploaded.
         upload.setSizeMax(maxFileSize);
-
         try {
             // Parse the request to get file items.
             List fileItems = upload.parseRequest(request);
-
             // Process the uploaded file items
             Iterator i = fileItems.iterator();
-
             out.println("<html>");
             out.println("<head>");
             out.println("<title>JSP File upload</title>");
@@ -68,7 +70,6 @@
                     String fileName = fi.getName();
                     boolean isInMemory = fi.isInMemory();
                     long sizeInBytes = fi.getSize();
-
                     // Write the file
                     if (fileName.lastIndexOf("\\") >= 0) {
                         file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\")));
@@ -77,7 +78,17 @@
                     }
                     fi.write(file);
                     out.println("Uploaded successfully!");
-                   %><br/><%
+                    String Path = folder + "/" + fileName;
+                    out.println(Path);
+                    pageContext.setAttribute("Path", Path);
+%><br/>
+
+<sql:update dataSource="${connection}" var="result">
+    UPDATE Exams SET FilePath = ? WHERE ExamNo = ?
+    <sql:param value = "${Path}"/>
+    <sql:param value = "${examNo}"/>
+</sql:update>   
+<%
                     out.println("Uploaded Filename: " + filePath + fileName + "<br>");
                 }
             }
@@ -97,7 +108,6 @@
         out.println("</html>");
     }
 %>
-      <% if(Code.equals("IM"))  %><meta http-equiv="refresh" content="3;url=internalMouderatorUploadExam.jsp"><%
-              else if(Code.equals("EVC"))  %><meta http-equiv="refresh" content="3;url=examVCUploadExam.jsp"><%
-                      else if(Code.equals("ES"))   %><meta http-equiv="refresh" content="3;url=examSetterUploadExam.jsp">
-
+   <% if(Code.equals("IM"))  %><meta http-equiv="refresh" content="3;url=internalMouderatorUploadExam.jsp"><%
+           else if(Code.equals("EVC"))  %><meta http-equiv="refresh" content="3;url=examVCUploadExam.jsp"><%
+                   else if(Code.equals("ES"))   %><meta http-equiv="refresh" content="3;url=examSetterUploadExam.jsp">
