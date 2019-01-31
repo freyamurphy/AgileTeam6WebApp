@@ -1,5 +1,6 @@
 <%@include file="../dbConnection.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -49,6 +50,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+
                     <a class="navbar-brand" href="examSetterDashboard.jsp">Exam Workflow Management System</a>
                 </div>
                 <!-- /.navbar-header -->
@@ -87,6 +89,7 @@
                                 <a href="examSetterDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
+
                                 <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -121,18 +124,63 @@
                 <div style="margin: auto; width: 95%;">
                     <h3>Upload Files</h3>
                     </br>
+                    <%
+                        //var for cookies
+                        String username = "";
+                        String role = "";
+
+                        //Fetch username and role values from cookies
+                        Cookie cookie = null;
+                        Cookie[] cookies = null;
+                        //Get cookies array
+                        cookies = request.getCookies();
+                        //check if cookies exist
+                        if (cookies != null) {
+                            //loop through cookie array
+                            for (int i = 0; i < cookies.length; i++) {
+                                cookie = cookies[i];
+                                //check if cookie is the username cookie
+                                if (cookie.getName().equals("username")) {
+                                    //Store username cookie's value as JSP variable
+                                    username = cookie.getValue();
+                                } else if (cookie.getName().equals("role")) {
+                                    //Store role cookie's value as JSP variable
+                                    role = cookie.getValue();
+                                }
+                            }
+                        } else {
+                            //browser didn't store cookies, usually means not logged in
+                            out.println("<h2>No cookies found</h2>");
+                        }
+                        pageContext.setAttribute("username", username);
+                        pageContext.setAttribute("role", role);
+                    %>
+                    <sql:query dataSource = "${connection}" var = "IDlist">
+                        SELECT ID FROM Staff WHERE Role = ? AND Username = ?
+                        <sql:param value="${role}"/>
+                        <sql:param value="${username}"/>
+                    </sql:query>
+
+                    <!-- Take results and store in ID var -->
+                    <c:forEach var="IDRow" items="${IDlist.rows}">
+                        <c:set var="staffID" value="${IDRow.ID}" scope="session"/>
+                    </c:forEach>
+
                     Please select the module code of the exam you want to upload: 
                     <form action="examSetterUploadExamHandle.jsp" method="post"></br>
-                        <select name="module">
+                        <select name="ExamNo">
                             <sql:query dataSource="${connection}" var="result">
-                                SELECT * FROM Exams;     
+                                SELECT * FROM Exams WHERE ExamSetter = ? ORDER BY ModuleCode, AcademicYear, ModuleName
+                                <sql:param value="${staffID}"/>
                             </sql:query>   
                             <c:forEach var="row" items="${result.rows}"> 
-                                <option value="${row.ModuleCode}"><c:out value="${row.ModuleCode}"/></option>
+                                <option value="${row.ExamNo}"><c:out value="${row.AcademicYear}"/>---<c:out value="${row.ModuleCode}"/>---<c:out value="${row.ModuleName}"/>---<c:out value="${row.ExamType}"/></option>
+
                             </c:forEach>
                         </select>     
                         <input type="submit" value="submit" /></br>
                     </form>
+
                 </div>
 
             </div>
