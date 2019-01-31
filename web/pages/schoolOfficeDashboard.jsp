@@ -103,9 +103,6 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
-         <c:set var = "newExam" value = "${0}" />
-            <c:set var = "inProgressExam" value = "${0}" />
             <c:set var = "completedExam" value = "${0}" />
             <sql:query dataSource ="${connection}" var = "examCount">
                 SELECT COUNT(*) FROM Exams
@@ -118,15 +115,9 @@
                 </sql:query>
                 <c:set var = "resultInt" scope = "page" value = "${result.getRowsByIndex()[0][0]}"/>
                 <c:choose>
-                    <c:when test="${resultInt == '0'}">
-                        <c:set var = "newExam" value = "${newExam+1}" />
-                    </c:when>
                     <c:when test="${resultInt == '4'}">
                         <c:set var = "completedExam" value = "${completedExam+1}" />
                     </c:when>
-                    <c:otherwise>
-                        <c:set var = "inProgressExam" value = "${inProgressExam+1}" />
-                    </c:otherwise>
                 </c:choose>
             </c:forEach>
 
@@ -137,50 +128,6 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><c:out value = "${newExam}" /> </div>
-                                    <div>Exams Not Started</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><c:out value = "${inProgressExam}" /></div>
-                                    <div>Exams In Progress</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-green">
                         <div class="panel-heading">
@@ -191,30 +138,6 @@
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><c:out value = "${completedExam}" /></div>
                                     <div>Exams Finished</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Comments to Review!</div>
                                 </div>
                             </div>
                         </div>
