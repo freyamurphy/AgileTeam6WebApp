@@ -141,7 +141,7 @@
                 %>
 
 
-                <form action= "AssignExamStaff.jsp" method="post" id="AssignExam">
+                <form action= "../AssignExamStaff.jsp" method="post" id="AssignExam">
                     <select name = "Exam">
                         <c:forEach var="row" items="${Exam.rows}">
                             <option value="${row.ExamNo}">
