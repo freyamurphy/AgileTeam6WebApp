@@ -289,7 +289,8 @@
                                                 <a href="viewCompletedExams.jsp">View Completed Exams</a>
                                             </li>
                                         </ul>
-                                    </li>                                   
+                                    </li> 
+                                </c:when>
                             </c:choose>
 
                             <!-- /.nav-second-level -->
