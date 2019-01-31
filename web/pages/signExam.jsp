@@ -91,144 +91,160 @@
     Connecting to SQL database to store info on new exam
 -->
 <html lang="en">
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <title>Sign Exam</title>
+        <title>Sign Exam</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap Core CSS -->
+        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+        <!-- MetisMenu CSS -->
+        <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
-    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+        <!-- Morris Charts CSS -->
+        <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- Custom Fonts -->
+        <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-</head>
+    </head>
 
-<body>
+    <body>
 
-    <div id="wrapper">
+        <div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="adminDashboard.html">Exam Workflow Management System</a>
-            </div>
-            <!-- /.navbar-header -->
-            </ul>
-            <!-- /.navbar-top-links -->
-
-            <div class="navbar-default sidebar" role="navigation">
-
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Success!</h1>
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <c:choose>
+                        <c:when test="${role.equals('admin')}">
+                            <a class="navbar-brand" href="adminDashboard.jsp">Exam Workflow Management System</a>
+                        </c:when>
+                        <c:when test="${role.equals('examSetter')}">
+                            <a class="navbar-brand" href="examSetterDashboard.jsp">Exam Workflow Management System</a>
+                        </c:when>
+                        <c:when test="${role.equals('internalModerator')}">
+                            <a class="navbar-brand" href="internalMouderatorDashboard.jsp">Exam Workflow Management System</a>
+                        </c:when>
+                        <c:when test="${role.equals('examVettingCommittee')}">
+                            <a class="navbar-brand" href="examVCDashboard.jsp">Exam Workflow Management System0</a>
+                        </c:when>
+                        <c:when test="${role.equals('externalExaminer')}">
+                            <a class="navbar-brand" href="externalExaminer.jsp">Exam Workflow Management System</a>
+                        </c:when>
+                    </c:choose>
                 </div>
-                <!-- /.col-lg-12 -->
+                <!-- /.navbar-header -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Success!</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+
+                <c:if test="${imSig != null}">
+                    <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE InternalModeratorSignatures=values(InternalModeratorSignatures)" dataSource = "${connection}" var = "result">
+                        <sql:param value="${esSig}"/>
+                        <sql:param value="${imSig}"/>
+                        <sql:param value="${evSig}"/>
+                        <sql:param value="${emSig}"/>
+                        <sql:param value="${examID}"/>
+                    </sql:update>
+                    <sql:update sql="UPDATE Exams SET InternalModerator = NULL WHERE ExamNo = ?" dataSource = "${connection}" var = "result">
+                        <sql:param value="${examID}"/>  
+                    </sql:update>
+                </c:if>
+                <c:if test="${evSig != null}">
+                    <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE ExamVettingCommitteeSignatures=values(ExamVettingCommitteeSignatures)" dataSource = "${connection}" var = "result">
+                        <sql:param value="${esSig}"/>
+                        <sql:param value="${imSig}"/>
+                        <sql:param value="${evSig}"/>
+                        <sql:param value="${emSig}"/>
+                        <sql:param value="${examID}"/>
+                    </sql:update>
+                </c:if>
+                <c:if test="${emSig != null}">
+                    <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE ExternalModeratorSignatures=values(ExternalModeratorSignatures)" dataSource = "${connection}" var = "result">
+                        <sql:param value="${esSig}"/>
+                        <sql:param value="${imSig}"/>
+                        <sql:param value="${evSig}"/>
+                        <sql:param value="${emSig}"/>
+                        <sql:param value="${examID}"/>
+                    </sql:update>
+                    <sql:update sql="UPDATE Exams SET ExternalExaminer = NULL WHERE ExamNo = ?" dataSource = "${connection}" var = "result">
+                        <sql:param value="${examID}"/>  
+                    </sql:update>
+                </c:if>
+                <c:if test="${esSig != null}">
+                    <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE ExamSetterSignatures=values(ExamSetterSignatures)" dataSource = "${connection}" var = "result">
+                        <sql:param value="${esSig}"/>
+                        <sql:param value="${imSig}"/>
+                        <sql:param value="${evSig}"/>
+                        <sql:param value="${emSig}"/>
+                        <sql:param value="${examID}"/>
+                    </sql:update>
+                    <sql:update sql="UPDATE Exams SET ExamSetter = NULL WHERE ExamNo = ?" dataSource = "${connection}" var = "result">
+                        <sql:param value="${examID}"/>  
+                    </sql:update>
+                </c:if>
+
+                <h4>You Have Successfully Signed The Exam.</h4>
+                <a type="back" href="signExamForm.jsp" class="btn btn-primary" style="float: left;">Back to Dashboard</a>
+                <!-- /#page-wrapper -->
+
             </div>
-            <!-- /.row -->
-               
-        <c:if test="${imSig != null}">
-            <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE InternalModeratorSignatures=values(InternalModeratorSignatures)" dataSource = "${connection}" var = "result">
-                <sql:param value="${esSig}"/>
-                <sql:param value="${imSig}"/>
-                <sql:param value="${evSig}"/>
-                <sql:param value="${emSig}"/>
-                <sql:param value="${examID}"/>
-            </sql:update>
-            <sql:update sql="UPDATE Exams SET InternalModerator = NULL WHERE ExamNo = ?" dataSource = "${connection}" var = "result">
-                <sql:param value="${examID}"/>  
-            </sql:update>
-        </c:if>
-        <c:if test="${evSig != null}">
-            <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE ExamVettingCommitteeSignatures=values(ExamVettingCommitteeSignatures)" dataSource = "${connection}" var = "result">
-                <sql:param value="${esSig}"/>
-                <sql:param value="${imSig}"/>
-                <sql:param value="${evSig}"/>
-                <sql:param value="${emSig}"/>
-                <sql:param value="${examID}"/>
-            </sql:update>
-        </c:if>
-        <c:if test="${emSig != null}">
-            <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE ExternalModeratorSignatures=values(ExternalModeratorSignatures)" dataSource = "${connection}" var = "result">
-                <sql:param value="${esSig}"/>
-                <sql:param value="${imSig}"/>
-                <sql:param value="${evSig}"/>
-                <sql:param value="${emSig}"/>
-                <sql:param value="${examID}"/>
-            </sql:update>
-            <sql:update sql="UPDATE Exams SET ExternalExaminer = NULL WHERE ExamNo = ?" dataSource = "${connection}" var = "result">
-                <sql:param value="${examID}"/>  
-            </sql:update>
-        </c:if>
-        <c:if test="${esSig != null}">
-            <sql:update sql="INSERT INTO Signatures (ExamSetterSignatures, InternalModeratorSignatures, ExamVettingCommitteeSignatures, ExternalModeratorSignatures, ExamID) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE ExamSetterSignatures=values(ExamSetterSignatures)" dataSource = "${connection}" var = "result">
-                <sql:param value="${esSig}"/>
-                <sql:param value="${imSig}"/>
-                <sql:param value="${evSig}"/>
-                <sql:param value="${emSig}"/>
-                <sql:param value="${examID}"/>
-            </sql:update>
-            <sql:update sql="UPDATE Exams SET ExamSetter = NULL WHERE ExamNo = ?" dataSource = "${connection}" var = "result">
-                <sql:param value="${examID}"/>  
-            </sql:update>
-        </c:if>
-         
-         <h4>You Have Successfully Signed The Exam.</h4>
-        <a type="back" href="signExamForm.jsp" class="btn btn-primary" style="float: left;">Back to Dashboard</a>
-        <!-- /#page-wrapper -->
+            <!-- /#wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+            <!-- jQuery -->
+            <script src="../vendor/jquery/jquery.min.js"></script>
 
-    <!-- jQuery -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+            <!-- Bootstrap Core JavaScript -->
+            <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+            <!-- Metis Menu Plugin JavaScript -->
+            <script src="../vendor/metisMenu/metisMenu.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+            <!-- Morris Charts JavaScript -->
+            <script src="../vendor/raphael/raphael.min.js"></script>
+            <script src="../vendor/morrisjs/morris.min.js"></script>
+            <script src="../data/morris-data.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="../vendor/raphael/raphael.min.js"></script>
-    <script src="../vendor/morrisjs/morris.min.js"></script>
-    <script src="../data/morris-data.js"></script>
+            <!-- Custom Theme JavaScript -->
+            <script src="../dist/js/sb-admin-2.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
-
-</body>
+    </body>
 
 </html>
