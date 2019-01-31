@@ -257,34 +257,7 @@
                         </a>
                     </div>
                 </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <sql:query sql="SELECT COUNT(*) FROM Comments LEFT JOIN Replies On Comments.CommentID = Replies.CommentID WHERE Replies.CommentID IS NULL"
-                                               dataSource ="${connection}" var="countResult">
-                                    </sql:query>
-                                    <c:set var = "resultInt" scope = "page" value = "${countResult.getRowsByIndex()[0][0]}"/>
-                                    <div class="huge">${resultInt}</div>
-                                    <div>Comments to Review!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="examsWithNewComments.jsp">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                
         </div>
         <!-- /#page-wrapper -->
 
