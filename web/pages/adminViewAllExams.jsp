@@ -150,18 +150,28 @@
                         </sql:query>
                         <c:forEach var="row" items="${result.rows}">     
                             <div class="tab-pane" id="${row.ModuleCode}">
-                                <h3>Module Details:</h3>
-                                ModuleName: <c:out value="${row.ModuleName}"/></br>
-                                ExamNo: <c:out value="${row.ExamNo}"/></br>
-                                Academic Year: <c:out value="${row.AcademicYear}"/></br>
-                                Exam Type(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
-                                Module Degree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br>
-                                Exam Format (P: Paper-based Exam; O: Online Exam): <c:out value="${row.ExamFormat}"/></br></br>
+                                <table class="table table-striped">
+                                    <h3>Module Name: <c:out value="${row.ModuleName}"/></h3>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Academic Year</th>                                 
+                                        <th>Exam Type [M: Main; R: Resit]</th>
+                                        <th>Module Degree [UG: Undergraduate; PG: Postgraduate]</th>
+                                        <th>Exam Format [P: Paper-based; O: Online]</th>
+                                    </tr>
+                                    <tr>
+                                        <td><c:out value="${row.ExamNo}"/></td>
+                                        <td><c:out value="${row.AcademicYear}"/></td>
+                                        <td><c:out value="${row.ExamType}"/></td>
+                                        <td><c:out value="${row.ModuleDegree}"/></td>
+                                        <td><c:out value="${row.ExamFormat}"/></td>
+                                    </tr>
+                                </table>
                                 <form action="ViewComments.jsp">
                                     <input type="hidden" value="${row.ExamNo}" name="examNo" />
-                                    <input type="submit" value="View comments" />
-                                </form></br>
-                                <h3>Process:</h3>
+                                    <button type="submit" class="btn btn-default" value="View comments">View Comments</button>
+                                </form><br>
+                                <h3>Progress</h3>
                                 <div class="progress progress-striped active">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
                                         30% Complete
