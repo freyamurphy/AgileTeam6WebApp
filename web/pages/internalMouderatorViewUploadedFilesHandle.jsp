@@ -116,22 +116,22 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <h3>Files:</h3>
-            <%
-            String filePath = request.getSession().getServletContext().getRealPath("");
-            String code = request.getParameter("module");
-            String fold = "../../web/pages/upload_files/";//This is the path of the folder you want to get access
-            filePath = filePath + fold + code + "/";
-            File directory = new File(filePath);
-            File[] fList = directory.listFiles();
-            for (File file : fList){
-                 if (file.isFile()){
-                     String temp = file.getName();
-                     %><% out.print(temp);%> <a href="upload_files/<%=code%>/<%=temp%>"> download</a></br>
-         <%            
-                  }
-             }      
-        %>
+            <h3>Download Link:</h3>
+                <%
+                    String ExamNo = request.getParameter("ExamNo");
+                    pageContext.setAttribute("ExamNo", ExamNo);
+                %>
+                <sql:query dataSource="${connection}" var="result">
+                    SELECT FilePath FROM Exams WHERE ExamNo = ?
+                    <sql:param value="${ExamNo}"/>
+                </sql:query>   
+                <c:forEach var="row" items="${result.rows}"> 
+                    <c:set var="path" value="${row.FilePath}"/>
+                </c:forEach>
+                <%  String path = pageContext.getAttribute("path").toString();%>
+                <%=path%>:<a href="upload_files/<%=path%>"> download</a></br></br>
+
+                <a href="internalMouderatorViewUploadedFiles.jsp"> GO BACK</a></br>
 
         </div>
         <!-- /#page-wrapper -->
