@@ -102,19 +102,19 @@ and open the template in the editor.
                         <span class="icon-bar"></span>
                     </button>
                     <c:choose>
-                        <c:when test="${role.equals('admin')}">
+                        <c:when test="${role.equals('Admin')}">
                             <a class="navbar-brand" href="adminDashboard.jsp">Exam Workflow Management System</a>
                         </c:when>
-                        <c:when test="${role.equals('examSetter')}">
+                        <c:when test="${role.equals('ExamSetter')}">
                             <a class="navbar-brand" href="examSetterDashboard.jsp">Exam Workflow Management System</a>
                         </c:when>
-                        <c:when test="${role.equals('internalModerator')}">
+                        <c:when test="${role.equals('InternalModerator')}">
                             <a class="navbar-brand" href="internalMouderatorDashboard.jsp">Exam Workflow Management System</a>
                         </c:when>
-                        <c:when test="${role.equals('examVettingCommittee')}">
+                        <c:when test="${role.equals('ExamVettingCommittee')}">
                             <a class="navbar-brand" href="examVCDashboard.jsp">Exam Workflow Management System0</a>
                         </c:when>
-                        <c:when test="${role.equals('externalExaminer')}">
+                        <c:when test="${role.equals('ExternalExaminer')}">
                             <a class="navbar-brand" href="externalExaminer.jsp">Exam Workflow Management System</a>
                         </c:when>
                     </c:choose>
@@ -153,25 +153,25 @@ and open the template in the editor.
                             </li>
                             <li>
                                 <c:choose>
-                                    <c:when test="${role.equals('admin')}">
-                                        <a class="navbar-brand" href="adminDashboard.jsp">Exam Workflow Management System</a>
+                                    <c:when test="${role.equals('Admin')}">
+                                        <a href="adminDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                                     </c:when>
-                                    <c:when test="${role.equals('examSetter')}">
-                                        <a class="navbar-brand" href="examSetterDashboard.jsp">Exam Workflow Management System</a>
+                                    <c:when test="${role.equals('ExamSetter')}">
+                                        <a href="examSetterDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                                     </c:when>
-                                    <c:when test="${role.equals('internalModerator')}">
-                                        <a class="navbar-brand" href="internalMouderatorDashboard.jsp">Exam Workflow Management System</a>
+                                    <c:when test="${role.equals('InternalModerator')}">
+                                        <a href="internalMouderatorDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                                     </c:when>
-                                    <c:when test="${role.equals('examVettingCommittee')}">
-                                        <a class="navbar-brand" href="examVCDashboard.jsp">Exam Workflow Management System0</a>
+                                    <c:when test="${role.equals('ExamVettingCommittee')}">
+                                        <a href="examVCDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                                     </c:when>
-                                    <c:when test="${role.equals('externalExaminer')}">
-                                        <a class="navbar-brand" href="externalExaminer.jsp">Exam Workflow Management System</a>
+                                    <c:when test="${role.equals('ExternalExaminer')}">
+                                        <a href="externalExaminerDashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                                     </c:when>
                                 </c:choose>
                             </li>
                             <c:choose>
-                                <c:when test="${role.equals('admin')}">
+                                <c:when test="${role.equals('Admin')}">
                                     <li>
                                         <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
@@ -202,7 +202,7 @@ and open the template in the editor.
                                         </ul>
                                     </li>
                                 </c:when>
-                                <c:when test="${role.equals('examSetter')}">
+                                <c:when test="${role.equals('ExamSetter')}">
                                     <li>
                                         <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
@@ -221,7 +221,7 @@ and open the template in the editor.
                                         </ul>
                                     </li>
                                 </c:when>
-                                <c:when test="${role.equals('internalModerator')}">
+                                <c:when test="${role.equals('InternalModerator')}">
                                     <li>
                                         <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
@@ -240,7 +240,7 @@ and open the template in the editor.
                                         </ul>
                                     </li>
                                 </c:when>
-                                <c:when test="${role.equals('externalExaminer')}">
+                                <c:when test="${role.equals('ExternalExaminer')}">
                                     <li>
                                         <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
@@ -256,7 +256,7 @@ and open the template in the editor.
                                         </ul>
                                     </li>
                                 </c:when>
-                                <c:when test="${role.equals('examVettingCommittee')}">
+                                <c:when test="${role.equals('ExamVettingCommittee')}">
                                     <li>
                                         <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
