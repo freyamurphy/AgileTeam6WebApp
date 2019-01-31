@@ -138,7 +138,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="adminDashboard.html">Team 6 -- the best team :)</a>
+                <a class="navbar-brand" href="adminDashboard.html">Exam Workflow Management System</a>
             </div>
             <!-- /.navbar-header -->
             </ul>

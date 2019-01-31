@@ -1,17 +1,24 @@
-<%@include file="../dbConnection.jsp"%>
+<%-- 
+    Document   : AssignExam
+    Created on : 24 Jan 2019, 12:13:11
+    Author     : lucymurphy
+--%>
+<%@ include file="dbConnection.jsp"%>
+
+<sql:query sql="SELECT ExamNo, ModuleCode, ModuleName, AcademicYear FROM Exams"
+           var="Exam" dataSource="${connection}">
+</sql:query>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-
+        <title>Assign Exam Setter</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-
-        <title>View All Exams</title>
-
         <!-- Bootstrap Core CSS -->
         <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -33,13 +40,9 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
     </head>
-
     <body>
-
         <div id="wrapper">
-
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
@@ -121,63 +124,79 @@
                 </div>
                 <!-- /.navbar-static-side -->
             </nav>
-
             <div id="page-wrapper">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">View All Exams</h1>
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /.row -->
-                <div class="tabbable" style="margin-bottom: 18px;">
-                    <ul class="nav nav-tabs">   
-                        <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-                            <sql:query dataSource="${connection}" var="result">
-                            SELECT * FROM Exams;     
-                        </sql:query>   
-                        <c:forEach var="row" items="${result.rows}"> 
-                            <li><a href="#${row.ModuleCode}" data-toggle="tab"><c:out value="${row.ModuleCode}"/></a></li>
-                            </c:forEach>
-                    </ul>
-                    <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
-                        <div class="tab-pane  active" id="home">
-                            <h3>Home</h3>
-                            <p>You can get the information of the module and view comments here</p>
-                        </div>
-                        <sql:query dataSource="${connection}" var="result">
-                            SELECT * FROM Exams;     
-                        </sql:query>
-                        <c:forEach var="row" items="${result.rows}">     
-                            <div class="tab-pane" id="${row.ModuleCode}">
-                                <h3>Module Details:</h3>
-                                ModuleName: <c:out value="${row.ModuleName}"/></br>
-                                ExamNo: <c:out value="${row.ExamNo}"/></br>
-                                Academic Year: <c:out value="${row.AcademicYear}"/></br>
-                                Exam Type(M: Main Exam; R: Resit Exam): <c:out value="${row.ExamType}"/></br>
-                                Module Degree(UG: Undergraduate Exam; PG: Postgraduate Exam): <c:out value="${row.ModuleDegree}"/></br>
-                                Exam Format (P: Paper-based Exam; O: Online Exam): <c:out value="${row.ExamFormat}"/></br></br>
-                                <form action="ViewComments.jsp">
-                                    <input type="hidden" value="${row.ExamNo}" name="examNo" />
-                                    <input type="submit" value="View comments" />
-                                </form></br>
-                                <h3>Process:</h3>
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
-                                        30% Complete
-                                    </div>
-                                </div>
-                            </div>
+                <h1> Assign an Exam to a member of teaching staff</h1>
+                <p> Select an exam from the options available then select a member of Teaching Staff to assign 
+                    an exam to them.</p>
+                <h3>Exams available</h3>
+
+
+                <%
+                //get setter from hashmap
+                //request.setAttribute("availableSetters", eSList);
+                %>
+
+                <% //get input from select and send selected exam to selected setter
+                 //make sure the exam has sent (use counter?)
+                %>
+
+
+                <form action= "AssignExamStaff.jsp" method="post" id="AssignExam">
+                    <select name = "Exam">
+                        <c:forEach var="row" items="${Exam.rows}">
+                            <option value="${row.ExamNo}">
+                                <c:out value="${row.ModuleCode} ${row.ModuleName} ${row.AcademicYear}"/>
+                            </option>
                         </c:forEach>
-                    </div>
-                </div>
+                    </select> 
+                    <c:out value="${row.ExamNo}"/>
+                    <h3>Teaching Staff Available</h3>
+                    <sql:query sql="SELECT ID, FirstName, LastName FROM Staff
+                               WHERE Role = 'examSetter'"
+                               var="TeachStaff" dataSource="${connection}">
+                    </sql:query>      
+                    <select name = "TeachStaff">
+                        <c:forEach var="row" items="${TeachStaff.rows}">
+                            <option value="${row.ID}">
+                                <c:out value="${row.FirstName} ${row.LastName}"/>
+                            </option>
+                        </c:forEach>
+                    </select> 
 
-            </div>   
-            <!-- /#page-wrapper -->
+                    <h3>Internal Moderators Available</h3>
+                    <sql:query sql="SELECT ID, FirstName, LastName FROM Staff
+                               WHERE Role = 'internalModerator'"
+                               var="IM" dataSource="${connection}">
+                    </sql:query>
+                    <select name = "IM">
+                        <c:forEach var="row" items="${IM.rows}">
+                            <option value="${row.ID}">
+                                <c:out value="${row.FirstName} ${row.LastName}"/>
+                            </option>
+                        </c:forEach>
+                    </select> 
 
-        </div>
-        <!-- /#wrapper -->
 
+                    <h3>External Examiners Available</h3>
+                    <sql:query sql="SELECT ID, FirstName, LastName FROM Staff
+                               WHERE Role = 'externalExaminer'"
+                               var="EE" dataSource="${connection}">
+                    </sql:query>
+                    <select name = "EE">
+                        <c:forEach var="row" items="${EE.rows}">
+                            <option value="${row.ID}">
+                                <c:out value="${row.FirstName} ${row.LastName}"/>
+                            </option>
+                        </c:forEach>
+                    </select> 
+
+                    <h1> </h1>
+                    <input type="submit" value="Assign"/>
+
+                </form>
+
+            </div>
+        </div>  
         <!-- jQuery -->
         <script src="../vendor/jquery/jquery.min.js"></script>
 
@@ -189,12 +208,10 @@
 
         <!-- Morris Charts JavaScript -->
         <script src="../vendor/raphael/raphael.min.js"></script>
-        <script src="../vendor/morrisjs/morr is.min.js"></script>
+        <script src="../vendor/morrisjs/morris.min.js"></script>
         <script src="../data/morris-data.js"></script>
 
         <!-- Custom Theme JavaScript -->
         <script src="../dist/js/sb-admin-2.js"></script>
-
     </body>
-
 </html>
