@@ -140,7 +140,7 @@
                                 <a href="#"><i class="fa fa-table fa-fw"></i> Exams<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="examVCViewExams.jsp">View Exams</a>
+                                        <a href="examVCViewAllExams.jsp">View Exams</a>
                                     </li>
                                     <li>
                                         <a href="examVCUploadExam.jsp">Upload Exam</a>
