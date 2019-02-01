@@ -39,6 +39,7 @@ public class AdminTest {
     
     @After
     public void tearDown() {
+        
     }
 
     /**
@@ -84,23 +85,100 @@ public class AdminTest {
                 counter++;
             }
             
-            // There should be exactly 1 entry for this exam.
-            assertEquals("Too many or too few entries are added to Exams table", counter, 1);
-            
             // Delete the test entry from the database
             String deleteQuery = "DELETE FROM Exams WHERE AcademicYear = ? AND ModuleCode = ?";
             PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery);
             deleteStatement.setString(1, expectedYear);
-            deleteStatement.setString(1, expectedYear);
             deleteStatement.setString(2, expectedModCode);
             deleteStatement.execute();
+
+            
+            // There should be exactly 1 entry for this exam.
+            assertEquals("Too many or too few entries are added to Exams table", counter, 1);
+         
             connection.close();
-        }
-        catch (Exception e) {
-            System.err.println("Got an exception!");
-            System.err.println(e.getMessage());
             
         }
+        catch (Exception e) {
+            System.err.println("Got an exception in test create exam!");
+            System.err.println(e.getMessage());
+            fail();
+            
+        }
+        
+    }
+    
+    @Test
+    public void testCreateUser() {
+        Admin admin = new Admin("foo", "foo");
+        String fName = "Freya";
+        String lName = "Murphy";
+        String username = "freya";
+        String password = "pass";
+        String role = "examSetter";
+        
+        try {
+            DBConnect dbConnect = new DBConnect();
+            Connection connection = dbConnect.connect();
+            
+            String count1 = "SELECT COUNT(*) AS numRows FROM Staff";
+            Statement statement1 = connection.createStatement();
+            ResultSet resultSet1 = statement1.executeQuery(count1);
+            
+            int num1 = 0;
+            while(resultSet1.next()) {
+                num1 = resultSet1.getInt("numRows");
+            }
+            
+            admin.createUser(fName, lName, username, password, role);
+            
+            String count2 = "SELECT COUNT(*) AS numRows FROM Staff";
+            Statement statement2 = connection.createStatement();
+            ResultSet resultSet2 = statement2.executeQuery(count2);
+            
+            int num2 = 0;
+            while(resultSet2.next()) {
+                num2 = resultSet2.getInt("numRows");
+            }
+            
+            String select = "SELECT * FROM Staff WHERE FirstName = ? AND LastName = ? AND Username = ? AND Password = ? AND Role = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(select);
+            preparedStatement.setString(1, fName);
+            preparedStatement.setString(2, lName);
+            preparedStatement.setString(3, username);
+            preparedStatement.setString(4, password);
+            preparedStatement.setString(5, role);
+
+            ResultSet results = preparedStatement.executeQuery();
+            
+            int counter = 0;
+            while(results.next()) {
+                counter++;
+            }
+            
+            // Delete the test entry from the database
+            String deleteQuery = "DELETE FROM Staff WHERE FirstName = ? AND LastName = ? AND Username = ? AND Password = ? AND Role = ?";
+            PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery);
+            deleteStatement.setString(1, fName);
+            deleteStatement.setString(2, lName);
+            deleteStatement.setString(3, username);
+            deleteStatement.setString(4, password);
+            deleteStatement.setString(5, role);
+            deleteStatement.execute();
+
+            assertEquals("Incorrect number of rows added to Staff", num1+1, num2);
+            assertEquals("Wrong values added to Staff", 1, counter);
+            
+            connection.close();
+            
+        }
+        catch (Exception e) {
+            System.err.println("Got an exception in test create exam!");
+            System.err.println(e.getMessage());
+            fail();
+        }
+        
+        
         
     }
     

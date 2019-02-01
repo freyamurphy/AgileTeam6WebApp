@@ -13,6 +13,6 @@ import classes.Comment;
  */
 public interface Commenting {
     
-    public Comment addComment(String content);
+    public void addComment(String content);
     
 }
