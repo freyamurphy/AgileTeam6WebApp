@@ -6,6 +6,9 @@
 package staff;
 
 import classes.Comment;
+import classes.DBConnect;
+
+import java.sql.*;
 
 /**
  *
@@ -18,9 +21,31 @@ public class InternalModerator extends Staff implements Commenting{
         super(username, password); 
     }
     
-    public Comment addComment(String content) {
+    public void addComment(String content) {
         Comment comment = new Comment(content, this.username, "InternalModerator");
-        return comment;
+        
+        try {
+            DBConnect dbConnect = new DBConnect();
+            Connection connection = dbConnect.connect();
+            
+            String query = "INSERT INTO Comments(Content, TimeOfComment, ExamNo, Author) VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, comment.getContent());
+            preparedStatement.setString(2, comment.getTimePosted());
+            //preparedStatement.setString(3, exam.get());
+            //preparedStatement.setString(4, exam.getExamType());
+            //preparedStatement.setString(5, exam.getModuleDegree());
+
+            preparedStatement.execute();
+
+            connection.close();
+        }
+        catch (Exception e) {
+            
+        }
     }
+    
+   
     
 }

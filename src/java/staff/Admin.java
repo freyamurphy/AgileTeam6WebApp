@@ -25,16 +25,11 @@ public class Admin extends Staff {
     }
     
     //method to create an exam 
-    //currently not in use, since switch to external SQL database instead of Java data structure
     public void createExam(String year, String modName, String modCode, String type, String degree)
     {
         //create exam object with given parameters
         Exam exam = new Exam(year, modName, modCode, type, degree);
         
-        //functionality to store newly created exams
-        //currently not in use, since switch to external SQL database instead of Java data structure
-        //ExamStorage examStore = new ExamStorage();
-        //examStore.addExamToList(exam);
         
         try {
             DBConnect dbConnect = new DBConnect();
@@ -60,5 +55,31 @@ public class Admin extends Staff {
         
         
     }
+    
+    public void createUser(String fName, String lName, String username, String password, String role) {
+        try {
+            DBConnect dbConnect = new DBConnect();
+            Connection connection = dbConnect.connect();
+            
+            String query = "INSERT INTO Staff(FirstName, LastName, Username, Password, Role) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, fName);
+            preparedStatement.setString(2, lName);
+            preparedStatement.setString(3, username);
+            preparedStatement.setString(4, password);
+            preparedStatement.setString(5, role);
+
+            preparedStatement.execute();
+        }
+        catch (Exception e) {
+            System.err.println("Got an exception in create user!");
+            System.err.println(e.getMessage());
+        }
+        
+        
+    }
+    
+ 
     
 }

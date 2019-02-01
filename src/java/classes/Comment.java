@@ -16,6 +16,7 @@ public class Comment {
     String authorUsername;
     Timestamp timePosted;
     String authorRole;
+    String examNo;
     
     public Comment(String content, String authorUsername, String authorRole) {
         this.content = content;
@@ -38,6 +39,10 @@ public class Comment {
     
     public String getTimePosted() {
         return timePosted.toString();
+    }
+    
+    public void getExamNo() {
+        //return ExamNo;
     }
     
     
